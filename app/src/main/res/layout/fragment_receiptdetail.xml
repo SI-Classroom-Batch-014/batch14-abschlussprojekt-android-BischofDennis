@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/backroundlayout">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/MaterialCardViewFood"
@@ -40,15 +41,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/receiclerViewIngredients"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAllIngredients" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cardViewKcal"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginStart="16dp"
@@ -58,7 +58,7 @@
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/receiclerViewIngredients">
+        app:layout_constraintTop_toBottomOf="@+id/textViewInstructionsString">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -67,7 +67,7 @@
 
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/textViewCarbonhydrate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -90,10 +90,10 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="16dp"
                 android:background="#000"
-                app:layout_constraintTop_toBottomOf="@+id/textView24" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewKcal" />
 
             <TextView
-                android:id="@+id/textView24"
+                android:id="@+id/textViewKcal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -105,7 +105,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
             <TextView
-                android:id="@+id/textView25"
+                android:id="@+id/textViewAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -120,9 +120,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="@+id/textView23"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewCarbonhydrate"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView23" />
+                app:layout_constraintTop_toTopOf="@+id/textViewCarbonhydrate" />
 
             <TextView
                 android:id="@+id/textView27"
@@ -130,9 +130,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="@+id/textView24"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewKcal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView24" />
+                app:layout_constraintTop_toTopOf="@+id/textViewKcal" />
 
             <TextView
                 android:id="@+id/textView28"
@@ -140,9 +140,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="@+id/textView25"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewAdd"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView25" />
+                app:layout_constraintTop_toTopOf="@+id/textViewAdd" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -153,23 +153,45 @@
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
-        android:backgroundTint="#64D2FF"
-        android:text="Button"
-        android:textColor="#1C1C1E"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#0116FF"
+        android:text="Ja"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardViewKcal" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="#64D2FF"
-        android:text="Button"
-        android:textColor="#1C1C1E"
+        android:backgroundTint="#0116FF"
+        android:text="Nein"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardViewKcal" />
+
+    <TextView
+        android:id="@+id/textViewInstructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Zubereitung: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/receiclerViewIngredients" />
+
+    <TextView
+        android:id="@+id/textViewInstructionsString"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="ZubereitungString"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewInstructions" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
