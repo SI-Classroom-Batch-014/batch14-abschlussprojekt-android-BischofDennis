@@ -43,4 +43,16 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="profil">Profil</string>
+    <string name="weiter">weiter</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="diabetes_typ">Diabetes Typ</string>
+    <string name="einheit">Einheit</string>
+    <string name="tabletten">Tabletten</string>
+    <string name="ja">Ja</string>
+    <string name="nein">Nein</string>
+    <string name="insulin">Insulin</string>
+    <string name="blutzucker_messen_um">Blutzucker messen um</string>
+    <string name="n_chster_arzttermin_am">Nächster Arzttermin am</string>
 </resources>

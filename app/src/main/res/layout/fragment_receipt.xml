@@ -44,7 +44,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/toggleButtonFood"
+        android:id="@+id/toggleButtonDiabtesTyp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="145dp"
