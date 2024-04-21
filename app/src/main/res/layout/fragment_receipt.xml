@@ -55,7 +55,7 @@
 
         <Button
             android:id="@+id/button1"
-            style="?attr/materialButtonOutlinedStyle"
+            style="@style/button_style2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#64D2FF"
@@ -63,7 +63,7 @@
 
         <Button
             android:id="@+id/button2"
-            style="?attr/materialButtonOutlinedStyle"
+            style="@style/button_style2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#64D2FF"
@@ -71,7 +71,7 @@
 
         <Button
             android:id="@+id/button3"
-            style="?attr/materialButtonOutlinedStyle"
+            style="@style/button_style2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#64D2FF"
@@ -79,7 +79,7 @@
 
         <Button
             android:id="@+id/button4"
-            style="?attr/materialButtonOutlinedStyle"
+            style="@style/button_style2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#64D2FF"

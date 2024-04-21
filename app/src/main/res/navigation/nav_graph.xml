@@ -3,26 +3,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
-
+    app:startDestination="@id/fragmentHome">
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.glucoflow.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+        android:id="@+id/fragmentHome"
+        android:name="com.example.glucoflow.FragmentHome"
+        android:label="FragmentHome" />
+    <fragment
+        android:id="@+id/fragmentGlucose"
+        android:name="com.example.glucoflow.FragmentGlucose"
+        android:label="FragmentGlucose" />
+    <fragment
+        android:id="@+id/fragmentLoginSignup"
+        android:name="com.example.glucoflow.FragmentLoginSignup"
+        android:label="FragmentLoginSignup" >
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_fragmentLoginSignup_to_fragmentLoginSignupField"
+            app:destination="@id/fragmentLoginSignupField" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.glucoflow.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
+        android:id="@+id/fragmentLoginSignupField"
+        android:name="com.example.glucoflow.FragmentLoginSignupField"
+        android:label="FragmentLoginSignupField" >
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_fragmentLoginSignupField_to_fragmentProfilabfrage"
+            app:destination="@id/fragmentProfilabfrage" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentProfilabfrage"
+        android:name="com.example.glucoflow.FragmentProfilabfrage"
+        android:label="FragmentProfilabfrage" />
+    <fragment
+        android:id="@+id/fragmentReceipt"
+        android:name="com.example.glucoflow.FragmentReceipt"
+        android:label="FragmentReceipt" >
+        <action
+            android:id="@+id/action_fragmentReceipt_to_fragmentReceiptDetail"
+            app:destination="@id/fragmentReceiptDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentReceiptDetail"
+        android:name="com.example.glucoflow.FragmentReceiptDetail"
+        android:label="FragmentReceiptDetail" />
 </navigation>
