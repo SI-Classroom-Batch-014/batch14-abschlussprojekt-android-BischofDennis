@@ -1,22 +1,22 @@
-package com.example.glucoflow
+package com.example.glucoflow.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.glucoflow.databinding.FragmentLoginSignupFieldBinding
+import com.example.glucoflow.databinding.FragmentProfilabfrageBinding
 
-class FragmentLoginSignupField: Fragment() {
+class FragmentProfilabfrage: Fragment() {
 
-    private lateinit var binding: FragmentLoginSignupFieldBinding
+    private lateinit var binding: FragmentProfilabfrageBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentLoginSignupFieldBinding.inflate(layoutInflater)
+        binding = FragmentProfilabfrageBinding.inflate(layoutInflater)
         return binding.root
     }
 

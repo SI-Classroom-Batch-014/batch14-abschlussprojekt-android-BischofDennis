@@ -50,127 +50,127 @@
         android:id="@+id/kalenderwidget"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="141dp"
         app:cardBackgroundColor="#64D2FF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <TextView
             android:id="@+id/textViewDatumMontag"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/montag"
             android:textColor="@color/blueDefault"
-            android:textSize="23sp"/>
+            android:textSize="23sp" />
 
         <TextView
             android:id="@+id/textViewDatum"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="140dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="8dp"
             android:text="@string/_26"
             android:textColor="@color/blueDefault"
-            android:textSize="23sp"/>
+            android:textSize="23sp" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/textViewButtonBlutzucker"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="40dp"
+            android:clickable="true"
+            android:focusable="true"
             app:cardBackgroundColor="#007AFF"
-            app:cardCornerRadius="10dp" >
+            app:cardCornerRadius="10dp">
 
             <TextView
                 android:id="@+id/textViewBlutzucker"
-                android:layout_marginTop="2dp"
-                android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="2dp"
                 android:text="@string/blutzucker"
+                android:textColor="@color/black"
                 android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewUhrzeit"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/_12_00_12_30"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/textViewButtonTabletten"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="85dp"
+            android:clickable="true"
+            android:focusable="true"
             app:cardBackgroundColor="#007AFF"
-            app:cardCornerRadius="10dp" >
+            app:cardCornerRadius="10dp">
 
             <TextView
                 android:id="@+id/textViewTabletten"
-                android:layout_marginTop="2dp"
-                android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="2dp"
                 android:text="@string/metformin"
+                android:textColor="@color/black"
                 android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewUhrzeitTabletten"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/_12_00_12_30"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/textViewButtonTermin"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="130dp"
+            android:clickable="true"
+            android:focusable="true"
             app:cardBackgroundColor="#007AFF"
-            app:cardCornerRadius="10dp" >
+            app:cardCornerRadius="10dp">
 
             <TextView
                 android:id="@+id/textViewArzt"
-                android:layout_marginTop="2dp"
-                android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="2dp"
                 android:text="@string/arzt"
+                android:textColor="@color/black"
                 android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewUhrzeitArzt"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/_12_00_12_30"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
         </androidx.cardview.widget.CardView>
 
     </com.google.android.material.card.MaterialCardView>
@@ -180,115 +180,115 @@
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_marginTop="141dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         app:cardBackgroundColor="#64D2FF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textViewGlucose"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/glucose"
             android:textColor="@color/blueDefault"
-            android:textSize="23sp"/>
+            android:textSize="23sp" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/textViewButtonGlucose"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="40dp"
+            android:clickable="true"
+            android:focusable="true"
             app:cardBackgroundColor="#007AFF"
-            app:cardCornerRadius="10dp" >
+            app:cardCornerRadius="10dp">
 
             <TextView
                 android:id="@+id/textViewGlucoseWert"
-                android:layout_marginTop="2dp"
-                android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="2dp"
                 android:text="@string/_120mg_dl"
+                android:textColor="@color/black"
                 android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewGlucoseWertUhrzeit"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/_8_21"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/textViewButtonGlucose2"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="85dp"
+            android:clickable="true"
+            android:focusable="true"
             app:cardBackgroundColor="#007AFF"
-            app:cardCornerRadius="10dp" >
+            app:cardCornerRadius="10dp">
 
             <TextView
                 android:id="@+id/textViewGlucoseWert2"
-                android:layout_marginTop="2dp"
-                android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="2dp"
                 android:text="@string/_131mg_dl"
+                android:textColor="@color/black"
                 android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewGlucoseWertUhrzeit2"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/_12_36"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/textViewButtonMessen"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="130dp"
+            android:clickable="true"
+            android:focusable="true"
             app:cardBackgroundColor="#007AFF"
-            app:cardCornerRadius="10dp" >
+            app:cardCornerRadius="10dp">
 
             <TextView
                 android:id="@+id/textViewMessen"
-                android:layout_marginTop="2dp"
-                android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="2dp"
                 android:text="@string/arzt"
+                android:textColor="@color/black"
                 android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewUhrzeitMessen"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/_18_00_18_30"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
         </androidx.cardview.widget.CardView>
 
     </com.google.android.material.card.MaterialCardView>
@@ -297,52 +297,52 @@
         android:id="@+id/schrittzaehlerWidget"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="337dp"
         app:cardBackgroundColor="#64D2FF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textViewSchrittzaehler"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/schrittz_hler"
             android:textColor="@color/blueDefault"
-            android:textSize="23sp"/>
+            android:textSize="23sp" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/textViewButtonSchrittzaehler"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="110dp"
+            android:clickable="true"
+            android:focusable="true"
             app:cardBackgroundColor="#007AFF"
-            app:cardCornerRadius="10dp" >
+            app:cardCornerRadius="10dp">
 
             <TextView
                 android:id="@+id/textViewSchritte"
-                android:layout_marginTop="1dp"
-                android:layout_marginStart="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="1dp"
                 android:text="@string/_4000_5000"
+                android:textColor="@color/black"
                 android:textSize="28sp"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textStyle="bold" />
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="45dp"
-            app:cardCornerRadius="25dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp" >
+            app:cardCornerRadius="25dp">
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -357,95 +357,96 @@
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_marginTop="337dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         app:cardBackgroundColor="#64D2FF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textViewKohlenHydrate"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/kohlenhydrate"
             android:textColor="@color/blueDefault"
-            android:textSize="23sp"/>
+            android:textSize="23sp" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/textViewButtonKohlenhydrate"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="60dp"
+            android:clickable="true"
+            android:focusable="true"
             app:cardBackgroundColor="#007AFF"
-            app:cardCornerRadius="10dp" >
+            app:cardCornerRadius="10dp">
 
             <TextView
                 android:id="@+id/textViewKohlenhydrate"
-                android:layout_marginTop="6dp"
-                android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="6dp"
                 android:text="@string/_210_250"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewEinheitG"
-                android:layout_marginStart="120dp"
-                android:layout_marginTop="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="4dp"
                 android:text="@string/g"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/textViewButtonEinheitKcal"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="110dp"
+            android:clickable="true"
+            android:focusable="true"
             app:cardBackgroundColor="#007AFF"
-            app:cardCornerRadius="10dp" >
+            app:cardCornerRadius="10dp">
 
             <TextView
                 android:id="@+id/textViewKcal"
-                android:layout_marginTop="6dp"
-                android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="6dp"
                 android:text="@string/_1700_2100"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewEinheitKcal"
-                android:layout_marginStart="105dp"
-                android:layout_marginTop="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="6dp"
                 android:text="@string/kcal"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
         </androidx.cardview.widget.CardView>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/trendGlucose"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#64D2FF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

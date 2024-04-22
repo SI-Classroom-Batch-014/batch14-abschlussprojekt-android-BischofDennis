@@ -6,35 +6,27 @@
     app:startDestination="@id/fragmentHome">
     <fragment
         android:id="@+id/fragmentHome"
-        android:name="com.example.glucoflow.FragmentHome"
+        android:name="com.example.glucoflow.ui.FragmentHome"
         android:label="FragmentHome" />
     <fragment
         android:id="@+id/fragmentGlucose"
-        android:name="com.example.glucoflow.FragmentGlucose"
+        android:name="com.example.glucoflow.ui.FragmentGlucose"
         android:label="FragmentGlucose" />
     <fragment
         android:id="@+id/fragmentLoginSignup"
-        android:name="com.example.glucoflow.FragmentLoginSignup"
-        android:label="FragmentLoginSignup" >
-        <action
-            android:id="@+id/action_fragmentLoginSignup_to_fragmentLoginSignupField"
-            app:destination="@id/fragmentLoginSignupField" />
-    </fragment>
+        android:name="com.example.glucoflow.ui.FragmentLoginSignup"
+        android:label="FragmentLoginSignup" />
     <fragment
         android:id="@+id/fragmentLoginSignupField"
-        android:name="com.example.glucoflow.FragmentLoginSignupField"
-        android:label="FragmentLoginSignupField" >
-        <action
-            android:id="@+id/action_fragmentLoginSignupField_to_fragmentProfilabfrage"
-            app:destination="@id/fragmentProfilabfrage" />
-    </fragment>
+        android:name="com.example.glucoflow.ui.FragmentLoginSignupField"
+        android:label="FragmentLoginSignupField" />
     <fragment
         android:id="@+id/fragmentProfilabfrage"
-        android:name="com.example.glucoflow.FragmentProfilabfrage"
+        android:name="com.example.glucoflow.ui.FragmentProfilabfrage"
         android:label="FragmentProfilabfrage" />
     <fragment
         android:id="@+id/fragmentReceipt"
-        android:name="com.example.glucoflow.FragmentReceipt"
+        android:name="com.example.glucoflow.ui.FragmentReceipt"
         android:label="FragmentReceipt" >
         <action
             android:id="@+id/action_fragmentReceipt_to_fragmentReceiptDetail"
@@ -42,6 +34,14 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentReceiptDetail"
-        android:name="com.example.glucoflow.FragmentReceiptDetail"
-        android:label="FragmentReceiptDetail" />
+        android:name="com.example.glucoflow.ui.FragmentReceiptDetail"
+        android:label="FragmentReceiptDetail" >
+        <action
+            android:id="@+id/action_fragmentReceiptDetail_to_fragmentReceipt"
+            app:destination="@id/fragmentReceipt" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentProfile"
+        android:name="com.example.glucoflow.ui.FragmentProfile"
+        android:label="FragmentProfile" />
 </navigation>

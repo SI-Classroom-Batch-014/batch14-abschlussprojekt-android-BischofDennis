@@ -81,4 +81,8 @@
     <string name="nach_essen">Nach Essen</string>
     <string name="datum_amp_uhrzeit"><![CDATA[Datum & Uhrzeit]]></string>
     <string name="heute_10_33">Heute, 10:33</string>
+    <string name="home">Home</string>
+    <string name="kalender">Kalender</string>
+    <string name="hinzuf_gen">Hinzufügen</string>
+    <string name="rezepte">Rezepte</string>
 </resources>
