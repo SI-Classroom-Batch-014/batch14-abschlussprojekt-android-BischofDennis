@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.glucoflow.R
 import com.example.glucoflow.databinding.FragmentLoginSignupFieldBinding
 
 class FragmentLoginSignupField: Fragment() {
@@ -22,5 +24,13 @@ class FragmentLoginSignupField: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonLogIn.setOnClickListener {
+            findNavController().navigate(R.id.fragmentProfilabfrage)
+        }
+
+        binding.buttonSignUp.setOnClickListener {
+            findNavController().navigate(R.id.fragmentProfilabfrage)
+        }
     }
 }

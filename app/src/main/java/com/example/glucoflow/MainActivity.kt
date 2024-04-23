@@ -9,6 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.glucoflow.databinding.ActivityMainBinding
@@ -26,6 +27,19 @@ class MainActivity : AppCompatActivity() {
 
         val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         binding.bottomNavigationView.setupWithNavController(navHost.navController)
+
+        navHost.navController.addOnDestinationChangedListener{ _, destination, _ ->
+            when(destination.id) {
+                R.id.fragmentLoginSignup -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.fragmentLoginSignupField -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.fragmentProfilabfrage -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.fragmentHome-> binding.bottomNavigationView.visibility = View.VISIBLE
+                R.id.fragmentGlucose -> binding.bottomNavigationView.visibility = View.VISIBLE
+                R.id.fragmentReceipt -> binding.bottomNavigationView.visibility = View.VISIBLE
+                R.id.fragmentReceiptDetail -> binding.bottomNavigationView.visibility = View.VISIBLE
+                R.id.fragmentProfile-> binding.bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
 
         //setSupportActionBar(binding.toolbar)
 
