@@ -85,4 +85,6 @@
     <string name="kalender">Kalender</string>
     <string name="hinzuf_gen">Hinzufügen</string>
     <string name="rezepte">Rezepte</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
 </resources>
