@@ -87,4 +87,7 @@
     <string name="rezepte">Rezepte</string>
     <string name="name">Name</string>
     <string name="password">Password</string>
+    <string name="zubereitung">Zubereitung:</string>
+    <string name="zubereitungstring">ZubereitungString</string>
+    <string name="ingredients">Ingredients</string>
 </resources>

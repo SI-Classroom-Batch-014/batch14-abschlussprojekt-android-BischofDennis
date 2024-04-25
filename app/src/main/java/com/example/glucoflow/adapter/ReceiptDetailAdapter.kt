@@ -3,10 +3,14 @@ package com.example.glucoflow.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.glucoflow.MainViewModel
+import com.example.glucoflow.data.model.Meal
 import com.example.glucoflow.databinding.ReceiptdetailItemBinding
+import com.example.glucoflow.ui.MealViewModel
 
 class ReceiptDetailAdapter (
-    private val dataset: MutableList<String>
+    private val dataset: List<String>,
+    private val viewModel: MealViewModel
 ) : RecyclerView.Adapter<ReceiptDetailAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(val binding: ReceiptdetailItemBinding) :

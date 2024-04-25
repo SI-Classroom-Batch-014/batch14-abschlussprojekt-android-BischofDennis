@@ -32,27 +32,45 @@ class FragmentReceiptDetail: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        viewModel.currentMeal.observe(viewLifecycleOwner){
+        viewModel.currentMeal.observe(viewLifecycleOwner) {
             binding.receiptViewMealImageDetail.load(it.strMealThumb)
 
+            binding.textViewInstructionsString.text = it.strInstructions
 
-        binding.button5.setOnClickListener {
-           // findNavController().navigate(FragmentReceiptDirections)
+            binding.buttonNo.setOnClickListener {
+                findNavController().navigateUp()//oder R.id.FragmentReceipt
+            }
+
+            // Verbesserte Performance bei fixer Listengröße
+            binding.receiclerViewIngredients.setHasFixedSize(true)
+
+            binding.textViewInstructionsString.text = it.strInstructions
+
+
         }
-        // Verbesserte Performance bei fixer Listengröße
-        binding.receiclerViewIngredients.setHasFixedSize(true)
+
+        //für den RecyclerView Zutaten
+        viewModel.currentMealIngredients.observe(viewLifecycleOwner){
+            binding.receiclerViewIngredients.adapter = ReceiptDetailAdapter(it,viewModel)
+        }
 
 
-        //viewModel.currentMealIngredients.observe(viewLifecycleOwner){
 
-        binding.receiclerViewIngredients.adapter = ReceiptDetailAdapter(mutableListOf(
-            "strIngr1",
-            "strIngrA",
-            "strIngrB",
-            "strIngrC",
-        ))
 
-    }}
+        /**viewModel.currentMealIngredients.observe(viewLifecycleOwner){
+        binding.receiclerViewIngredients.adapter = ReceiptDetailAdapter(it,viewModel)
+        }*/
+
+
+        /** binding.receiclerViewIngredients.adapter = ReceiptDetailAdapter(mutableListOf(
+        "strIngr1",
+        "strIngrA",
+        "strIngrB",
+        "strIngrC",
+        ))*/
+
+
+    }
 
     private fun openLinkInBrowser(link: String) {
         val intent = Intent(Intent.ACTION_VIEW)

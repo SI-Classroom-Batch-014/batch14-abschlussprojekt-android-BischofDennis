@@ -28,6 +28,13 @@ class MealViewModel: ViewModel() {
     val currentMealIngredients: LiveData<MutableList<String>>
         get() = _currentMealIngredients
 
+    //Live Data für Zutaten von Rezept
+    private var _currentMealInstructions = MutableLiveData<String>()
+
+    val currentMealInstructions: LiveData<String>
+        get() = _currentMealInstructions
+
+
     fun loadMeal(search: String) {
         viewModelScope.launch {
             repository.getMeals(search)
@@ -39,8 +46,9 @@ class MealViewModel: ViewModel() {
         val ingredientList = mutableListOf(meal.strIngredient1!!,
             meal.strIngredient2!!,
         )
+
         _currentMeal.value = meal
         _currentMealIngredients.postValue(ingredientList)
-
+        _currentMealInstructions.postValue(meal.strInstructions)
     }
 }
