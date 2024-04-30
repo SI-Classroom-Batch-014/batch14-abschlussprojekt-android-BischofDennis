@@ -43,11 +43,33 @@ class MealViewModel: ViewModel() {
 
     fun setCurrentMeal(meal: Meal) {
 
-        val ingredientList = mutableListOf(meal.strIngredient1!!,
+        //überprüfung schreiben schleife if empty rausnehmen so wie es aussieht
+        // sieht man leere strings nicht
+
+        val ingredientList = mutableListOf(
+            meal.strIngredient1!!,
             meal.strIngredient2!!,
-        )
+            meal.strIngredient3!!,
+            meal.strIngredient4!!,
+            meal.strIngredient5!!,
+            meal.strIngredient6!!,
+            meal.strIngredient8!!,
+            meal.strIngredient9!!,
+            meal.strIngredient10!!,
+            meal.strIngredient11!!,
+            meal.strIngredient12!!,
+            meal.strIngredient13!!,
+            meal.strIngredient14!!,
+            meal.strIngredient15!!,
+            meal.strIngredient16!!,
+            meal.strIngredient17!!,
+            meal.strIngredient18!!,
+            meal.strIngredient19!!,
+            meal.strIngredient20!!,
+            )
 
         _currentMeal.value = meal
+        //gefüllte liste geht hier in Live data
         _currentMealIngredients.postValue(ingredientList)
         _currentMealInstructions.postValue(meal.strInstructions)
     }
