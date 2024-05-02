@@ -101,4 +101,5 @@
     <string name="_200">200</string>
     <string name="_800">800</string>
     <string name="mealname">MealName</string>
+    <string name="kalorien">Kalorien</string>
 </resources>
