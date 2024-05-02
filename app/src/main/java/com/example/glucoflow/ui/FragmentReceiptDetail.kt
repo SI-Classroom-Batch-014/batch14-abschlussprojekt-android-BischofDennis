@@ -33,11 +33,25 @@ class FragmentReceiptDetail: Fragment() {
 
 
         viewModel.currentMeal.observe(viewLifecycleOwner) {
+            binding.textViewMealName.text = it.strMeal
+
             binding.receiptViewMealImageDetail.load(it.strMealThumb)
 
             binding.textViewInstructionsString.text = it.strInstructions
 
-            binding.buttonNo.setOnClickListener {
+            //binding.buttonLinkReceipt.text = it.strSource
+
+            binding.buttonLinkReceipt.setOnClickListener {it1 ->
+                it.strSource?.let {it2 -> openLinkInBrowser(it2) }
+            }
+
+           // binding.buttonYouTube.text = it.strYoutube
+
+            binding.buttonYouTube.setOnClickListener {it1 ->
+                it.strYoutube?.let {it2 ->openLinkInBrowser(it2) }
+            }
+
+            binding.buttonBack.setOnClickListener {
                 findNavController().navigateUp()//oder R.id.FragmentReceipt
             }
 
@@ -46,30 +60,15 @@ class FragmentReceiptDetail: Fragment() {
 
             binding.textViewInstructionsString.text = it.strInstructions
 
+            binding.tvKcal.text = viewModel.getRandomKcal()
 
+            binding.tvKH.text = viewModel.getRandomKH()
         }
 
         //für den RecyclerView Zutaten
         viewModel.currentMealIngredients.observe(viewLifecycleOwner){
             binding.receiclerViewIngredients.adapter = ReceiptDetailAdapter(it,viewModel)
         }
-
-
-
-
-        /**viewModel.currentMealIngredients.observe(viewLifecycleOwner){
-        binding.receiclerViewIngredients.adapter = ReceiptDetailAdapter(it,viewModel)
-        }*/
-
-
-        /** binding.receiclerViewIngredients.adapter = ReceiptDetailAdapter(mutableListOf(
-        "strIngr1",
-        "strIngrA",
-        "strIngrB",
-        "strIngrC",
-        ))*/
-
-
     }
 
     private fun openLinkInBrowser(link: String) {

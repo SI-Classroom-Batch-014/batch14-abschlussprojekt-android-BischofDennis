@@ -19,8 +19,26 @@
         <ImageView
             android:id="@+id/receiptViewMealImageDetail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="160dp"
             app:srcCompat="@drawable/ic_launcher_foreground" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:id="@+id/textViewMealName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/mealname"
+                android:textSize="30sp"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
@@ -42,7 +60,9 @@
         android:id="@+id/receiclerViewIngredients"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="224dp"
+        android:layout_marginEnd="8dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -53,10 +73,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewKcal"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="70dp"
         app:cardBackgroundColor="#64D2FF"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -87,91 +107,80 @@
                 android:background="#000"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="#000"
-                app:layout_constraintTop_toBottomOf="@+id/textViewKcal" />
-
             <TextView
                 android:id="@+id/textViewKcal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
                 android:text="Kalorien"
-                app:layout_constraintBottom_toTopOf="@+id/view2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
             <TextView
-                android:id="@+id/textViewAdd"
+                android:id="@+id/tvKH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:text="Hinzufügen?"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view2" />
-
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
-                android:text="TextView"
+                android:layout_marginEnd="64dp"
+                android:text="@string/_200"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewCarbonhydrate"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textViewCarbonhydrate" />
 
             <TextView
-                android:id="@+id/textView27"
+                android:id="@+id/tvKcal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
-                android:text="TextView"
+                android:layout_marginEnd="64dp"
+                android:text="@string/_800"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewKcal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textViewKcal" />
 
             <TextView
-                android:id="@+id/textView28"
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="@+id/textViewAdd"
+                android:text="@string/g"
+                app:layout_constraintBottom_toBottomOf="@+id/tvKH"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textViewAdd" />
+                app:layout_constraintTop_toTopOf="@+id/tvKH" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:text="@string/kcal"
+                app:layout_constraintBottom_toBottomOf="@+id/tvKcal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvKcal" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonAdd"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#0116FF"
-        android:text="Ja"
-        android:textColor="@color/white"
+        android:text="@string/hinzuf_gen"
+        style="@style/button_style2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buttonNo"
+        android:id="@+id/buttonBack"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#0116FF"
-        android:text="@string/nein"
-        android:textColor="@color/white"
+
+        android:text="@string/zur_ck"
+        style="@style/button_style2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -196,5 +205,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonYouTube"
+        style="@style/button_style2"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="178dp"
+        android:text="YouTube"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonLinkReceipt"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="178dp"
+        android:text="@string/link"
+        style="@style/button_style2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

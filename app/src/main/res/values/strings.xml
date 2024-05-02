@@ -96,4 +96,9 @@
     <string name="lamm">Lamm</string>
     <string name="suchen">Suchen</string>
     <string name="random">Random</string>
+    <string name="zur_ck">zurück</string>
+    <string name="link">Link</string>
+    <string name="_200">200</string>
+    <string name="_800">800</string>
+    <string name="mealname">MealName</string>
 </resources>

@@ -25,10 +25,15 @@ class FragmentGlucose: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //speicehrn button ist so lange nicht klickbar
+
         binding.textViewButtonSpeichern.setOnClickListener{
             val glucoseInput = binding.editTextTextGlucoseInput.text.toString()
             //val datumUhrzeit = LocalDateTime.now().hour.toString()
             //if else wenns leer ist
+
+        }
+
+        binding.editTextTextGlucoseInput.setOnClickListener{
 
         }
     }

@@ -35,6 +35,15 @@ class MealViewModel: ViewModel() {
         get() = _currentMealInstructions
 
 
+    fun getRandomKH(): String {
+        val kH = (0..100).random().toString()
+        return kH
+    }
+
+    fun getRandomKcal(): String {
+        val kcal= (0..1000).random().toString()
+        return kcal
+    }
     fun loadMeal(search: String) {
         viewModelScope.launch {
             repository.getMealsBySearch(search)
