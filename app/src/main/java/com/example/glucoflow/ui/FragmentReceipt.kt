@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.glucoflow.adapter.ReceiptAdapter
-import com.example.glucoflow.databinding.FragmentHomeBinding
 import com.example.glucoflow.databinding.FragmentReceiptBinding
 
 class FragmentReceipt: Fragment() {
@@ -27,15 +26,37 @@ class FragmentReceipt: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.button1.setOnClickListener{
+
+        binding.buttonSearch.setOnClickListener{
             viewModel.loadMeal(binding.searchview.text.toString())
+        }
+
+        binding.buttonRandom.setOnClickListener{
+            viewModel.loadRandomMeal()
+        }
+
+
+        binding.buttonBreakfast.setOnClickListener{
+            viewModel.loadMealByCategory("Breakfast")
+        }
+
+        binding.buttonBeef.setOnClickListener{
+            viewModel.loadMealByCategory("Beef")
+        }
+
+        binding.buttonChicken.setOnClickListener {
+            viewModel.loadMealByCategory("Chicken")
+        }
+
+        binding.buttonLamb.setOnClickListener {
+            viewModel.loadMealByCategory("Lamb")
         }
 
         // Verbesserte Performance bei fixer Listengröße
         binding.recyclerViewMeal.setHasFixedSize(true)
 
 
-        viewModel.randomMeal.observe(viewLifecycleOwner){
+        viewModel.meals.observe(viewLifecycleOwner){
             binding.recyclerViewMeal.adapter = ReceiptAdapter(it,viewModel)
         }
     }

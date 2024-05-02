@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 class MealViewModel: ViewModel() {
 
     private val repository = AppRepository(MealApi)
-    val randomMeal = repository.meals
+    val meals = repository.meals
     //val currentMeal = repository.currentMeal
     //var currentMealIndex: Int = 0
 
@@ -37,7 +37,20 @@ class MealViewModel: ViewModel() {
 
     fun loadMeal(search: String) {
         viewModelScope.launch {
-            repository.getMeals(search)
+            repository.getMealsBySearch(search)
+
+        }
+    }
+
+    fun loadRandomMeal() {
+        viewModelScope.launch {
+            repository.getRandomMeal()
+        }
+    }
+
+    fun loadMealByCategory(category: String) {
+        viewModelScope.launch {
+            repository.getMealCategory(category)
         }
     }
 

@@ -90,4 +90,10 @@
     <string name="zubereitung">Zubereitung:</string>
     <string name="zubereitungstring">ZubereitungString</string>
     <string name="ingredients">Ingredients</string>
+    <string name="fr_hst_ck">Frühstück</string>
+    <string name="rind">Rind</string>
+    <string name="h_hnchen">Hühnchen</string>
+    <string name="lamm">Lamm</string>
+    <string name="suchen">Suchen</string>
+    <string name="random">Random</string>
 </resources>

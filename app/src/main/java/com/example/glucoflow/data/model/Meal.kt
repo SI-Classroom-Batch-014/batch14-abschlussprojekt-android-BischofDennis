@@ -7,12 +7,12 @@ data class Meal (
     @Json(name="idMeal")
     val id: Int,
     //Name
-    val strMeal: String,
-    val strCategory: String,
+    val strMeal: String ,
+    val strCategory: String = "",
     //Land
-    val strArea: String,
+    val strArea: String = "",
     //Anleitung
-    val strInstructions: String,
+    val strInstructions: String = "",
     //Zutaten
 
     val strIngredient1:String? = "",
@@ -40,6 +40,6 @@ data class Meal (
     val strSource: String? = "",
     val strYoutube: String? = "",
     //Foto
-    val strMealThumb: String? = ""
+    val strMealThumb: String?
 
 )

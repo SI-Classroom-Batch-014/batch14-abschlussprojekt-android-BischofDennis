@@ -16,7 +16,7 @@ class AppRepository(private val mealAPI : MealApi) {
         get() = _meals
 
 
-    suspend fun getMeals(search: String){
+    suspend fun getMealsBySearch(search: String){
         try {
             val result = mealAPI.retrofitService.getMealBySearch(search)
             _meals.value = result.meals.shuffled()
@@ -24,6 +24,29 @@ class AppRepository(private val mealAPI : MealApi) {
         }catch (e: Exception){
             Log.e(TAG, "Error loading Data from API: $e")
         }
-
     }
+
+
+    suspend fun getRandomMeal(){
+        try {
+            val result = mealAPI.retrofitService.getRandomMeal()
+            _meals.value = result.meals.shuffled()
+            //alternative _memes.postValue(result.memesList)
+        }catch (e: Exception){
+            Log.e(TAG, "Error loading Data from API: $e")
+        }
+    }
+
+    suspend fun getMealCategory(category: String){
+        try {
+            val result = mealAPI.retrofitService.getMealsByCategory(category)
+            _meals.value = result.meals.shuffled()
+            //alternative _memes.postValue(result.memesList)
+        }catch (e: Exception){
+            Log.e(TAG, "Error loading Data from API: $e")
+        }
+    }
+
+
+
 }
