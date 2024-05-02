@@ -31,7 +31,9 @@ interface MealAPIService {
     /**
      * Endpunkt für ein Random Meal wird angegeben.
      */
-    //@GET("random.php")
+
+    @GET("random.php")
+    suspend fun getRandomMeal(): Data
 
     @GET("search.php")
     suspend fun getMealBySearch(@Query("f")search: String): Data
@@ -39,8 +41,8 @@ interface MealAPIService {
     /**
      * Endpunkt für alle Meal Kategorien.
      */
-    // @GET("categories.php")
-    // suspend fun getAllMealCategories(): MealCategoryResult
+    @GET("categories.php")
+    suspend fun getAllMealCategories(): Data
 
     @GET("filter.php")
     suspend fun getMealsByCategory(@Query("c") category: String): Data
