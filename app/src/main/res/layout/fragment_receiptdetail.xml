@@ -185,7 +185,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewZubereitung"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="130dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="340dp"
         android:layout_marginEnd="16dp"
@@ -220,7 +220,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/zubereitungstring"
                 android:textSize="14sp"

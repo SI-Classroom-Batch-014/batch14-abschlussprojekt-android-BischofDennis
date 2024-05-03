@@ -12,7 +12,7 @@ data class Meal (
     //Land
     val strArea: String = "",
     //Anleitung
-    val strInstructions: String = "",
+    val strInstructions: String  = "",
     //Zutaten
 
     val strIngredient1:String? = "",

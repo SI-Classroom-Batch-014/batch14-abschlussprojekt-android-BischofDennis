@@ -7,6 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.glucoflow.data.AppRepository
 import com.example.glucoflow.data.model.Meal
 import com.example.glucoflow.data.remote.MealApi
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.launch
 
 class MealViewModel: ViewModel() {
@@ -18,6 +21,9 @@ class MealViewModel: ViewModel() {
 
     //Live Data für ausgewählten Rezept
     private var _currentMeal = MutableLiveData<Meal>()
+
+
+
 
     val currentMeal: LiveData<Meal>
         get() = _currentMeal

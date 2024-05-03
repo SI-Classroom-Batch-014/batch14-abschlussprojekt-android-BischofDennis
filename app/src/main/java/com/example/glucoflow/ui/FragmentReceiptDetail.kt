@@ -37,7 +37,7 @@ class FragmentReceiptDetail: Fragment() {
 
             binding.receiptViewMealImageDetail.load(it.strMealThumb)
 
-            binding.textViewInstructionsString.text = it.strInstructions
+           // binding.textViewInstructionsString.text = it.strInstructions
 
             //binding.buttonLinkReceipt.text = it.strSource
 
