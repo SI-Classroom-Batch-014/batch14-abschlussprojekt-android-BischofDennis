@@ -22,9 +22,6 @@ class MealViewModel: ViewModel() {
     //Live Data für ausgewählten Rezept
     private var _currentMeal = MutableLiveData<Meal>()
 
-
-
-
     val currentMeal: LiveData<Meal>
         get() = _currentMeal
 
