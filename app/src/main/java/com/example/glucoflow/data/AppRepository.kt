@@ -47,6 +47,16 @@ class AppRepository(private val mealAPI : MealApi) {
         }
     }
 
+    //der Category Call ist anders aufgebaut (3 Eigenschaften) als der normale Call
+    suspend fun getMealbyId(id: Int): Meal {
+        return try {
+            mealAPI.retrofitService.getMealById(id).meals[0]
+        }catch (e: Exception){
+            Log.e(TAG, "Error loading Data from API: $e")
+            Meal(500, "test", strMealThumb = "null")
+        }
+    }
+
 
 
 }

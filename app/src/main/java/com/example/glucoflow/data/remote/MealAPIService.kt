@@ -46,6 +46,11 @@ interface MealAPIService {
 
     @GET("filter.php")
     suspend fun getMealsByCategory(@Query("c") category: String): Data
+
+    //wird benötigt, weil der 2te Api Call (Kategorie) anders aufgebaut ist (3 Eigenschaften)
+    @GET("lookup.php")
+    suspend fun getMealById(@Query("i") id: Int): Data
+
 }
 
 object MealApi {

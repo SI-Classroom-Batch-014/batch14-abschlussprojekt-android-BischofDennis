@@ -38,12 +38,11 @@ class ReceiptAdapter (
 
             holder.binding.textViewMealName.text = item.strMeal
 
-
-
             holder.binding.root.setOnClickListener{
 
                 viewModel.setCurrentMeal(item)
-
+                //Einzeln aufrufen, weil der Category Call ist anders aufgebaut (3 Eigenschaften) als der normale Call
+                viewModel.getMealbyId(viewModel.currentMeal.value!!.id)
                 holder.itemView.findNavController().navigate(R.id.fragmentReceiptDetail)
             }
 

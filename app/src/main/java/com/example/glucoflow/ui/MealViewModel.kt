@@ -40,7 +40,6 @@ class MealViewModel: ViewModel() {
     val currentMealInstructions: LiveData<String>
         get() = _currentMealInstructions
 
-
     fun getRandomKH(): String {
         val kH = (0..100).random().toString()
         return kH
@@ -68,7 +67,6 @@ class MealViewModel: ViewModel() {
             repository.getMealCategory(category)
         }
     }
-
     fun setCurrentMeal(meal: Meal) {
 
         //überprüfung schreiben schleife if empty rausnehmen so wie es aussieht
@@ -101,4 +99,12 @@ class MealViewModel: ViewModel() {
         _currentMealIngredients.postValue(ingredientList)
         _currentMealInstructions.postValue(meal.strInstructions)
     }
+
+    //der Category Call ist anders aufgebaut (3 Eigenschaften) als der normale Call
+    fun  getMealbyId(id: Int){
+        viewModelScope.launch {
+            _currentMeal.value = repository.getMealbyId(id)
+        }
+    }
+
 }
