@@ -200,35 +200,33 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/scrollViewInstructionsString"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+            </ScrollView>
+
             <TextView
                 android:id="@+id/textViewInstructions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
                 android:text="@string/zubereitung"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-
-            <TextView
-                android:id="@+id/textViewInstructionsString"
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/zubereitungstring"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewInstructions" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -276,7 +274,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewAllIngredients"
                 tools:listitem="@layout/receiptdetail_item" />
 
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

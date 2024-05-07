@@ -58,7 +58,7 @@ class FragmentReceiptDetail: Fragment() {
             // Verbesserte Performance bei fixer Listengröße
             binding.receiclerViewIngredients.setHasFixedSize(true)
 
-            binding.textViewInstructionsString.text = it.strInstructions
+            binding.scrollViewInstructionsString.text = it.strInstructions
 
             binding.tvKcal.text = viewModel.getRandomKcal()
 

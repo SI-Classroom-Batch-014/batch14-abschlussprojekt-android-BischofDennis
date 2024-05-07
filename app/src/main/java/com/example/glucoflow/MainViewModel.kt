@@ -15,7 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.google.firebase.storage.FirebaseStorage
 
-class MainViewModel: ViewModel() {
+class MainViewModel: ViewModel() { //: (application: )
      // Instanz von Firebase Authentication
      // Ersetzt in diesem Fall ein Repository
     // private val firebaseAuth = FirebaseAuth.getInstance()
