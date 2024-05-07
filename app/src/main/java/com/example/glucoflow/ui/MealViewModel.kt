@@ -64,6 +64,16 @@ class MealViewModel: ViewModel() {
             repository.getMealCategory(category)
         }
     }
+
+    //der Category Call ist anders aufgebaut (3 Eigenschaften) als der normale Call
+    fun  getMealbyId(id: Int){
+        viewModelScope.launch {
+            _currentMeal.value = repository.getMealbyId(id)
+            // wird benötigt wegen Ingredient List
+            setCurrentMeal(repository.getMealbyId(id))
+        }
+    }
+
     fun setCurrentMeal(meal: Meal) {
 
         //überprüfung schreiben schleife if empty rausnehmen so wie es aussieht
@@ -96,12 +106,4 @@ class MealViewModel: ViewModel() {
         _currentMealIngredients.postValue(ingredientList)
         _currentMealInstructions.postValue(meal.strInstructions)
     }
-
-    //der Category Call ist anders aufgebaut (3 Eigenschaften) als der normale Call
-    fun  getMealbyId(id: Int){
-        viewModelScope.launch {
-            _currentMeal.value = repository.getMealbyId(id)
-        }
-    }
-
 }

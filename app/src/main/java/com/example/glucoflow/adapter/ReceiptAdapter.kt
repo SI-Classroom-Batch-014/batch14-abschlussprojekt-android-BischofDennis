@@ -42,7 +42,7 @@ class ReceiptAdapter (
 
                 viewModel.setCurrentMeal(item)
                 //Einzeln aufrufen, weil der Category Call ist anders aufgebaut (3 Eigenschaften) als der normale Call
-                viewModel.getMealbyId(viewModel.currentMeal.value!!.id)
+                viewModel.getMealbyId(item.id)
                 holder.itemView.findNavController().navigate(R.id.fragmentReceiptDetail)
             }
 
