@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.gms.google-services")
+    //Room Database - AnnotationProcessor
+    id("kotlin-kapt")
 }
 
 android {
@@ -71,8 +73,6 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore-ktx:24.11.1#")
 
-
-
     //Retrofit und Moshi
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
@@ -80,4 +80,9 @@ dependencies {
 
     // Coil
     implementation ("io.coil-kt:coil:2.5.0")
+
+    //Room Dependencies
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
 }

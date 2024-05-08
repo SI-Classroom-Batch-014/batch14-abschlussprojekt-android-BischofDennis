@@ -1,10 +1,13 @@
 package com.example.glucoflow.db.model
 
-//@Entity
-//data class Profile(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-    //@PrimaryKey(autoGenerate = true)
+@Entity
+data class Profile(
+    @PrimaryKey(autoGenerate = true)
 
-   // name
+    val name : String,
+    val password : String
 
-//)
+)
