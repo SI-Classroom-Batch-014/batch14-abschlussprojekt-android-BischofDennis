@@ -37,12 +37,33 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      */
     val repository = GlucoseRepository(getDatabase(application))
 
-    val glucoseList = repository.glucoseList
-
     /**
      * In der glucoseList Value wird der Wert der guestList des Repositories gespeichert
      * (dabei handelt es sich immer noch um LiveData)
      */
+
+    private var _glucoseList = MutableLiveData<MutableList<Glucose>>()
+
+    val glucoseList: LiveData<MutableList<Glucose>>
+        get() = _glucoseList
+
+
+    fun getGlucoseList(){
+        viewModelScope.launch {
+            _glucoseList.value = repository.searchGlucoseAll().toMutableList()
+        }
+    }
+    private var _glucoseListoneDay = MutableLiveData<MutableList<Glucose>>()
+
+    val glucoseListoneDay: LiveData<MutableList<Glucose>>
+        get() = _glucoseListoneDay
+    fun filterGlucoseList(day: String){
+        _glucoseListoneDay.value =_glucoseList.value?.filter {
+            it.dateTime.contains(day)
+
+        }?.toMutableList()
+    }
+
 
     fun insertGlucose(glucose: Glucose){
         viewModelScope.launch {

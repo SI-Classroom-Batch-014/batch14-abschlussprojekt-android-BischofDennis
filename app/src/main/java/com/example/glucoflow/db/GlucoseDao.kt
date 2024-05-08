@@ -28,6 +28,12 @@ interface GlucoseDao {
     @Delete
     fun deleteGlucose(glucose: Glucose)
 
-    @Query("SELECT * from Glucose WHERE instr(glucosevalue, :searchTerm) OR instr(dateTime, :searchTerm)")
+    //
+    @Query("SELECT * from Glucose WHERE instr(glucosevalue, :searchTerm)")
     suspend fun searchGlucose(searchTerm: String) : List<Glucose>
+
+    @Query("SELECT * from Glucose")
+    suspend fun searchGlucoseAll() : List<Glucose>
+
+
 }

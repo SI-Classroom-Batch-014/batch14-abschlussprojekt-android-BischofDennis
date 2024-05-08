@@ -25,6 +25,10 @@ class GlucoseRepository(private val database: GlucoseDatabase) {
         return database.glucoseDatabaseDao.searchGlucose(searchTerm)
     }
 
+    suspend fun searchGlucoseAll(): List<Glucose> {
+        return database.glucoseDatabaseDao.searchGlucoseAll()
+    }
+
     suspend fun insert(glucose: Glucose) {
         try {
             database.glucoseDatabaseDao.insert(glucose)

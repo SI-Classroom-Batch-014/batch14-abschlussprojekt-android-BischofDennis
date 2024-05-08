@@ -1,4 +1,5 @@
 plugins {
+    //alias name
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("androidx.navigation.safeargs.kotlin")
@@ -42,7 +43,7 @@ android {
         buildConfig = true
     }
 }
-
+//dependencies = bibliothek aus internet, gradle vereint alles bindet in Projekt ein
 dependencies {
 
     implementation(libs.androidx.core.ktx)
