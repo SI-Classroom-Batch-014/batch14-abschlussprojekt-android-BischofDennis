@@ -12,6 +12,8 @@ import com.example.glucoflow.databinding.FragmentGlucoseBinding
 import com.example.glucoflow.db.model.Glucose
 import com.example.glucoflow.db.model.MyCalendar
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -38,16 +40,21 @@ class FragmentCalendar: Fragment() {
 
             //von Kalender aktuelle Zeit
             val calendar = Calendar.getInstance()
-            val dateTimeInput = SimpleDateFormat("dd.MM.yyyy",
-                Locale.getDefault()).format(kalendarInput)
+            calendar.timeInMillis = kalendarInput
 
-            viewModel.insertCalendar(
-                MyCalendar(
-                    title = title ,
-                    date = dateTimeInput,
-                    time = "11:11"
+            binding.calendarView3.setOnDateChangeListener { view, year, month, dayOfMonth ->
+                viewModel.insertCalendar(
+                    MyCalendar(
+                        title = title ,
+                        date = "$dayOfMonth.$month.$year",
+                        time = "11:11"
+                    )
                 )
-            )
+            }
+
+            val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+            val dateTimeInput = dateFormat.format(binding.calendarView3.date)
+
 
         }
 
