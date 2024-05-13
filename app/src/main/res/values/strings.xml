@@ -102,4 +102,22 @@
     <string name="_800">800</string>
     <string name="mealname">MealName</string>
     <string name="kalorien">Kalorien</string>
+    <string name="datum">Datum</string>
+    <string name="dienstag">Dienstag</string>
+    <string name="mo">MO</string>
+    <string name="di">DI</string>
+    <string name="mi">MI</string>
+    <string name="Do">DO</string>
+    <string name="fr">FR</string>
+    <string name="sa">SA</string>
+    <string name="so">SO</string>
+    <string name="_11_10_2024">11.10.2024</string>
+    <string name="h_ufigkeit">Häufigkeit</string>
+    <string name="title">Title</string>
+    <string name="termin">Termin</string>
+    <string name="erinnerung">Erinnerung</string>
+    <string name="einstellungen">Einstellungen</string>
+    <string name="setup">SetUp</string>
+    <string name="regina_icloud_com">Regina@icloud.com</string>
+    <string name="alter">Alter</string>
 </resources>

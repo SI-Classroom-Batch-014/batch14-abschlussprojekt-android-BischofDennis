@@ -1,5 +1,4 @@
 package com.example.glucoflow
-
 import android.app.Application
 import android.net.Uri
 import android.util.Log
@@ -22,6 +21,9 @@ import com.google.firebase.firestore.firestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 /**
  * Da wir im ViewModel den Kontext brauchen, um eine Datenbank-Instanz zu erzeugen,
@@ -48,21 +50,134 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         get() = _glucoseList
 
 
-    fun getGlucoseList(){
-        viewModelScope.launch {
-            _glucoseList.value = repository.searchGlucoseAll().toMutableList()
-        }
-    }
     private var _glucoseListoneDay = MutableLiveData<MutableList<Glucose>>()
 
     val glucoseListoneDay: LiveData<MutableList<Glucose>>
         get() = _glucoseListoneDay
-    fun filterGlucoseList(day: String){
+
+   /** fun filterGlucoseList(day: String){
+        getGlucoseList()
         _glucoseListoneDay.value =_glucoseList.value?.filter {
             it.dateTime.contains(day)
-
         }?.toMutableList()
     }
+
+   fun getGlucoseList(){
+       viewModelScope.launch {
+           _glucoseList.value = repository.searchGlucoseAll().toMutableList()
+       }
+   }*/
+
+    suspend fun filterGlucoseList(day: String){
+        viewModelScope.launch {
+            _glucoseList.value = repository.searchGlucoseAll().toMutableList()
+            _glucoseListoneDay.value = _glucoseList.value?.filter {
+                it.dateTime.contains(day)
+            }?.toMutableList()
+        }
+    }
+
+    private fun getCurrentDate(): String {
+        val calendar = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
+
+    //Aktuelles Datum als LiveData
+    // ändern
+
+
+    private var _currentDate = MutableLiveData<String>()
+    val currentDate: LiveData<String>
+        get() = _currentDate
+
+
+    private fun getMondayDate(): String {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY) // Setze auf den Montag der aktuellen Woche
+        calendar.add(Calendar.WEEK_OF_YEAR, -1) // Gehe eine Woche zurück, um den letzten Montag zu finden
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
+
+    private var _mondayDate = MutableLiveData<String>()
+    val mondayDate: LiveData<String>
+        get() = _mondayDate
+
+
+    private fun getTuesdayDate(): String {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY)
+        calendar.add(Calendar.WEEK_OF_YEAR, -1)
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
+
+    private var _tuesdayDate = MutableLiveData<String>()
+    val tuesdayDate: LiveData<String>
+        get() = _tuesdayDate
+
+
+    private fun getWednesdayDate(): String {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY)
+        calendar.add(Calendar.WEEK_OF_YEAR, -1)
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
+
+    private var _wednesDate = MutableLiveData<String>()
+    val wednesdayDate: LiveData<String>
+        get() = _wednesDate
+
+    private fun getThursdayDate(): String {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY)
+        calendar.add(Calendar.WEEK_OF_YEAR, -1)
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
+
+    private var _thursdayDate = MutableLiveData<String>()
+    val thursdayDate: LiveData<String>
+        get() = _thursdayDate
+
+    private fun getFridayDate(): String {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY)
+        calendar.add(Calendar.WEEK_OF_YEAR, -1)
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
+
+    private var _fridayDate = MutableLiveData<String>()
+    val fridayDate: LiveData<String>
+        get() = _fridayDate
+
+    private fun getSaturdayDate(): String {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY)
+        calendar.add(Calendar.WEEK_OF_YEAR, -1)
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
+
+    private var _saturdayDate = MutableLiveData<String>()
+    val saturdayDate: LiveData<String>
+        get() = _saturdayDate
+
+    private fun getSundayDate(): String {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
+        calendar.add(Calendar.WEEK_OF_YEAR, -1)
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
+
+    private var _sundayDate = MutableLiveData<String>()
+    val sundayDate: LiveData<String>
+        get() = _sundayDate
+
 
 
     fun insertGlucose(glucose: Glucose){
@@ -113,8 +228,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     }
 
-     // Instanz von Firebase Authentication
-     // Ersetzt in diesem Fall ein Repository
+    // Instanz von Firebase Authentication
+    // Ersetzt in diesem Fall ein Repository
     // private val firebaseAuth = FirebaseAuth.getInstance()
     private val firebaseAuth = Firebase.auth
 
@@ -131,6 +246,15 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         if (firebaseAuth.currentUser != null){
             setProfileRef()
         }
+        //werte Value werden sofort gesetzt
+        _currentDate.value = getCurrentDate()
+        _mondayDate.value = getMondayDate()
+        _tuesdayDate.value = getTuesdayDate()
+        _wednesDate.value = getWednesdayDate()
+        _thursdayDate.value = getThursdayDate()
+        _fridayDate.value = getFridayDate()
+        _saturdayDate.value = getSaturdayDate()
+        _sundayDate.value = getSundayDate()
     }
 
 

@@ -101,7 +101,7 @@
                 android:ems="4"
                 android:focusable="true"
                 android:inputType="text"
-                android:text=""
+                android:hint=""
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textView"

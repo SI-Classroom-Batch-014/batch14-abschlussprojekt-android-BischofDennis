@@ -44,4 +44,8 @@
         android:id="@+id/fragmentProfile"
         android:name="com.example.glucoflow.ui.FragmentProfile"
         android:label="FragmentProfile" />
+    <fragment
+        android:id="@+id/fragmentCalendar"
+        android:name="com.example.glucoflow.ui.FragmentCalendar"
+        android:label="FragmentCalendar" />
 </navigation>

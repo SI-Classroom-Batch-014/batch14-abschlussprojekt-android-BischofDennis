@@ -8,10 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.databinding.FragmentGlucoseBinding
-import com.example.glucoflow.databinding.FragmentHomeBinding
 import com.example.glucoflow.db.model.Glucose
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.Calendar
 import java.util.Locale
 
@@ -32,21 +30,26 @@ class FragmentGlucose: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //speicehrn button ist so lange nicht klickbar
-
+        //Glucose Wert mit akutellen Datum gespeichert
         binding.textViewButtonSpeichern.setOnClickListener {
             val glucoseInput =  binding.editTextTextGlucoseInput.text.toString()
-            //von Kalender akutelle Zeit
+            val carbonHydrate = binding.editTextTextKohlenhydrateInput.text.toString()
+
+
+            //von Kalender aktuelle Zeit
             val calendar = Calendar.getInstance()
-            val dateTimeInput = SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
+            val dateTimeInput = SimpleDateFormat("dd.MM.yyyy HH:mm:ss",
                 Locale.getDefault()).format(calendar.time)
 
             viewModel.insertGlucose(
                 Glucose(
-                    glucosevalue = glucoseInput,
+                    glucosevalue =glucoseInput + "mg/dl",
                     dateTime = dateTimeInput
                 )
             )
+            //EditTextFeld zurücksetzen
+            binding.editTextTextGlucoseInput.text.clear()
+            binding.editTextTextKohlenhydrateInput.text.clear()
         }
     }
 }

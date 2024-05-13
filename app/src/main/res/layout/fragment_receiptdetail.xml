@@ -66,7 +66,7 @@
 
 
             <TextView
-                android:id="@+id/textViewCarbonhydrate"
+                android:id="@+id/textViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -84,7 +84,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textViewKcal"
+                android:id="@+id/textViewHäufigkeit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -99,9 +99,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="64dp"
                 android:text="@string/_200"
-                app:layout_constraintBottom_toBottomOf="@+id/textViewCarbonhydrate"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewTitle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textViewCarbonhydrate" />
+                app:layout_constraintTop_toTopOf="@+id/textViewTitle" />
 
             <TextView
                 android:id="@+id/tvKcal"
@@ -109,9 +109,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="64dp"
                 android:text="@string/_800"
-                app:layout_constraintBottom_toBottomOf="@+id/textViewKcal"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewHäufigkeit"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textViewKcal" />
+                app:layout_constraintTop_toTopOf="@+id/textViewHäufigkeit" />
 
             <TextView
                 android:id="@+id/textView2"

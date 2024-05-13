@@ -4,10 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Glucose (
+data class Glucose(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val glucosevalue : String,
-    val dateTime : String
+    val glucosevalue: String,
+    val dateTime: String
 
 )
