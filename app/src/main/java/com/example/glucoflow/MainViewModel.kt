@@ -55,6 +55,25 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     val glucoseListoneDay: LiveData<MutableList<Glucose>>
         get() = _glucoseListoneDay
 
+    private var _carbonhydrateoneDay = MutableLiveData<Glucose>()
+
+    val carbonHydrateoneDay : LiveData<Glucose>
+        get() = _carbonhydrateoneDay
+
+    fun insertGlucose(glucose: Glucose){
+        viewModelScope.launch {
+            repository.insert(glucose)
+        }
+    }
+
+    /**
+     * insertGlucose(glucose: Glucose)
+     * startet die insert Funktion des Repositories
+     * in einer Coroutine um den UI Thread nicht zu blockieren
+     */
+
+
+
    /** fun filterGlucoseList(day: String){
         getGlucoseList()
         _glucoseListoneDay.value =_glucoseList.value?.filter {
@@ -67,6 +86,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
            _glucoseList.value = repository.searchGlucoseAll().toMutableList()
        }
    }*/
+
 
     suspend fun filterGlucoseList(day: String){
         viewModelScope.launch {
@@ -178,19 +198,6 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     val sundayDate: LiveData<String>
         get() = _sundayDate
 
-
-
-    fun insertGlucose(glucose: Glucose){
-        viewModelScope.launch {
-            repository.insert(glucose)
-        }
-    }
-
-    /**
-     * insertGlucose(glucose: Glucose)
-     * startet die insert Funktion des Repositories
-     * in einer Coroutine um den UI Thread nicht zu blockieren
-     */
 
     private val _selectedGlucose = MutableLiveData<Glucose>()
     val selectedGlucose: LiveData<Glucose>

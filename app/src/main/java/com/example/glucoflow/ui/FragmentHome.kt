@@ -26,6 +26,8 @@ class FragmentHome: Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MainViewModel by activityViewModels()
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -151,10 +153,27 @@ class FragmentHome: Fragment() {
 
 
 
+        //Glucose Widget
         viewModel.glucoseListoneDay.observe(viewLifecycleOwner){
             Log.d("Glucose","${viewModel.glucoseListoneDay.value}")
             binding.rvGlucose.adapter = GlucoseAdapter(it,viewModel)
+
         }
+
+        //Kohlenhydrate Widget
+        viewModel.glucoseListoneDay.observe(viewLifecycleOwner){
+            viewModel.viewModelScope.launch {
+                var carbonGesamt = 0
+                // weil es eine Liste ist alles einzeln durchgehen und dann zusammen rechnen
+                for (i in it){
+                    carbonGesamt += i.carbon.toInt()
+                }
+                binding.textViewKohlenhydrate.text = carbonGesamt.toString()
+            }
+
+        }
+
+
 
 
 

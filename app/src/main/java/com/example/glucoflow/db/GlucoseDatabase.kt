@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.glucoflow.db.model.Glucose
 
-@Database(entities = [Glucose::class], version = 1)
+@Database(entities = [Glucose::class], version = 2)
 /**
  *
  * gibt an, dass diese Klasse eine Datenbank ist

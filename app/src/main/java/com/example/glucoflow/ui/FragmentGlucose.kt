@@ -44,7 +44,8 @@ class FragmentGlucose: Fragment() {
             viewModel.insertGlucose(
                 Glucose(
                     glucosevalue =glucoseInput + "mg/dl",
-                    dateTime = dateTimeInput
+                    dateTime = dateTimeInput,
+                    carbon = carbonHydrate
                 )
             )
             //EditTextFeld zurücksetzen

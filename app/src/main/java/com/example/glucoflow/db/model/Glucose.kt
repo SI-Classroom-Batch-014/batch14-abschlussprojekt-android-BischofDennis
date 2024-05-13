@@ -8,6 +8,7 @@ data class Glucose(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val glucosevalue: String,
-    val dateTime: String
+    val dateTime: String,
+    val carbon: String
 
 )
