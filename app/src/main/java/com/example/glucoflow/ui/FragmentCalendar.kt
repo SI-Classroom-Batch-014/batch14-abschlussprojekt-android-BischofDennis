@@ -9,6 +9,11 @@ import androidx.fragment.app.activityViewModels
 import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.databinding.FragmentCalendarBinding
 import com.example.glucoflow.databinding.FragmentGlucoseBinding
+import com.example.glucoflow.db.model.Glucose
+import com.example.glucoflow.db.model.MyCalendar
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class FragmentCalendar: Fragment() {
 
@@ -26,6 +31,25 @@ class FragmentCalendar: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonSave.setOnClickListener {
+            val kalendarInput =  binding.calendarView3.date
+            val title = binding.editTextTitle.text.toString()
+
+            //von Kalender aktuelle Zeit
+            val calendar = Calendar.getInstance()
+            val dateTimeInput = SimpleDateFormat("dd.MM.yyyy",
+                Locale.getDefault()).format(kalendarInput)
+
+            viewModel.insertCalendar(
+                MyCalendar(
+                    title = title ,
+                    date = dateTimeInput,
+                    time = "11:11"
+                )
+            )
+
+        }
 
     }
 }

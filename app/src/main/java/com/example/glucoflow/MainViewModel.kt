@@ -1,24 +1,21 @@
 package com.example.glucoflow
 import android.app.Application
-import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.glucoflow.data.Profile
-import com.example.glucoflow.db.GlucoseRepository
+import com.example.glucoflow.db.AppRepository
 import com.example.glucoflow.db.getDatabase
+import com.example.glucoflow.db.getDatabase2
 import com.example.glucoflow.db.model.Glucose
+import com.example.glucoflow.db.model.MyCalendar
 import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
-import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -37,7 +34,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      * ruft Datenbank auf und erstellt falls noch keine vorhanden
      * ist eine neue mittels application(context)
      */
-    val repository = GlucoseRepository(getDatabase(application))
+    val repository = AppRepository(getDatabase(application), getDatabase2(application))
 
     /**
      * In der glucoseList Value wird der Wert der guestList des Repositories gespeichert
@@ -71,6 +68,12 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      * startet die insert Funktion des Repositories
      * in einer Coroutine um den UI Thread nicht zu blockieren
      */
+
+    fun insertCalendar(calender: MyCalendar){
+        viewModelScope.launch {
+            repository.insertCalendar(calender)
+        }
+    }
 
 
 

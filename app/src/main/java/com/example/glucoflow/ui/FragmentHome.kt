@@ -11,15 +11,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.viewModelScope
 import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.adapter.GlucoseAdapter
-import com.example.glucoflow.adapter.ReceiptAdapter
 import com.example.glucoflow.databinding.FragmentHomeBinding
-import com.example.glucoflow.db.GlucoseRepository
-import com.example.glucoflow.db.model.Glucose
 import kotlinx.coroutines.launch
-import okhttp3.internal.notify
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
 class FragmentHome: Fragment() {
 

@@ -3,14 +3,14 @@ package com.example.glucoflow.db
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.glucoflow.db.model.Glucose
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import java.lang.Exception
+import com.example.glucoflow.db.model.MyCalendar
+import kotlin.Exception
 
-const val TAG = "Repository"
-class GlucoseRepository(private val database: GlucoseDatabase) {
+const val TAG = "AppRepository"
+class AppRepository(private val database: GlucoseDatabase, private val databaseCalendar: CalendarDatabase) {
 
     val glucoseList: LiveData<List<Glucose>> = database.glucoseDatabaseDao.getALLData()
+    val calendarList: LiveData<List<MyCalendar>> = databaseCalendar.calendarDatabaseDao.getALLData()
 
 
     fun upsertGlucose(glucose: Glucose) {
@@ -32,6 +32,14 @@ class GlucoseRepository(private val database: GlucoseDatabase) {
     suspend fun insert(glucose: Glucose) {
         try {
             database.glucoseDatabaseDao.insert(glucose)
+        } catch (e: Exception) {
+            Log.d(TAG,"Failed to insert into Database: $e")
+        }
+    }
+
+    suspend fun insertCalendar(calendar: MyCalendar){
+        try {
+            databaseCalendar.calendarDatabaseDao.insert(calendar)
         } catch (e: Exception) {
             Log.d(TAG,"Failed to insert into Database: $e")
         }
