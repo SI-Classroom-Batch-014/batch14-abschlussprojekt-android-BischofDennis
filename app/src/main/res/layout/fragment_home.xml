@@ -235,122 +235,45 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <TextView
-            android:id="@+id/textViewDatumMontag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/montag"
-            android:textColor="@color/blueDefault"
-            android:textSize="23sp" />
-
-        <TextView
-            android:id="@+id/textViewDatum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/_26"
-            android:textColor="@color/blueDefault"
-            android:textSize="23sp" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/textViewButtonBlutzucker"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="40dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardBackgroundColor="#007AFF"
-            app:cardCornerRadius="10dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textViewBlutzucker"
+                android:id="@+id/textViewDatumMontag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="2dp"
-                android:text="@string/blutzucker"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/montag"
+                android:textColor="@color/blueDefault"
+                android:textSize="23sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textViewUhrzeit"
+                android:id="@+id/textViewDatum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="20dp"
-                android:text="@string/_12_00_12_30"
-                android:textColor="@color/black" />
-        </androidx.cardview.widget.CardView>
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/_26"
+                android:textColor="@color/blueDefault"
+                android:textSize="23sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/textViewButtonTabletten"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="85dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardBackgroundColor="#007AFF"
-            app:cardCornerRadius="10dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMyCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:listitem="@layout/mycalendarday_item" />
 
-            <TextView
-                android:id="@+id/textViewTabletten"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="2dp"
-                android:text="@string/metformin"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textViewUhrzeitTabletten"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="20dp"
-                android:text="@string/_12_00_12_30"
-                android:textColor="@color/black" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/textViewButtonTermin"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="130dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardBackgroundColor="#007AFF"
-            app:cardCornerRadius="10dp">
-
-            <TextView
-                android:id="@+id/textViewArzt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="2dp"
-                android:text="@string/arzt"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textViewUhrzeitArzt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="20dp"
-                android:text="@string/_12_00_12_30"
-                android:textColor="@color/black" />
-        </androidx.cardview.widget.CardView>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView

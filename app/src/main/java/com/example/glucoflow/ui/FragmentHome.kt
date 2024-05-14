@@ -11,14 +11,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.viewModelScope
 import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.adapter.GlucoseAdapter
+import com.example.glucoflow.adapter.MyCalendarAdapter
 import com.example.glucoflow.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
 
-class FragmentHome: Fragment() {
+class FragmentHome : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MainViewModel by activityViewModels()
-
 
 
     override fun onCreateView(
@@ -35,20 +35,23 @@ class FragmentHome: Fragment() {
 
         // viewModel.insertGlucose(Glucose(0, "test", "2024-05-08"))
 
-        viewModel.currentDate.observe(viewLifecycleOwner){
+        viewModel.currentDate.observe(viewLifecycleOwner) {
 
             binding.textViewTodayDate.text = it
         }
 
         binding.textViewTodayDate.setOnClickListener {
-            viewModel.currentDate.observe(viewLifecycleOwner){
+            viewModel.currentDate.observe(viewLifecycleOwner) {
                 viewModel.viewModelScope.launch {
-                    viewModel.filterGlucoseList(it) }
+                    viewModel.filterGlucoseList(it)
+                    viewModel.filterMyCalendarList(it)
+                }
             }
+
         }
 
 
-        viewModel.mondayDate.observe(viewLifecycleOwner){
+        viewModel.mondayDate.observe(viewLifecycleOwner) {
 
             binding.textViewMondayDate.text = it
         }
@@ -59,11 +62,12 @@ class FragmentHome: Fragment() {
                 //GlucoseListe nach ausgewählten Tag filter für den glucoseListOneDay zum Observen
                 Toast.makeText(requireContext(), "Montag: $it", Toast.LENGTH_SHORT).show()
                 viewModel.viewModelScope.launch {
-                    viewModel.filterGlucoseList(it) }
+                    viewModel.filterGlucoseList(it)
+                }
             }
         }
 
-        viewModel.tuesdayDate.observe(viewLifecycleOwner){
+        viewModel.tuesdayDate.observe(viewLifecycleOwner) {
 
             binding.textViewTuesdayDate.text = it
         }
@@ -74,12 +78,13 @@ class FragmentHome: Fragment() {
                 //GlucoseListe nach ausgewählten Tag filter für den glucoseListOneDay zum Observen
                 Toast.makeText(requireContext(), "Dienstag: $it", Toast.LENGTH_SHORT).show()
                 viewModel.viewModelScope.launch {
-                    viewModel.filterGlucoseList(it) }
+                    viewModel.filterGlucoseList(it)
+                }
             }
         }
 
 
-        viewModel.wednesdayDate.observe(viewLifecycleOwner){
+        viewModel.wednesdayDate.observe(viewLifecycleOwner) {
             binding.textViewMittwochDate.text = it
         }
 
@@ -88,11 +93,12 @@ class FragmentHome: Fragment() {
                 Toast.makeText(requireContext(), "Mittwoch: $it", Toast.LENGTH_SHORT).show()
                 //GlucoseListe nach ausgewählten Tag filter für den glucoseListOneDay zum Observen
                 viewModel.viewModelScope.launch {
-                    viewModel.filterGlucoseList(it) }
+                    viewModel.filterGlucoseList(it)
+                }
             }
         }
 
-        viewModel.thursdayDate.observe(viewLifecycleOwner){
+        viewModel.thursdayDate.observe(viewLifecycleOwner) {
             binding.textViewDonnerstagDate.text = it
         }
 
@@ -101,11 +107,12 @@ class FragmentHome: Fragment() {
                 Toast.makeText(requireContext(), "Donnerstag: $it", Toast.LENGTH_SHORT).show()
                 //GlucoseListe nach ausgewählten Tag filter für den glucoseListOneDay zum Observen
                 viewModel.viewModelScope.launch {
-                    viewModel.filterGlucoseList(it) }
+                    viewModel.filterGlucoseList(it)
+                }
             }
         }
 
-        viewModel.fridayDate.observe(viewLifecycleOwner){
+        viewModel.fridayDate.observe(viewLifecycleOwner) {
             binding.textViewFreitagDate.text = it
         }
 
@@ -114,11 +121,12 @@ class FragmentHome: Fragment() {
                 Toast.makeText(requireContext(), "Freitag: $it", Toast.LENGTH_SHORT).show()
                 //GlucoseListe nach ausgewählten Tag filter für den glucoseListOneDay zum Observen
                 viewModel.viewModelScope.launch {
-                    viewModel.filterGlucoseList(it) }
+                    viewModel.filterGlucoseList(it)
+                }
             }
         }
 
-        viewModel.saturdayDate.observe(viewLifecycleOwner){
+        viewModel.saturdayDate.observe(viewLifecycleOwner) {
             binding.textViewSamstagDate.text = it
         }
 
@@ -127,11 +135,12 @@ class FragmentHome: Fragment() {
                 Toast.makeText(requireContext(), "Samstag: $it", Toast.LENGTH_SHORT).show()
                 //GlucoseListe nach ausgewählten Tag filter für den glucoseListOneDay zum Observen
                 viewModel.viewModelScope.launch {
-                    viewModel.filterGlucoseList(it) }
+                    viewModel.filterGlucoseList(it)
+                }
             }
         }
 
-        viewModel.sundayDate.observe(viewLifecycleOwner){
+        viewModel.sundayDate.observe(viewLifecycleOwner) {
             binding.textViewSundayDate.text = it
         }
 
@@ -140,25 +149,25 @@ class FragmentHome: Fragment() {
                 Toast.makeText(requireContext(), "Sonntag: $it", Toast.LENGTH_SHORT).show()
                 //GlucoseListe nach ausgewählten Tag filter für den glucoseListOneDay zum Observen
                 viewModel.viewModelScope.launch {
-                    viewModel.filterGlucoseList(it) }
+                    viewModel.filterGlucoseList(it)
+                }
             }
         }
 
 
-
         //Glucose Widget
-        viewModel.glucoseListoneDay.observe(viewLifecycleOwner){
-            Log.d("Glucose","${viewModel.glucoseListoneDay.value}")
-            binding.rvGlucose.adapter = GlucoseAdapter(it,viewModel)
+        viewModel.glucoseListoneDay.observe(viewLifecycleOwner) {
+            Log.d("Glucose", "${viewModel.glucoseListoneDay.value}")
+            binding.rvGlucose.adapter = GlucoseAdapter(it, viewModel)
 
         }
 
         //Kohlenhydrate Widget
-        viewModel.glucoseListoneDay.observe(viewLifecycleOwner){
+        viewModel.glucoseListoneDay.observe(viewLifecycleOwner) {
             viewModel.viewModelScope.launch {
                 var carbonGesamt = 0
                 // weil es eine Liste ist alles einzeln durchgehen und dann zusammen rechnen
-                for (i in it){
+                for (i in it) {
                     carbonGesamt += i.carbon.toInt()
                 }
                 binding.textViewKohlenhydrate.text = carbonGesamt.toString()
@@ -166,11 +175,11 @@ class FragmentHome: Fragment() {
 
         }
 
-
-
-
-
+        //Kalender Widget
+        viewModel.mycalendaroneDay.observe(viewLifecycleOwner) {
+            Log.d("MyCalendar", "${viewModel.mycalendaroneDay.value}")
+            binding.rvMyCalendar.adapter = MyCalendarAdapter(it, viewModel)
+        }
 
     }
-
 }

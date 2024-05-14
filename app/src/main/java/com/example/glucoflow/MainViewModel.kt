@@ -1,4 +1,5 @@
 package com.example.glucoflow
+
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
@@ -27,7 +28,7 @@ import java.util.Locale
  * erbt unser ViewModel nun nicht mehr von ViewModel() sondern von AndroidViewModel(),
  * da dieses uns den application-context mitgibt
  */
-class MainViewModel(application: Application): AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     //database Room
     /**
@@ -54,10 +55,25 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     private var _carbonhydrateoneDay = MutableLiveData<Glucose>()
 
-    val carbonHydrateoneDay : LiveData<Glucose>
+    val carbonHydrateoneDay: LiveData<Glucose>
         get() = _carbonhydrateoneDay
 
-    fun insertGlucose(glucose: Glucose){
+
+
+    //Kalender
+    private var _myCalendarList = MutableLiveData<MutableList<MyCalendar>>()
+
+    val myCalendarList: LiveData<MutableList<MyCalendar>>
+        get() = _myCalendarList
+
+    private var _mycalendaroneDay = MutableLiveData<MutableList<MyCalendar>>()
+
+    val mycalendaroneDay: LiveData<MutableList<MyCalendar>>
+        get() = _mycalendaroneDay
+
+
+
+    fun insertGlucose(glucose: Glucose) {
         viewModelScope.launch {
             repository.insert(glucose)
         }
@@ -69,33 +85,41 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
      * in einer Coroutine um den UI Thread nicht zu blockieren
      */
 
-    fun insertCalendar(calender: MyCalendar){
+    fun insertCalendar(calender: MyCalendar) {
         viewModelScope.launch {
             repository.insertCalendar(calender)
         }
     }
 
 
-
-   /** fun filterGlucoseList(day: String){
-        getGlucoseList()
-        _glucoseListoneDay.value =_glucoseList.value?.filter {
-            it.dateTime.contains(day)
-        }?.toMutableList()
+    /** fun filterGlucoseList(day: String){
+    getGlucoseList()
+    _glucoseListoneDay.value =_glucoseList.value?.filter {
+    it.dateTime.contains(day)
+    }?.toMutableList()
     }
 
-   fun getGlucoseList(){
-       viewModelScope.launch {
-           _glucoseList.value = repository.searchGlucoseAll().toMutableList()
-       }
-   }*/
+    fun getGlucoseList(){
+    viewModelScope.launch {
+    _glucoseList.value = repository.searchGlucoseAll().toMutableList()
+    }
+    }*/
 
 
-    suspend fun filterGlucoseList(day: String){
+    suspend fun filterGlucoseList(day: String) {
         viewModelScope.launch {
             _glucoseList.value = repository.searchGlucoseAll().toMutableList()
             _glucoseListoneDay.value = _glucoseList.value?.filter {
                 it.dateTime.contains(day)
+            }?.toMutableList()
+        }
+    }
+
+    suspend fun filterMyCalendarList(day: String) {
+        viewModelScope.launch {
+            _myCalendarList.value = repository.searchMyCalendarAll().toMutableList()
+            _mycalendaroneDay.value = _myCalendarList.value?.filter {
+                it.date.contains(day)
             }?.toMutableList()
         }
     }
@@ -117,8 +141,14 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     private fun getMondayDate(): String {
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY) // Setze auf den Montag der aktuellen Woche
-        calendar.add(Calendar.WEEK_OF_YEAR, -1) // Gehe eine Woche zurück, um den letzten Montag zu finden
+        calendar.set(
+            Calendar.DAY_OF_WEEK,
+            Calendar.MONDAY
+        ) // Setze auf den Montag der aktuellen Woche
+        calendar.add(
+            Calendar.WEEK_OF_YEAR,
+            -1
+        ) // Gehe eine Woche zurück, um den letzten Montag zu finden
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         return dateFormat.format(calendar.time)
     }
@@ -206,11 +236,11 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     val selectedGlucose: LiveData<Glucose>
         get() = _selectedGlucose
 
-    fun selectedGlucose(glucose: Glucose){
+    fun selectedGlucose(glucose: Glucose) {
         _selectedGlucose.value = glucose
     }
 
-    fun upsertGlucose(glucose: Glucose){
+    fun upsertGlucose(glucose: Glucose) {
         if (glucose.glucosevalue.isNotEmpty() && glucose.dateTime.isNotEmpty()) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.upsertGlucose(glucose)
@@ -253,7 +283,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     lateinit var profileRef: DocumentReference
 
     init {
-        if (firebaseAuth.currentUser != null){
+        if (firebaseAuth.currentUser != null) {
             setProfileRef()
         }
         //werte Value werden sofort gesetzt
@@ -268,26 +298,29 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     }
 
 
-
     fun loginWithEmailAndPassword(email: String, pwd: String, completion: () -> Unit) {
         if (email.isNotBlank() && pwd.isNotBlank()) {
-            firebaseAuth.signInWithEmailAndPassword(email, pwd).addOnCompleteListener { authResult ->
-                if (authResult.isSuccessful) {
-                    completion()
-                    //
-                    firebaseAuth.currentUser?.sendEmailVerification()
+            firebaseAuth.signInWithEmailAndPassword(email, pwd)
+                .addOnCompleteListener { authResult ->
+                    if (authResult.isSuccessful) {
+                        completion()
+                        //
+                        firebaseAuth.currentUser?.sendEmailVerification()
 
-                    profileRef = db.collection("profiles").document(firebaseAuth.currentUser!!.uid)
-                    profileRef.set(Profile())
+                        profileRef =
+                            db.collection("profiles").document(firebaseAuth.currentUser!!.uid)
+                        profileRef.set(Profile())
 
-                    db.collection("profiles").document(firebaseAuth.currentUser!!.uid).set(Profile())
+                        db.collection("profiles").document(firebaseAuth.currentUser!!.uid)
+                            .set(Profile())
 
-                    _currentUser.value = firebaseAuth.currentUser
-                    profileRef = db.collection("profiles").document(firebaseAuth.currentUser!!.uid)
-                } else {
-                    Log.e("FIREBASE_AUTH", authResult.exception.toString())
+                        _currentUser.value = firebaseAuth.currentUser
+                        profileRef =
+                            db.collection("profiles").document(firebaseAuth.currentUser!!.uid)
+                    } else {
+                        Log.e("FIREBASE_AUTH", authResult.exception.toString())
+                    }
                 }
-            }
         }
     }
 
@@ -297,13 +330,14 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     fun registerWithEmailAndPassword(email: String, pwd: String, completion: () -> Unit) {
         if (email.isNotBlank() && pwd.isNotBlank()) {
-            firebaseAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener { authResult ->
-                if (authResult.isSuccessful) {
-                    completion()
-                } else {
-                    Log.e("FIREBASE_AUTH", authResult.exception.toString())
+            firebaseAuth.createUserWithEmailAndPassword(email, pwd)
+                .addOnCompleteListener { authResult ->
+                    if (authResult.isSuccessful) {
+                        completion()
+                    } else {
+                        Log.e("FIREBASE_AUTH", authResult.exception.toString())
+                    }
                 }
-            }
         }
     }
 
@@ -312,7 +346,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     }
 
 
-    fun updateProfile(profile: Profile){
+    fun updateProfile(profile: Profile) {
 
         profileRef.set(profile)
 

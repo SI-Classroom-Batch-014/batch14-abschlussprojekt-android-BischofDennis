@@ -9,5 +9,6 @@ data class MyCalendar (
     val id: Long = 0,
     val title: String,
     val date: String,
-    val time: String
+    val time: String,
+    val haufigkeit: String? = null
 )

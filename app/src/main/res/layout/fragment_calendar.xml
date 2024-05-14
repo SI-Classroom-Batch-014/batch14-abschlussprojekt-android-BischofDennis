@@ -108,42 +108,65 @@
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
 
-            <TextView
-                android:id="@+id/tvValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
-                android:text="Value x"
-                android:textSize="25sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textViewHäufigkeit"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textViewHäufigkeit" />
-
             <EditText
                 android:id="@+id/editTextTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginEnd="128dp"
+                android:layout_marginEnd="190dp"
                 android:ems="10"
                 android:inputType="text"
-                android:text="@string/title"
+                android:hint="@string/title"
                 android:textSize="25sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextClock
-                android:id="@+id/textClock"
+            <EditText
+                android:id="@+id/editTextTime"
                 android:layout_width="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="64dp"
+                android:ems="3"
+                android:inputType="time"
                 android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="@+id/editTextTitle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/editTextTitle" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="Uhr"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="@+id/editTextTime"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editTextTime" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="x"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+
+            <EditText
+                android:id="@+id/editTextTimeHaufigkeitanzahl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="64dp"
+                android:ems="3"
+                android:inputType="time"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewHäufigkeit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewHäufigkeit" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

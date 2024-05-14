@@ -55,6 +55,8 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.storage.ktx)
     implementation(libs.firebase.auth.ktx)
+    //Google Ads deswegen App absturz
+    //implementation(libs.mediation.test.suite)
 
 
     testImplementation(libs.junit)
@@ -69,8 +71,7 @@ dependencies {
     //Durch die Verwendung der Firebase Android BoM verwendet die App immer kompatible
     // Versionen der Firebase Android-Bibliotheken.
     implementation("com.google.firebase:firebase-firestore")
-    implementation("com.google.firebase:firebase-analytics")
-    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+    //implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore-ktx:24.11.1#")
 

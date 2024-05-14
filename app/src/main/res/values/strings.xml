@@ -120,4 +120,9 @@
     <string name="setup">SetUp</string>
     <string name="regina_icloud_com">Regina@icloud.com</string>
     <string name="alter">Alter</string>
+    <string name="value">Value</string>
+    <string name="anzahl">Anzahl</string>
+    <string name="x">x</string>
+    <string name="_12_00">12:00</string>
+    <string name="uhr">Uhr</string>
 </resources>
