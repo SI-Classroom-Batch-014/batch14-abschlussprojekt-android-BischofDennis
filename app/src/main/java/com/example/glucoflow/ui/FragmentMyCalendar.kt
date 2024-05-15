@@ -37,6 +37,7 @@ class FragmentMyCalendar : Fragment() {
             "3:33"
         ))*/
 
+        //Todo funktioniert nicht wenn ich kein Datum,heutiges datum muss ich 2 mal klicken
         binding.calendarView3.setOnDateChangeListener { view, year, month, dayOfMonth ->
             val formattedMonth = String.format("%02d", month + 1) // Stelle sicher, dass der Monat zweistellig ist
             formattedDate = String.format("%02d", dayOfMonth) + "." + formattedMonth + "." + year

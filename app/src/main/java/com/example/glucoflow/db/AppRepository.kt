@@ -3,14 +3,18 @@ package com.example.glucoflow.db
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.glucoflow.db.model.Glucose
+import com.example.glucoflow.db.model.Meal
 import com.example.glucoflow.db.model.MyCalendar
 import kotlin.Exception
 
 const val TAG = "AppRepository"
-class AppRepository(private val database: GlucoseDatabase, private val databaseCalendar: CalendarDatabase) {
+class AppRepository(private val database: GlucoseDatabase,
+                    private val databaseCalendar: CalendarDatabase,
+                    private val databaseMeal: MealDatabase) {
 
     val glucoseList: LiveData<List<Glucose>> = database.glucoseDatabaseDao.getALLData()
     val calendarList: LiveData<List<MyCalendar>> = databaseCalendar.calendarDatabaseDao.getALLData()
+
 
 
     fun upsertGlucose(glucose: Glucose) {
@@ -44,6 +48,20 @@ class AppRepository(private val database: GlucoseDatabase, private val databaseC
     suspend fun insertCalendar(calendar: MyCalendar){
         try {
             databaseCalendar.calendarDatabaseDao.insert(calendar)
+        } catch (e: Exception) {
+            Log.d(TAG,"Failed to insert into Database: $e")
+        }
+    }
+
+
+    //MVVM zum filtern
+    suspend fun searchMealAll(): List<Meal> {
+        return databaseMeal.mealDatabaseDao.searchMealAll()
+    }
+
+    suspend fun saveKhKcal(meal: Meal){
+        try {
+            databaseMeal.mealDatabaseDao.insert(meal)
         } catch (e: Exception) {
             Log.d(TAG,"Failed to insert into Database: $e")
         }

@@ -1,7 +1,9 @@
 package com.example.glucoflow
 
 import android.app.Application
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +12,9 @@ import com.example.glucoflow.data.Profile
 import com.example.glucoflow.db.AppRepository
 import com.example.glucoflow.db.getDatabase
 import com.example.glucoflow.db.getDatabase2
+import com.example.glucoflow.db.getDatabase3
 import com.example.glucoflow.db.model.Glucose
+import com.example.glucoflow.db.model.Meal
 import com.example.glucoflow.db.model.MyCalendar
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseUser
@@ -20,6 +24,8 @@ import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -35,7 +41,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      * ruft Datenbank auf und erstellt falls noch keine vorhanden
      * ist eine neue mittels application(context)
      */
-    val repository = AppRepository(getDatabase(application), getDatabase2(application))
+    val repository = AppRepository(
+        getDatabase(application),
+        getDatabase2(application),
+        getDatabase3(application)
+    )
 
     /**
      * In der glucoseList Value wird der Wert der guestList des Repositories gespeichert
@@ -72,6 +82,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         get() = _mycalendaroneDay
 
 
+    //Meal Kalorien Kohlenhydrate
+    private var _myMealList = MutableLiveData<MutableList<Meal>>()
+
+    val myMealList: LiveData<MutableList<Meal>>
+        get() = _myMealList
+
+    private var _myMealoneDay = MutableLiveData<MutableList<Meal>>()
+
+    val myMealoneDay: LiveData<MutableList<Meal>>
+        get() = _myMealoneDay
+
+
 
     fun insertGlucose(glucose: Glucose) {
         viewModelScope.launch {
@@ -91,6 +113,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    //Kalorien widget
+    fun saveKhKcal(meal: Meal) {
+        viewModelScope.launch {
+            repository.saveKhKcal(meal)
+        }
+
+    }
 
     /** fun filterGlucoseList(day: String){
     getGlucoseList()
@@ -124,6 +153,44 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun filterMyCalendarListToday() {
+        val currentDate = LocalDate.now() // Heutiges Datum
+        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+
+        viewModelScope.launch {
+            _myCalendarList.value = repository.searchMyCalendarAll().toMutableList()
+            _mycalendaroneDay.value = _myCalendarList.value?.filter {
+                // Wenn LocalDatenach currentDate kommt true raus
+                LocalDate.parse(it.date, formatter).isAfter(currentDate) || LocalDate.parse(it.date, formatter).equals(currentDate)
+            }?.toMutableList()?.sortedBy { LocalDate.parse(it.date, formatter) }?.toMutableList()
+
+            Log.i("_mycalendaroneDay", "${_mycalendaroneDay.value}")
+        }
+    }
+
+    /**@RequiresApi(Build.VERSION_CODES.O)
+    suspend fun sortAscending(){
+        val currentDate = LocalDate.now()//Heutiges Datum
+        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        //sortedby = neue liste
+        _mycalendaroneDay.value = _mycalendaroneDay.value?.sortedBy {
+            LocalDate.parse(it.date, formatter)
+        }?.toMutableList()
+    }*/
+
+    suspend fun filterMyMealList(day: String) {
+        viewModelScope.launch {
+            _myMealList.value = repository.searchMealAll().toMutableList()
+            _myMealoneDay.value = _myMealList.value?.filter {
+                it.dateTime.contains(day)
+            }?.toMutableList()
+        }
+    }
+
+
+
+
     private fun getCurrentDate(): String {
         val calendar = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
@@ -141,6 +208,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun getMondayDate(): String {
         val calendar = Calendar.getInstance()
+        //localtime.current week
+        //nach woche anzeigen week 1 kw 34
         calendar.set(
             Calendar.DAY_OF_WEEK,
             Calendar.MONDAY

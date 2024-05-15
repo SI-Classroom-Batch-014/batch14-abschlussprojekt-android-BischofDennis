@@ -29,7 +29,7 @@ class MyCalendarAdapter(
 
        holder.binding.textViewBlutzucker.text = item.title
        holder.binding.textViewUhrzeit.text = item.time
-        holder.binding.textViewHUfigkeit.text = item.haufigkeit
+        holder.binding.textViewHaufigkeit.text = item.haufigkeit
        holder.binding.textViewDatum.text = item.date
     }
 

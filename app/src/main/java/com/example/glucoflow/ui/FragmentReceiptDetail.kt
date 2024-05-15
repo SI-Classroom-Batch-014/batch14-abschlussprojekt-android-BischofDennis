@@ -10,13 +10,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
+import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.adapter.ReceiptDetailAdapter
 import com.example.glucoflow.databinding.FragmentReceiptdetailBinding
+import com.example.glucoflow.db.model.Meal
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class FragmentReceiptDetail: Fragment() {
 
     private lateinit var binding: FragmentReceiptdetailBinding
     private val viewModel: MealViewModel by activityViewModels()
+    private val viewModelMain : MainViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -31,6 +37,8 @@ class FragmentReceiptDetail: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val randomKcal = viewModel.getRandomKcal()
+        val randomKH = viewModel.getRandomKH()
 
         viewModel.currentMeal.observe(viewLifecycleOwner) {
             binding.textViewMealName.text = it.strMeal
@@ -55,14 +63,30 @@ class FragmentReceiptDetail: Fragment() {
                 findNavController().navigateUp()//oder R.id.FragmentReceipt
             }
 
+
+            binding.buttonAdd.setOnClickListener {
+                //von Kalender aktuelle Zeit
+                val calendar = Calendar.getInstance()
+                val dateTimeInput = SimpleDateFormat("dd.MM.yyyy HH:mm:ss",
+                    Locale.getDefault()).format(calendar.time)
+
+                viewModelMain.saveKhKcal(
+                    Meal(
+                        randomKH,
+                        randomKcal,
+                        dateTimeInput
+                    )
+                )
+            }
+
             // Verbesserte Performance bei fixer Listengröße
             binding.receiclerViewIngredients.setHasFixedSize(true)
 
             binding.scrollViewInstructionsString.text = it.strInstructions
 
-            binding.tvKcal.text = viewModel.getRandomKcal()
+            binding.tvKcal.text = randomKcal
 
-            binding.tvKH.text = viewModel.getRandomKH()
+            binding.tvKH.text = randomKH
         }
 
         //für den RecyclerView Zutaten
