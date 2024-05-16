@@ -30,16 +30,18 @@ class FragmentGlucose: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        //von Kalender aktuelle Zeit
+        val calendar = Calendar.getInstance()
+        val dateTimeInput = SimpleDateFormat("dd.MM.yyyy HH:mm:ss",
+            Locale.getDefault()).format(calendar.time)
+
         //Glucose Wert mit akutellen Datum gespeichert
         binding.textViewButtonSpeichern.setOnClickListener {
             val glucoseInput =  binding.editTextTextGlucoseInput.text.toString()
             val carbonHydrate = binding.editTextTextKohlenhydrateInput.text.toString()
 
-
-            //von Kalender aktuelle Zeit
-            val calendar = Calendar.getInstance()
-            val dateTimeInput = SimpleDateFormat("dd.MM.yyyy HH:mm:ss",
-                Locale.getDefault()).format(calendar.time)
 
             viewModel.insertGlucose(
                 Glucose(
@@ -52,5 +54,7 @@ class FragmentGlucose: Fragment() {
             binding.editTextTextGlucoseInput.text.clear()
             binding.editTextTextKohlenhydrateInput.text.clear()
         }
+        //von Kalender aktuelle Zeit
+        binding.textViewDatumUhrzeit.text = dateTimeInput
     }
 }

@@ -21,6 +21,8 @@ class FragmentHome : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MainViewModel by activityViewModels()
+    var carbonInsulin = 0
+    var carbonMeal = 0
     var carbonGesamt = 0
 
 
@@ -45,7 +47,7 @@ class FragmentHome : Fragment() {
         }
 
         binding.textViewTodayDate.setOnClickListener {
-            carbonGesamt = 0
+            carbonGesamt = carbonInsulin +carbonMeal
             viewModel.currentDate.observe(viewLifecycleOwner) {
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
@@ -67,11 +69,12 @@ class FragmentHome : Fragment() {
         //Kohlenhydrate Widget
         viewModel.glucoseListoneDay.observe(viewLifecycleOwner) {
             viewModel.viewModelScope.launch {
-
+                var localCarbongesamt = 0
                 // weil es eine Liste ist alles einzeln durchgehen und dann zusammen rechnen
                 for (i in it) {
-                    carbonGesamt += i.carbon.toInt()
+                    localCarbongesamt += i.carbon.toInt()
                 }
+                carbonInsulin = localCarbongesamt
                 binding.textViewKohlenhydrate.text = carbonGesamt.toString()
             }
 
@@ -85,7 +88,7 @@ class FragmentHome : Fragment() {
 
         binding.kalenderwidget.setOnClickListener {
             viewModel.viewModelScope.launch {
-                viewModel.filterMyCalendarListToday()
+               viewModel.filterMyCalendarListToday()
                 //viewModel.sortDescending()
             }
         }
@@ -93,12 +96,16 @@ class FragmentHome : Fragment() {
         viewModel.myMealoneDay.observe(viewLifecycleOwner) {
             Log.d("Meal","${viewModel.myMealoneDay.value}")
             viewModel.viewModelScope.launch {
+                var localCarbongesamt = 0
                 var kalorienGesamt = 0
                 for (i in it) {
                     kalorienGesamt += i.kalorien.toInt()
-                    carbonGesamt += i.kohlenhydrate.toInt()
+                    localCarbongesamt += i.kohlenhydrate.toInt()
 
                 }
+                // Addiere die Kohlenhydrate aus den Mahlzeiten zum Gesamtwert
+
+                carbonMeal = localCarbongesamt
                 binding.textViewKalorien.text = kalorienGesamt.toString()
             }
         }
@@ -116,6 +123,7 @@ class FragmentHome : Fragment() {
                 Toast.makeText(requireContext(), "Montag: $it", Toast.LENGTH_SHORT).show()
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
+                    viewModel.filterMyCalendarList(it)
                 }
             }
         }
@@ -132,6 +140,8 @@ class FragmentHome : Fragment() {
                 Toast.makeText(requireContext(), "Dienstag: $it", Toast.LENGTH_SHORT).show()
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
+                    viewModel.filterMyCalendarList(it)
+
                 }
             }
         }
@@ -147,6 +157,8 @@ class FragmentHome : Fragment() {
                 //GlucoseListe nach ausgewählten Tag filter für den glucoseListOneDay zum Observen
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
+                    viewModel.filterMyCalendarList(it)
+
                 }
             }
         }
@@ -161,6 +173,8 @@ class FragmentHome : Fragment() {
                 //GlucoseListe nach ausgewählten Tag filter für den glucoseListOneDay zum Observen
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
+                    viewModel.filterMyCalendarList(it)
+
                 }
             }
         }
@@ -175,6 +189,8 @@ class FragmentHome : Fragment() {
                 //GlucoseListe nach ausgewählten Tag filter für den glucoseListOneDay zum Observen
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
+                    viewModel.filterMyCalendarList(it)
+
                 }
             }
         }
@@ -189,6 +205,8 @@ class FragmentHome : Fragment() {
                 //GlucoseListe nach ausgewählten Tag filter für den glucoseListOneDay zum Observen
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
+                    viewModel.filterMyCalendarList(it)
+
                 }
             }
         }
@@ -203,6 +221,8 @@ class FragmentHome : Fragment() {
                 //GlucoseListe nach ausgewählten Tag filter für den glucoseListOneDay zum Observen
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
+                    viewModel.filterMyCalendarList(it)
+
                 }
             }
         }

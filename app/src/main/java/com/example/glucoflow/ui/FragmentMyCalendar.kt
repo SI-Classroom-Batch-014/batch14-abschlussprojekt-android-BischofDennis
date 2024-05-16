@@ -9,7 +9,9 @@ import androidx.fragment.app.activityViewModels
 import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.databinding.FragmentCalendarBinding
 import com.example.glucoflow.db.model.MyCalendar
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 
 class FragmentMyCalendar : Fragment() {
@@ -49,9 +51,16 @@ class FragmentMyCalendar : Fragment() {
             val time = binding.editTextTime.text.toString()
             val haufikgkeit = binding.editTextTimeHaufigkeitanzahl.text.toString()
 
+
             //von Kalender aktuelle Zeit
             val calendar = Calendar.getInstance()
             calendar.timeInMillis = kalendarInput
+
+            /** Verwende das heutige Datum, wenn kein Datum ausgewählt wurde
+            if (formattedDate.isEmpty()) {
+                val calendar = Calendar.getInstance()
+                formattedDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(calendar.time)
+            }*/
 
             viewModel.insertCalendar(
                 MyCalendar(

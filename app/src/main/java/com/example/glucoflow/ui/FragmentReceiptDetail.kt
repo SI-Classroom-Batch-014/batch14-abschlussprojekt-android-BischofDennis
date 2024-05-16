@@ -77,6 +77,8 @@ class FragmentReceiptDetail: Fragment() {
                         dateTimeInput
                     )
                 )
+                binding.tvKcal.text = "0"
+                binding.tvKH.text = "0"
             }
 
             // Verbesserte Performance bei fixer Listengröße

@@ -208,15 +208,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun getMondayDate(): String {
         val calendar = Calendar.getInstance()
-        //localtime.current week
-        //nach woche anzeigen week 1 kw 34
         calendar.set(
             Calendar.DAY_OF_WEEK,
             Calendar.MONDAY
         ) // Setze auf den Montag der aktuellen Woche
         calendar.add(
             Calendar.WEEK_OF_YEAR,
-            -1
+            0
         ) // Gehe eine Woche zurück, um den letzten Montag zu finden
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         return dateFormat.format(calendar.time)
@@ -230,7 +228,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun getTuesdayDate(): String {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY)
-        calendar.add(Calendar.WEEK_OF_YEAR, -1)
+        calendar.add(Calendar.WEEK_OF_YEAR, 0)
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         return dateFormat.format(calendar.time)
     }
@@ -243,7 +241,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun getWednesdayDate(): String {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY)
-        calendar.add(Calendar.WEEK_OF_YEAR, -1)
+        calendar.add(Calendar.WEEK_OF_YEAR, 0)
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         return dateFormat.format(calendar.time)
     }
@@ -255,7 +253,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun getThursdayDate(): String {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY)
-        calendar.add(Calendar.WEEK_OF_YEAR, -1)
+        calendar.add(Calendar.WEEK_OF_YEAR, 0)
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         return dateFormat.format(calendar.time)
     }
@@ -267,7 +265,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun getFridayDate(): String {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY)
-        calendar.add(Calendar.WEEK_OF_YEAR, -1)
+        calendar.add(Calendar.WEEK_OF_YEAR, 0)
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         return dateFormat.format(calendar.time)
     }
@@ -279,7 +277,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun getSaturdayDate(): String {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY)
-        calendar.add(Calendar.WEEK_OF_YEAR, -1)
+        calendar.add(Calendar.WEEK_OF_YEAR, 0)
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         return dateFormat.format(calendar.time)
     }
@@ -291,7 +289,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun getSundayDate(): String {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
-        calendar.add(Calendar.WEEK_OF_YEAR, -1)
+        calendar.add(Calendar.WEEK_OF_YEAR, 0)
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         return dateFormat.format(calendar.time)
     }
