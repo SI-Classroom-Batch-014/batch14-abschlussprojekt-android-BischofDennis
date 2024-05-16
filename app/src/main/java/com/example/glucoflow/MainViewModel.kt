@@ -400,6 +400,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             firebaseAuth.createUserWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener { authResult ->
                     if (authResult.isSuccessful) {
+                        //_currentUser.value = firebaseAuth.currentUser
                         completion()
                     } else {
                         Log.e("FIREBASE_AUTH", authResult.exception.toString())
