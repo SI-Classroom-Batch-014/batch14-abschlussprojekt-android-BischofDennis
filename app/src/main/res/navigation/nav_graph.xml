@@ -17,9 +17,9 @@
         android:name="com.example.glucoflow.ui.FragmentLoginSignup"
         android:label="FragmentLoginSignup" />
     <fragment
-        android:id="@+id/fragmentLoginSignupField"
-        android:name="com.example.glucoflow.ui.FragmentLoginSignupField"
-        android:label="FragmentLoginSignupField" />
+        android:id="@+id/fragmentLogin"
+        android:name="com.example.glucoflow.ui.FragmentLogin"
+        android:label="FragmentLogin" />
     <fragment
         android:id="@+id/fragmentProfilabfrage"
         android:name="com.example.glucoflow.ui.FragmentProfilabfrage"
@@ -48,4 +48,8 @@
         android:id="@+id/fragmentCalendar"
         android:name="com.example.glucoflow.ui.FragmentMyCalendar"
         android:label="FragmentCalendar" />
+    <fragment
+        android:id="@+id/fragmentRegister"
+        android:name="com.example.glucoflow.ui.FragmentRegister"
+        android:label="FragmentRegister" />
 </navigation>

@@ -1,14 +1,7 @@
 package com.example.glucoflow
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -32,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         navHost.navController.addOnDestinationChangedListener{ _, destination, _ ->
             when(destination.id) {
                 R.id.fragmentLoginSignup -> binding.bottomNavigationView.visibility = View.GONE
-                R.id.fragmentLoginSignupField -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.fragmentLogin -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.fragmentProfilabfrage -> binding.bottomNavigationView.visibility = View.GONE
                 R.id.fragmentHome-> binding.bottomNavigationView.visibility = View.VISIBLE
                 R.id.fragmentGlucose -> binding.bottomNavigationView.visibility = View.VISIBLE

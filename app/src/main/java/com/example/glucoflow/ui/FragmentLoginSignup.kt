@@ -26,11 +26,11 @@ class FragmentLoginSignup: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonAnmelden.setOnClickListener {
-            findNavController().navigate(R.id.fragmentLoginSignupField)
+            findNavController().navigate(R.id.fragmentLogin)
         }
 
         binding.buttonRegistrieren.setOnClickListener {
-            findNavController().navigate(R.id.fragmentLoginSignupField)
+            findNavController().navigate(R.id.fragmentLogin)
         }
     }
 }

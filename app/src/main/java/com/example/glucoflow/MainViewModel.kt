@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import com.example.glucoflow.data.model.Profile
 import com.example.glucoflow.db.AppRepository
 import com.example.glucoflow.db.getDatabase
