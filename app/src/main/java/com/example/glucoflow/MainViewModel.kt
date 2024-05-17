@@ -8,7 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.glucoflow.data.Profile
+import com.example.glucoflow.data.model.Profile
 import com.example.glucoflow.db.AppRepository
 import com.example.glucoflow.db.getDatabase
 import com.example.glucoflow.db.getDatabase2
@@ -19,6 +19,7 @@ import com.example.glucoflow.db.model.MyCalendar
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.Dispatchers
@@ -339,19 +340,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     // Ersetzt in diesem Fall ein Repository
     // private val firebaseAuth = FirebaseAuth.getInstance()
     private val firebaseAuth = Firebase.auth
-
-    //update firestire
-    private val db = Firebase.firestore
+    //update firestore
+    private val firebaseStore = Firebase.firestore
 
     private var _currentUser = MutableLiveData<FirebaseUser>(firebaseAuth.currentUser)
     val currentUser: LiveData<FirebaseUser?>
         get() = _currentUser
 
-    lateinit var profileRef: DocumentReference
+    val profileCollectionReference: CollectionReference = firebaseStore.collection("profiles")
+    private lateinit var profileDocumentReference: DocumentReference
 
     init {
         if (firebaseAuth.currentUser != null) {
-            setProfileRef()
+            setProfileDocumentReference()
         }
         //werte Value werden sofort gesetzt
         _currentDate.value = getCurrentDate()
@@ -365,58 +366,47 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-    fun loginWithEmailAndPassword(email: String, pwd: String, completion: () -> Unit) {
-        if (email.isNotBlank() && pwd.isNotBlank()) {
-            firebaseAuth.signInWithEmailAndPassword(email, pwd)
-                .addOnCompleteListener { authResult ->
-                    if (authResult.isSuccessful) {
-                        completion()
-                        //
-                        firebaseAuth.currentUser?.sendEmailVerification()
 
-                        profileRef =
-                            db.collection("profiles").document(firebaseAuth.currentUser!!.uid)
-                        profileRef.set(Profile())
-
-                        db.collection("profiles").document(firebaseAuth.currentUser!!.uid)
-                            .set(Profile())
-
-                        _currentUser.value = firebaseAuth.currentUser
-                        profileRef =
-                            db.collection("profiles").document(firebaseAuth.currentUser!!.uid)
-                    } else {
-                        Log.e("FIREBASE_AUTH", authResult.exception.toString())
-                    }
+    fun login(email: String, password: String) {
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { authResult ->
+                if (authResult.isSuccessful) {
+                    _currentUser.value = firebaseAuth.currentUser
+                    setProfileDocumentReference()
+                } else {
+                    Log.e("AUTH", "register ${authResult.exception?.message.toString()}")
                 }
+            }
         }
     }
 
-    private fun setProfileRef() {
-
+    private fun setProfileDocumentReference() {
+        profileDocumentReference = profileCollectionReference.document(firebaseAuth.currentUser!!.uid)
     }
 
-    fun registerWithEmailAndPassword(email: String, pwd: String, completion: () -> Unit) {
-        if (email.isNotBlank() && pwd.isNotBlank()) {
-            firebaseAuth.createUserWithEmailAndPassword(email, pwd)
-                .addOnCompleteListener { authResult ->
-                    if (authResult.isSuccessful) {
-                        //_currentUser.value = firebaseAuth.currentUser
-                        completion()
-                    } else {
-                        Log.e("FIREBASE_AUTH", authResult.exception.toString())
-                    }
+    fun register(email: String, password: String, username: String) {
+        if (email.isNotEmpty() && password.isNotEmpty() && username.isNotEmpty()) {
+            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { authResult ->
+                if (authResult.isSuccessful) {
+                    _currentUser.value = firebaseAuth.currentUser
+                    setProfileDocumentReference()
+                    profileDocumentReference.set(Profile(username = username))
+                } else {
+                    Log.e("AUTH", "register ${authResult.exception?.message.toString()}")
                 }
+            }
         }
     }
 
     fun logout() {
         firebaseAuth.signOut()
+        _currentUser.value = firebaseAuth.currentUser
     }
 
 
     fun updateProfile(profile: Profile) {
 
-        profileRef.set(profile)
+        this.profileDocumentReference.set(profile)
 
     }
 }

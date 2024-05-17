@@ -126,4 +126,8 @@
     <string name="_12_00">12:00</string>
     <string name="uhr">Uhr</string>
     <string name="register">Register</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="login">LogIn</string>
+    <string name="back">Back</string>
 </resources>

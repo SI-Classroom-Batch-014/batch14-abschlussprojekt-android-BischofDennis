@@ -4,7 +4,9 @@ import com.example.glucoflow.testClass.AuthUtil
 import org.junit.Assert
 import org.junit.Test
 
+//https://developer.android.com/training/testing/fundamentals?hl=de
 class AuthUtilTest {
+
 
     @Test
     fun emptyEmail() {

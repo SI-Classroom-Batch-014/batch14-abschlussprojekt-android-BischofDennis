@@ -10,11 +10,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.R
 import com.example.glucoflow.databinding.FragmentLoginSignupFieldBinding
+import kotlin.math.log
 
 class FragmentLoginSignupField: Fragment() {
 
     private lateinit var binding: FragmentLoginSignupFieldBinding
-    private val viewBinding: MainViewModel by activityViewModels()
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,16 +29,61 @@ class FragmentLoginSignupField: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonLogIn.setOnClickListener {
-            viewBinding.loginWithEmailAndPassword(binding.editTextTextName.text.toString(),binding.editTextTextPassword.text.toString()){
-                findNavController().navigate(R.id.fragmentProfilabfrage)
-            }
-        }
+        setButtonsOnClickListener()
+    }
 
+    private fun setButtonsOnClickListener() {
+        setRegisterButtonOnClickListener()
+        setButtonLoginOnClickListener()
+        setupObservers()
+        addObservers()
+        //setBackButtonOnClickListener()
+    }
+
+    private fun setRegisterButtonOnClickListener() {
         binding.buttonSignUp.setOnClickListener {
-            viewBinding.registerWithEmailAndPassword(binding.editTextTextName.text.toString(),binding.editTextTextPassword.text.toString()){
+            val email = binding.editTextTextName.text.toString()
+            val password = binding.editTextTextPassword.text.toString()
+            val username = binding.editTextTextUsername.text.toString()
+
+            viewModel.register(email, password, username)
+        }
+    }
+
+    private fun setButtonLoginOnClickListener() {
+        binding.buttonLogIn.setOnClickListener {
+            val email = binding.editTextTextName.text.toString()
+            val password = binding.editTextTextPassword.text.toString()
+            viewModel.login(email, password)
+        }
+    }
+    private fun setupObservers() {
+        viewModel.currentUser.observe(viewLifecycleOwner) { authResult ->
+            if (authResult != null) {
                 findNavController().navigate(R.id.fragmentProfilabfrage)
             }
         }
     }
+
+    private fun addObservers() {
+        viewModel.currentUser.observe(viewLifecycleOwner) { firebaseUser ->
+            if (firebaseUser != null) {
+                findNavController().navigate(R.id.fragmentProfilabfrage)
+            }
+        }
+    }
+
+    /**private fun setButtonRegisterOnClickListener() {
+        binding.btToRegister.setOnClickListener {
+            findNavController().navigate(R.id.registerFragment)
+        }
+    }
+
+    private fun setBackButtonOnClickListener() {
+        binding.btBackToLogin.setOnClickListener {
+            findNavController().navigate(R.id.loginFragment)
+        }
+    }*/
+
+
 }

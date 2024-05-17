@@ -6,12 +6,25 @@
     android:layout_height="match_parent"
     android:background="@drawable/backroundlayoutthree">
 
+    <Button
+        android:id="@+id/buttonBack"
+        style="@style/button_style1"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="632dp"
+        android:text="@string/back"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonSignUp"
+        app:layout_constraintStart_toStartOf="@+id/buttonSignUp"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView2"
         android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:layout_marginStart="55dp"
-        android:layout_marginTop="265dp"
+        android:layout_marginTop="170dp"
         android:layout_marginEnd="56dp"
         android:layout_marginBottom="266dp"
         android:backgroundTint="#64D2FF"
@@ -25,21 +38,31 @@
             android:id="@+id/editTextTextName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="45dp"
+            android:layout_marginStart="45dp"
             android:layout_marginTop="40dp"
             android:ems="10"
-            android:inputType="textEmailAddress"
-            android:hint="@string/name" />
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/editTextTextPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="45dp"
+            android:layout_marginStart="45dp"
             android:layout_marginTop="110dp"
             android:ems="10"
-            android:inputType="textPassword"
-            android:hint="@string/password" />
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/editTextTextUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="180dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/username" />
     </com.google.android.material.card.MaterialCardView>
 
     <Button
@@ -50,7 +73,7 @@
         android:layout_marginStart="125dp"
         android:layout_marginTop="500dp"
         android:layout_marginEnd="125dp"
-        android:text="LogIn"
+        android:text="@string/login"
         android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
