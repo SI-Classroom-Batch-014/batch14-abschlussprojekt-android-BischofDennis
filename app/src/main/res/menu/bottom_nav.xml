@@ -21,8 +21,8 @@
         android:title="@string/rezepte"
         android:icon="@drawable/baseline_receipt_long_24"/>
     <item
-        android:id="@id/fragmentProfile"
-        android:title="@string/profil"
+        android:id="@+id/fragmentChatHome"
+        android:title="@string/chat"
         android:icon="@drawable/baseline_self_improvement_24"/>
 
 

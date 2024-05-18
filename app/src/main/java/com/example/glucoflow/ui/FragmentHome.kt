@@ -11,7 +11,9 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import com.example.glucoflow.MainViewModel
+import com.example.glucoflow.R
 import com.example.glucoflow.adapter.GlucoseAdapter
 import com.example.glucoflow.adapter.MyCalendarAdapter
 import com.example.glucoflow.databinding.FragmentHomeBinding
@@ -54,6 +56,9 @@ class FragmentHome : Fragment() {
 
         binding.datumBtn.setOnClickListener {
             showDatePickerDialog()
+        }
+        binding.profilePicture.setOnClickListener {
+            findNavController().navigate(R.id.fragmentProfile)
         }
 
 

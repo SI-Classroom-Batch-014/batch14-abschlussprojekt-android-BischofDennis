@@ -420,4 +420,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         this.profileDocumentReference.set(profile)
 
     }
+
+    fun getUserChatName() {
+
+    }
 }

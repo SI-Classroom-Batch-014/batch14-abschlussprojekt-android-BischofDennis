@@ -74,6 +74,7 @@ class MealViewModel: ViewModel() {
         }
     }
 
+
     fun setCurrentMeal(meal: Meal) {
 
         //überprüfung schreiben schleife if empty rausnehmen so wie es aussieht
