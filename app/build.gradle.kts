@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.storage.ktx)
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.material.v1120)
     //Google Ads deswegen App absturz
     //implementation(libs.mediation.test.suite)
 

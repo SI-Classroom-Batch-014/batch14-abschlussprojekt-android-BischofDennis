@@ -8,7 +8,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
 import com.example.glucoflow.data.model.Profile
 import com.example.glucoflow.db.AppRepository
 import com.example.glucoflow.db.getDatabase
@@ -26,8 +25,10 @@ import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.time.temporal.TemporalAdjusters
 import java.util.Calendar
 import java.util.Locale
 
@@ -36,6 +37,7 @@ import java.util.Locale
  * erbt unser ViewModel nun nicht mehr von ViewModel() sondern von AndroidViewModel(),
  * da dieses uns den application-context mitgibt
  */
+@RequiresApi(Build.VERSION_CODES.O)
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     //database Room
@@ -208,93 +210,98 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         get() = _currentDate
 
 
-    private fun getMondayDate(): String {
-        val calendar = Calendar.getInstance()
-        calendar.set(
-            Calendar.DAY_OF_WEEK,
-            Calendar.MONDAY
-        ) // Setze auf den Montag der aktuellen Woche
-        calendar.add(
-            Calendar.WEEK_OF_YEAR,
-            0
-        ) // Gehe eine Woche zurück, um den letzten Montag zu finden
-        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-        return dateFormat.format(calendar.time)
+    fun setDate(date: String){
+        _currentDate.value = date
     }
+
+    fun setWeekDays(selectedDate: LocalDate) {
+        // Berechne das Datum des Montags der gleichen Woche
+        val monday = selectedDate.with(TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY))
+
+        // Erstelle eine Liste mit den Daten von Montag bis Sonntag
+        val weekDates = (0..6).map { dayOffset ->
+            monday.plusDays(dayOffset.toLong())
+        }
+
+        // Formatieren der Daten
+        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        val formattedWeekDates = weekDates.map { date ->
+            date.format(formatter)
+        }
+
+        // Aktualisiere die Livedata
+        _mondayDate.value = formattedWeekDates[0]
+        _tuesdayDate.value = formattedWeekDates[1]
+        _wednesDate.value = formattedWeekDates[2]
+        _thursdayDate.value = formattedWeekDates[3]
+        _fridayDate.value = formattedWeekDates[4]
+        _saturdayDate.value = formattedWeekDates[5]
+        _sundayDate.value = formattedWeekDates[6]
+    }
+
+
 
     private var _mondayDate = MutableLiveData<String>()
     val mondayDate: LiveData<String>
         get() = _mondayDate
 
 
-    private fun getTuesdayDate(): String {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY)
-        calendar.add(Calendar.WEEK_OF_YEAR, 0)
-        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-        return dateFormat.format(calendar.time)
-    }
 
     private var _tuesdayDate = MutableLiveData<String>()
     val tuesdayDate: LiveData<String>
         get() = _tuesdayDate
 
 
-    private fun getWednesdayDate(): String {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY)
-        calendar.add(Calendar.WEEK_OF_YEAR, 0)
-        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-        return dateFormat.format(calendar.time)
+
+    private fun setDateToCurrentWeek() {
+        // Formatieren der Daten
+        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+
+        val today = LocalDate.parse(_currentDate.value, formatter)
+        val monday = today.with(TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY))
+
+        // Erstelle eine Liste mit den Daten von Montag bis Sonntag
+        val weekDates = (0..6).map { dayOffset ->
+            monday.plusDays(dayOffset.toLong())
+        }
+
+
+        val formattedWeekDates = weekDates.map { date ->
+            date.format(formatter)
+        }
+
+        // Aktualisiere die Livedata
+        _mondayDate.value = formattedWeekDates[0]
+        _tuesdayDate.value = formattedWeekDates[1]
+        _wednesDate.value = formattedWeekDates[2]
+        _thursdayDate.value = formattedWeekDates[3]
+        _fridayDate.value = formattedWeekDates[4]
+        _saturdayDate.value = formattedWeekDates[5]
+        _sundayDate.value = formattedWeekDates[6]
+
     }
+
 
     private var _wednesDate = MutableLiveData<String>()
     val wednesdayDate: LiveData<String>
         get() = _wednesDate
 
-    private fun getThursdayDate(): String {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY)
-        calendar.add(Calendar.WEEK_OF_YEAR, 0)
-        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-        return dateFormat.format(calendar.time)
-    }
 
     private var _thursdayDate = MutableLiveData<String>()
     val thursdayDate: LiveData<String>
         get() = _thursdayDate
 
-    private fun getFridayDate(): String {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY)
-        calendar.add(Calendar.WEEK_OF_YEAR, 0)
-        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-        return dateFormat.format(calendar.time)
-    }
+
 
     private var _fridayDate = MutableLiveData<String>()
     val fridayDate: LiveData<String>
         get() = _fridayDate
 
-    private fun getSaturdayDate(): String {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY)
-        calendar.add(Calendar.WEEK_OF_YEAR, 0)
-        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-        return dateFormat.format(calendar.time)
-    }
 
     private var _saturdayDate = MutableLiveData<String>()
     val saturdayDate: LiveData<String>
         get() = _saturdayDate
 
-    private fun getSundayDate(): String {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
-        calendar.add(Calendar.WEEK_OF_YEAR, 0)
-        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-        return dateFormat.format(calendar.time)
-    }
 
     private var _sundayDate = MutableLiveData<String>()
     val sundayDate: LiveData<String>
@@ -355,7 +362,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         if (firebaseAuth.currentUser != null) {
             setProfileDocumentReference()
         }
+        _currentDate.value = getCurrentDate()
+        setDateToCurrentWeek()
         //werte Value werden sofort gesetzt
+        /**
         _currentDate.value = getCurrentDate()
         _mondayDate.value = getMondayDate()
         _tuesdayDate.value = getTuesdayDate()
@@ -363,7 +373,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _thursdayDate.value = getThursdayDate()
         _fridayDate.value = getFridayDate()
         _saturdayDate.value = getSaturdayDate()
-        _sundayDate.value = getSundayDate()
+        _sundayDate.value = getSundayDate()*/
     }
 
 

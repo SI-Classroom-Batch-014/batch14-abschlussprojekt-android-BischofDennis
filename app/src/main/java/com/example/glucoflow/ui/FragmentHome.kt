@@ -15,8 +15,17 @@ import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.adapter.GlucoseAdapter
 import com.example.glucoflow.adapter.MyCalendarAdapter
 import com.example.glucoflow.databinding.FragmentHomeBinding
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.type.DayOfWeek
 import kotlinx.coroutines.launch
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.time.temporal.TemporalAdjusters
 
+@RequiresApi(Build.VERSION_CODES.O)
 class FragmentHome : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
@@ -24,6 +33,8 @@ class FragmentHome : Fragment() {
     var carbonInsulin = 0
     var carbonMeal = 0
     var carbonGesamt = 0
+
+
 
 
     override fun onCreateView(
@@ -35,20 +46,29 @@ class FragmentHome : Fragment() {
         return binding.root
     }
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        binding.datumBtn.setOnClickListener {
+            showDatePickerDialog()
+        }
+
 
         // viewModel.insertGlucose(Glucose(0, "test", "2024-05-08"))
 
         viewModel.currentDate.observe(viewLifecycleOwner) {
 
             binding.textViewTodayDate.text = it
+
         }
 
         binding.textViewTodayDate.setOnClickListener {
-            carbonGesamt = carbonInsulin +carbonMeal
+            carbonGesamt = carbonInsulin + carbonMeal
             viewModel.currentDate.observe(viewLifecycleOwner) {
+                Toast.makeText(requireContext(), "Heute: $it", Toast.LENGTH_SHORT).show()
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
                     viewModel.filterMyCalendarList(it)
@@ -88,13 +108,13 @@ class FragmentHome : Fragment() {
 
         binding.kalenderwidget.setOnClickListener {
             viewModel.viewModelScope.launch {
-               viewModel.filterMyCalendarListToday()
+                viewModel.filterMyCalendarListToday()
                 //viewModel.sortDescending()
             }
         }
 
         viewModel.myMealoneDay.observe(viewLifecycleOwner) {
-            Log.d("Meal","${viewModel.myMealoneDay.value}")
+            Log.d("Meal", "${viewModel.myMealoneDay.value}")
             viewModel.viewModelScope.launch {
                 var localCarbongesamt = 0
                 var kalorienGesamt = 0
@@ -124,8 +144,11 @@ class FragmentHome : Fragment() {
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
                     viewModel.filterMyCalendarList(it)
+                    viewModel.filterMyMealList(it)
+
                 }
             }
+            carbonGesamt = carbonInsulin +carbonMeal
         }
 
         viewModel.tuesdayDate.observe(viewLifecycleOwner) {
@@ -141,9 +164,11 @@ class FragmentHome : Fragment() {
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
                     viewModel.filterMyCalendarList(it)
+                    viewModel.filterMyMealList(it)
 
                 }
             }
+            carbonGesamt = carbonInsulin +carbonMeal
         }
 
 
@@ -158,9 +183,11 @@ class FragmentHome : Fragment() {
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
                     viewModel.filterMyCalendarList(it)
+                    viewModel.filterMyMealList(it)
 
                 }
             }
+            carbonGesamt = carbonInsulin +carbonMeal
         }
 
         viewModel.thursdayDate.observe(viewLifecycleOwner) {
@@ -174,9 +201,12 @@ class FragmentHome : Fragment() {
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
                     viewModel.filterMyCalendarList(it)
+                    viewModel.filterMyMealList(it)
+
 
                 }
             }
+            carbonGesamt = carbonInsulin +carbonMeal
         }
 
         viewModel.fridayDate.observe(viewLifecycleOwner) {
@@ -190,9 +220,12 @@ class FragmentHome : Fragment() {
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
                     viewModel.filterMyCalendarList(it)
+                    viewModel.filterMyMealList(it)
+
 
                 }
             }
+            carbonGesamt = carbonInsulin +carbonMeal
         }
 
         viewModel.saturdayDate.observe(viewLifecycleOwner) {
@@ -206,9 +239,12 @@ class FragmentHome : Fragment() {
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
                     viewModel.filterMyCalendarList(it)
+                    viewModel.filterMyMealList(it)
+
 
                 }
             }
+            carbonGesamt = carbonInsulin +carbonMeal
         }
 
         viewModel.sundayDate.observe(viewLifecycleOwner) {
@@ -216,17 +252,66 @@ class FragmentHome : Fragment() {
         }
 
         binding.textViewSonntag.setOnClickListener {
+            viewModel.viewModelScope.launch {
+                viewModel.filterGlucoseList(it.toString())
+                viewModel.filterMyCalendarList(it.toString())
+                viewModel.filterMyMealList(it.toString())
+            }
+            carbonGesamt = carbonInsulin +carbonMeal
+
             viewModel.sundayDate.observe(viewLifecycleOwner) {
                 Toast.makeText(requireContext(), "Sonntag: $it", Toast.LENGTH_SHORT).show()
                 //GlucoseListe nach ausgewählten Tag filter für den glucoseListOneDay zum Observen
                 viewModel.viewModelScope.launch {
                     viewModel.filterGlucoseList(it)
                     viewModel.filterMyCalendarList(it)
+                    viewModel.filterMyMealList(it)
+
 
                 }
             }
+            carbonGesamt = carbonInsulin +carbonMeal
         }
 
 
+
+
+
     }
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun showDatePickerDialog() {
+        val datePickerBuilder = MaterialDatePicker.Builder.datePicker()
+        // Heute als Standardauswahl festlegen
+        val today = MaterialDatePicker.todayInUtcMilliseconds()
+        datePickerBuilder.setSelection(today)
+        // Einschränkungen für den Kalender
+        val constraintsBuilder = CalendarConstraints.Builder()
+        //constraintsBuilder.setValidator(DateValidatorPointForward.now()) // Keine Vergangenheitsdaten zulassen
+        datePickerBuilder.setCalendarConstraints(constraintsBuilder.build())
+        // Erstellen des MaterialDatePicker
+        val datePicker = datePickerBuilder.build()
+        datePicker.addOnPositiveButtonClickListener {
+
+            // Hier können Sie das ausgewählte Datum verarbeiten
+            // 'it' repräsentiert den ausgewählten Zeitstempel in Millisekunden
+            //val selectedDate = datePicker.headerText // Datum als formatierter String
+            val selectedDate = Instant.ofEpochMilli(it).atZone(ZoneId.systemDefault()).toLocalDate()
+
+            // Formatieren des Datums als 'dd.MM.yyyy'
+            val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+            val formattedDate = selectedDate.format(formatter)
+
+            //val datum = Instant.ofEpochMilli(it).atZone(ZoneId.systemDefault()).toLocalDate()
+            // Aktion mit dem ausgewählten Datum
+            viewModel.setDate(formattedDate)
+            viewModel.setWeekDays(selectedDate)
+        }
+        // Anzeigen des DatePickers
+        datePicker.show(parentFragmentManager, datePicker.toString())
+    }
+
+
+
+
+
 }
