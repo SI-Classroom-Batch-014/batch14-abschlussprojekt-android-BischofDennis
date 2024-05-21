@@ -12,8 +12,8 @@
         android:layout_height="200dp"
         android:layout_marginHorizontal="12dp"
         android:layout_marginVertical="4dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:cardBackgroundColor="#64D2FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,37 +21,47 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:layout_gravity="bottom">
+
+            <ImageView
+                android:id="@+id/receiptViewMealImageDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_marginBottom="40dp"
+
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_launcher_foreground" />
 
             <TextView
                 android:id="@+id/textViewMealName"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="40dp"
                 android:gravity="center"
                 android:text="@string/mealname"
+                android:textColor="@color/black"
                 android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ImageView
-            android:id="@+id/receiptViewMealImageDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
     </com.google.android.material.card.MaterialCardView>
-
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewKcal"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="70dp"
         app:cardBackgroundColor="#64D2FF"
         app:cardCornerRadius="15dp"
@@ -139,24 +149,24 @@
 
     <Button
         android:id="@+id/buttonAdd"
+        style="@style/button_style2"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/hinzuf_gen"
-        style="@style/button_style2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonBack"
+        style="@style/button_style2"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
 
+        android:layout_marginBottom="8dp"
         android:text="@string/zur_ck"
-        style="@style/button_style2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -165,7 +175,7 @@
         style="@style/button_style2"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="178dp"
         android:text="YouTube"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -173,12 +183,12 @@
 
     <Button
         android:id="@+id/buttonLinkReceipt"
+        style="@style/button_style2"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="178dp"
         android:text="@string/link"
-        style="@style/button_style2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -186,9 +196,9 @@
         android:id="@+id/cardViewZubereitung"
         android:layout_width="match_parent"
         android:layout_height="130dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="340dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         app:cardBackgroundColor="#64D2FF"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -234,9 +244,9 @@
         android:id="@+id/cardViewZutaten"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="210dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         app:cardBackgroundColor="#64D2FF"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -36,10 +36,6 @@ class FragmentReceipt: Fragment() {
         }
 
 
-        binding.buttonBreakfast.setOnClickListener{
-            viewModel.loadMealByCategory("Breakfast")
-        }
-
         binding.buttonBeef.setOnClickListener{
             viewModel.loadMealByCategory("Beef")
         }

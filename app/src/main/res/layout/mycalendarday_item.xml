@@ -41,33 +41,33 @@
             android:id="@+id/textViewHaufigkeit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/anzahl"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="2dp"
-            android:layout_marginStart="80dp"/>
+            android:text="@string/anzahl" />
 
         <TextView
             android:id="@+id/textViewX"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
             android:layout_marginStart="130dp"
+            android:layout_marginTop="2dp"
             android:text="@string/x" />
 
         <TextView
             android:id="@+id/textViewDatum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/datum"
-            android:textColor="@color/black"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="4dp"/>
+            android:text="@string/datum"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="120dp"
+            android:layout_marginTop="20dp"
             android:text="@string/uhr" />
     </androidx.cardview.widget.CardView>
 

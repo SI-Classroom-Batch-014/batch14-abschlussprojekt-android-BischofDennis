@@ -35,7 +35,7 @@
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="21dp"
+            android:layout_marginTop="8dp"
             android:gravity="left"
             android:text="Rezepte"
             android:textSize="30dp"
@@ -48,47 +48,41 @@
             style="@style/button_style2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/suchen"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/suche"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/buttonRandom"
+            style="@style/button_style2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/random"
-            style="@style/button_style2"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/zuf_llig"
             app:layout_constraintEnd_toStartOf="@+id/buttonSearch"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/toggleButtonDiabtesTyp"
+        android:id="@+id/toggleButtonKategorie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="145dp"
+        android:layout_marginEnd="8dp"
         android:foregroundTint="#00B93C3C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/buttonBreakfast"
-            style="@style/button_style2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#64D2FF"
-            android:text="@string/fr_hst_ck" />
-
-        <Button
             android:id="@+id/buttonBeef"
             style="@style/button_style2"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#64D2FF"
             android:text="@string/rind" />
@@ -96,7 +90,7 @@
         <Button
             android:id="@+id/buttonChicken"
             style="@style/button_style2"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#64D2FF"
             android:text="@string/h_hnchen" />
@@ -104,7 +98,7 @@
         <Button
             android:id="@+id/buttonLamb"
             style="@style/button_style2"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#64D2FF"
             android:text="@string/lamm" />
@@ -124,7 +118,7 @@
             android:id="@+id/searchview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="hint" />
+            android:hint="@string/suche" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

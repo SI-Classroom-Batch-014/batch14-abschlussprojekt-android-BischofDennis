@@ -131,4 +131,7 @@
     <string name="login">LogIn</string>
     <string name="back">Back</string>
     <string name="chat">Chat</string>
+    <string name="suche">suche</string>
+    <string name="zuf_llig">zufällig</string>
+    <string name="meal_name">Meal_name</string>
 </resources>
