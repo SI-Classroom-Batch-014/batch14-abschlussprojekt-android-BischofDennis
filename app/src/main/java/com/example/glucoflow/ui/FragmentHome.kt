@@ -84,6 +84,17 @@ class FragmentHome : Fragment() {
 
         }
 
+        viewModel.viewModelScope.launch {
+            viewModel.showGlucoseList()
+        }
+
+        binding.glucosewidget.setOnClickListener {
+            viewModel.viewModelScope.launch {
+                viewModel.showGlucoseList()
+            }
+
+        }
+
         //Glucose Widget
         viewModel.glucoseListoneDay.observe(viewLifecycleOwner) {
             Log.d("Glucose", "${viewModel.glucoseListoneDay.value}")
@@ -111,6 +122,12 @@ class FragmentHome : Fragment() {
             binding.rvMyCalendar.adapter = MyCalendarAdapter(it, viewModel)
         }
 
+        //bei App start
+        viewModel.viewModelScope.launch {
+            viewModel.filterMyCalendarListToday()
+
+        }
+        //Kalender Widget draufklicken alle termine ab heute
         binding.kalenderwidget.setOnClickListener {
             viewModel.viewModelScope.launch {
                 viewModel.filterMyCalendarListToday()
@@ -245,8 +262,6 @@ class FragmentHome : Fragment() {
                     viewModel.filterGlucoseList(it)
                     viewModel.filterMyCalendarList(it)
                     viewModel.filterMyMealList(it)
-
-
                 }
             }
             carbonGesamt = carbonInsulin +carbonMeal

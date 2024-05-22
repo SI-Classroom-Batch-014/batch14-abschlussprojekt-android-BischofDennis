@@ -8,6 +8,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.glucoflow.data.model.Chat
+import com.example.glucoflow.data.model.Message
 import com.example.glucoflow.data.model.Profile
 import com.example.glucoflow.db.AppRepository
 import com.example.glucoflow.db.getDatabase
@@ -16,11 +18,13 @@ import com.example.glucoflow.db.getDatabase3
 import com.example.glucoflow.db.model.Glucose
 import com.example.glucoflow.db.model.Meal
 import com.example.glucoflow.db.model.MyCalendar
+import com.example.glucoflow.utils.Debug
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -145,6 +149,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             _glucoseListoneDay.value = _glucoseList.value?.filter {
                 it.dateTime.contains(day)
             }?.toMutableList()
+        }
+    }
+
+    suspend fun showGlucoseList(){
+        viewModelScope.launch {
+            val glucoseData = repository.searchGlucoseAll().toMutableList()
+            _glucoseList.value = glucoseData
+            _glucoseListoneDay.value = _glucoseList.value
         }
     }
 
@@ -351,12 +363,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     //update firestore
     private val firebaseStore = Firebase.firestore
 
+    private var _toastMessage = MutableLiveData<String?>()
+    val toastMessage: LiveData<String?>
+        get() = _toastMessage
+
     private var _currentUser = MutableLiveData<FirebaseUser>(firebaseAuth.currentUser)
     val currentUser: LiveData<FirebaseUser?>
         get() = _currentUser
 
+    //Profil liste
     val profileCollectionReference: CollectionReference = firebaseStore.collection("profiles")
     private lateinit var profileDocumentReference: DocumentReference
+    //Chat liste
+    lateinit var currentChatDocumentReference: DocumentReference
+
 
     init {
         if (firebaseAuth.currentUser != null) {
@@ -403,6 +423,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     setProfileDocumentReference()
                     profileDocumentReference.set(Profile(username = username))
                 } else {
+                    handleError(authResult.exception?.message.toString())
                     Log.e("AUTH", "register ${authResult.exception?.message.toString()}")
                 }
             }
@@ -414,6 +435,43 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _currentUser.value = firebaseAuth.currentUser
     }
 
+    fun sendMessage(message: String) {
+        val newMessage = Message(message, firebaseAuth.currentUser!!.uid)
+        currentChatDocumentReference.update("messages", FieldValue.arrayUnion(newMessage))
+    }
+
+    //Richtigen chat aus der Message liste holen
+    fun setCurrentChat(chatPartnerId: String) {
+        val chatId = createChatId(chatPartnerId, currentUser.value!!.uid)
+        currentChatDocumentReference = firebaseStore.collection("chats").document(chatId)
+        currentChatDocumentReference.get().addOnCompleteListener { task ->
+            if (task.isSuccessful && task.result != null && !task.result.exists()) {
+                currentChatDocumentReference.set(Chat())
+            }
+        }
+    }
+    //damit  die cokunation immer gleich ist, sonst steht abc=xyz und xyz=abc spiegelverkehrt
+    private fun createChatId(id1: String, id2: String): String {
+        val ids = listOf(id1, id2).sorted()
+        return ids.first() + ids.last()
+    }
+
+    fun resetToastMessage() {
+        _toastMessage.value = null
+    }
+
+    private fun handleError(message: String) {
+        setToastMessage(message)
+        logError(message)
+    }
+
+    private fun setToastMessage(message: String) {
+        _toastMessage.value = message
+    }
+
+    private fun logError(message: String) {
+        Log.e(Debug.AUTH_TAG.value, message)
+    }
 
     fun updateProfile(profile: Profile) {
 

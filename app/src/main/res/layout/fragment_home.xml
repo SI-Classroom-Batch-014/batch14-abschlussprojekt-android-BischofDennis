@@ -295,6 +295,8 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/glucosewidget"
+        android:focusable="true"
+        android:clickable="true"
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_marginTop="141dp"

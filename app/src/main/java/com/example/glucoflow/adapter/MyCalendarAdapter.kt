@@ -10,13 +10,14 @@ import com.example.glucoflow.db.model.MyCalendar
 class MyCalendarAdapter(
     private val dataset: MutableList<MyCalendar>,
     private val viewModel: MainViewModel
-): RecyclerView.Adapter<MyCalendarAdapter.ItemViewHolder>() {
+) : RecyclerView.Adapter<MyCalendarAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(val binding: MycalendardayItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val binding = MycalendardayItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            MycalendardayItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemViewHolder(binding)
     }
 
@@ -27,10 +28,10 @@ class MyCalendarAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
 
-       holder.binding.textViewBlutzucker.text = item.title
-       holder.binding.textViewUhrzeit.text = item.time
+        holder.binding.textViewBlutzucker.text = item.title
+        holder.binding.textViewUhrzeit.text = item.time
         holder.binding.textViewHaufigkeit.text = item.haufigkeit
-       holder.binding.textViewDatum.text = item.date
+        holder.binding.textViewDatum.text = item.date
     }
 
 }

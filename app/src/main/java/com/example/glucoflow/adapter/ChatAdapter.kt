@@ -1,5 +1,6 @@
 package com.example.glucoflow.adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.glucoflow.data.model.Message
@@ -27,14 +28,26 @@ class ChatAdapter(
     inner class ChatOutViewHolder(val binding: ItemChatOutBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        TODO("Not yet implemented")
+        if (viewType == chatInType) {
+            val binding = ItemChatInBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            return ChatInViewHolder(binding)
+        }
+        val binding = ItemChatOutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ChatOutViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return dataset.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+
+        val message = dataset[position]
+
+        if (holder is ChatInViewHolder) {
+            holder.binding.textViewIncoming.text = message.text
+        } else if (holder is ChatOutViewHolder) {
+            holder.binding.textViewOutgoing.text = message.text
+        }
     }
 }

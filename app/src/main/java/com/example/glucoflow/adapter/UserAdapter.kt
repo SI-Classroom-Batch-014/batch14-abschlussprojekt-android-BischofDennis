@@ -1,7 +1,9 @@
 package com.example.glucoflow.adapter
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.glucoflow.MainViewModel
@@ -26,16 +28,16 @@ class UserAdapter(
         return dataset.size
     }
 
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val profileItem = dataset[position]
         holder.binding.tvUsername.text = profileItem.username
 
-
-        holder.binding.root.setOnClickListener {
-            //username wird übergeben
-            val action = FragmentChatHomeDirections.actionFragmentChatHomeToFragmentChat(profileItem.username)
-            holder.itemView.findNavController().navigate(action)
-            // holder.itemView.findNavController().navigate(R.id.fragmentChat)
+        //Auf User Chat klicken übergabe anstatt argument ein LiveData
+        holder.binding.cvUser.setOnClickListener {
+            viewModel.setCurrentChat(profileItem.userId)
+            holder.itemView.findNavController().navigate(R.id.fragmentChat)
         }
     }
 }
