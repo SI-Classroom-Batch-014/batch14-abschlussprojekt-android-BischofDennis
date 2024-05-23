@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.glucoflow.db.model.MyCalendar
 
-@Database(entities = [MyCalendar::class], version = 2)
+@Database(entities = [MyCalendar::class], version = 1)
 /**
  *
  * gibt an, dass diese Klasse eine Datenbank ist

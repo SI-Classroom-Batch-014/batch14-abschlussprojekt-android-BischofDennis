@@ -63,6 +63,7 @@ class FragmentChat: Fragment() {
         binding.btSend.setOnClickListener {
             val message = binding.tietMessage.text.toString()
             viewModel.sendMessage(message)
+            binding.tietMessage.text?.clear()
         }
 
         binding.buttonBack.setOnClickListener(){
