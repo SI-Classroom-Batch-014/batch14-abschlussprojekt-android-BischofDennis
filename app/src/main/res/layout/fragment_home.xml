@@ -482,20 +482,22 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/trendGlucose"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="600dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="#64D2FF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="wrap_content"
-            android:layout_height="150dp"
+            android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/_79bec8c2_b27f_4912_b064_9916a4103229" />

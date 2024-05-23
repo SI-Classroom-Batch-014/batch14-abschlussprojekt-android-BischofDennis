@@ -1,9 +1,11 @@
 package com.example.glucoflow.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -11,6 +13,7 @@ import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.R
 import com.example.glucoflow.databinding.FragmentProfileBinding
 
+@RequiresApi(Build.VERSION_CODES.O)
 class FragmentProfile: Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
@@ -27,15 +30,22 @@ class FragmentProfile: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setLogoutOnClickListener()
+        setOnClickListener()
     }
 
-    fun setLogoutOnClickListener(){
+
+    fun setOnClickListener(){
 
         binding.buttonLogout.setOnClickListener {
             viewModel.logout()
             findNavController().navigate(R.id.fragmentLoginSignup)
-
         }
+
+        binding.buttonBack.setOnClickListener {
+            findNavController().navigate(R.id.fragmentHome)
+        }
+
     }
+
+
 }

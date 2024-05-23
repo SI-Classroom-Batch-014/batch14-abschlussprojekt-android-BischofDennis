@@ -23,7 +23,7 @@
     <item
         android:id="@+id/fragmentChatHome"
         android:title="@string/chat"
-        android:icon="@drawable/baseline_self_improvement_24"/>
+        android:icon="@drawable/baseline_chat_24"/>
 
 
 </menu>
