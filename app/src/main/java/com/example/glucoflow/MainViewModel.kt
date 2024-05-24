@@ -371,6 +371,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val currentUser: LiveData<FirebaseUser?>
         get() = _currentUser
 
+    private var _chatPartner = MutableLiveData<String>()
+    val chatPartner: LiveData<String>
+        get() = _chatPartner
+
     //Profil liste
     val profileCollectionReference: CollectionReference = firebaseStore.collection("profiles")
     private lateinit var profileDocumentReference: DocumentReference
@@ -450,6 +454,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
+    fun setChatPartnerName(chatPartnerName:String) {
+        _chatPartner.value = chatPartnerName
+    }
+
     //damit  die cokunation immer gleich ist, sonst steht abc=xyz und xyz=abc spiegelverkehrt
     private fun createChatId(id1: String, id2: String): String {
         val ids = listOf(id1, id2).sorted()
@@ -482,4 +490,5 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun getUserChatName() {
 
     }
+
 }

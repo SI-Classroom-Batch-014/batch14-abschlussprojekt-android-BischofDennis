@@ -37,7 +37,9 @@ class UserAdapter(
         //Auf User Chat klicken übergabe anstatt argument ein LiveData
         holder.binding.cvUser.setOnClickListener {
             viewModel.setCurrentChat(profileItem.userId)
+            viewModel.setChatPartnerName(profileItem.username)
             holder.itemView.findNavController().navigate(R.id.fragmentChat)
         }
+
     }
 }
