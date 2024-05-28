@@ -454,6 +454,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
+    //ChatPartner Name
     fun setChatPartnerName(chatPartnerName:String) {
         _chatPartner.value = chatPartnerName
     }
@@ -484,7 +485,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun updateProfile(profile: Profile) {
 
         this.profileDocumentReference.set(profile)
-
     }
 
 
