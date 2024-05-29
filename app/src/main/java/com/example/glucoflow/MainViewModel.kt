@@ -381,6 +381,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     //Chat liste
     lateinit var currentChatDocumentReference: DocumentReference
 
+    private fun setProfileDocumentReference() {
+        profileDocumentReference = profileCollectionReference.document(firebaseAuth.currentUser!!.uid)
+    }
 
     init {
         if (firebaseAuth.currentUser != null) {
@@ -388,16 +391,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
         _currentDate.value = getCurrentDate()
         setDateToCurrentWeek()
-        //werte Value werden sofort gesetzt
-        /**
-        _currentDate.value = getCurrentDate()
-        _mondayDate.value = getMondayDate()
-        _tuesdayDate.value = getTuesdayDate()
-        _wednesDate.value = getWednesdayDate()
-        _thursdayDate.value = getThursdayDate()
-        _fridayDate.value = getFridayDate()
-        _saturdayDate.value = getSaturdayDate()
-        _sundayDate.value = getSundayDate()*/
     }
 
 
@@ -415,8 +408,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private fun setProfileDocumentReference() {
-        profileDocumentReference = profileCollectionReference.document(firebaseAuth.currentUser!!.uid)
+    fun logout() {
+        firebaseAuth.signOut()
+        _currentUser.value = firebaseAuth.currentUser
     }
 
     fun register(email: String, password: String, username: String) {
@@ -434,14 +428,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun logout() {
-        firebaseAuth.signOut()
-        _currentUser.value = firebaseAuth.currentUser
-    }
 
     fun sendMessage(message: String) {
         val newMessage = Message(message, firebaseAuth.currentUser!!.uid)
         currentChatDocumentReference.update("messages", FieldValue.arrayUnion(newMessage))
+    }
+
+    //damit  die cokunation immer gleich ist, sonst steht abc=xyz und xyz=abc spiegelverkehrt
+    private fun createChatId(id1: String, id2: String): String {
+        val ids = listOf(id1, id2).sorted()
+        return ids.first() + ids.last()
     }
 
     //Richtigen chat aus der Message liste holen
@@ -459,11 +455,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _chatPartner.value = chatPartnerName
     }
 
-    //damit  die cokunation immer gleich ist, sonst steht abc=xyz und xyz=abc spiegelverkehrt
-    private fun createChatId(id1: String, id2: String): String {
-        val ids = listOf(id1, id2).sorted()
-        return ids.first() + ids.last()
-    }
 
     fun resetToastMessage() {
         _toastMessage.value = null
