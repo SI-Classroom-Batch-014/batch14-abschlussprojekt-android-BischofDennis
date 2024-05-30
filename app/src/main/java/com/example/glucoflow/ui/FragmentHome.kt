@@ -16,18 +16,13 @@ import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.R
 import com.example.glucoflow.adapter.GlucoseAdapter
 import com.example.glucoflow.adapter.MyCalendarAdapter
-import com.example.glucoflow.data.model.GlucoseFirebase
 import com.example.glucoflow.databinding.FragmentHomeBinding
-import com.example.glucoflow.db.model.Glucose
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.type.DayOfWeek
 import kotlinx.coroutines.launch
 import java.time.Instant
-import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.time.temporal.TemporalAdjusters
 
 @RequiresApi(Build.VERSION_CODES.O)
 class FragmentHome : Fragment() {

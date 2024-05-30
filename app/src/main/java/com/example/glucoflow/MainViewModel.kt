@@ -47,6 +47,30 @@ import java.util.Locale
 @RequiresApi(Build.VERSION_CODES.O)
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
+    /**
+     * Das ist die MasterSuppe
+     * @private val firebaseStore = Firebase.firestore
+     * @private val firebaseAuth = Firebase.auth
+     */
+    private val firebaseStore = Firebase.firestore
+    private val firebaseAuth = Firebase.auth
+
+    private var _toastMessage = MutableLiveData<String?>()
+    val toastMessage: LiveData<String?>
+        get() = _toastMessage
+    private var _currentUser = MutableLiveData<FirebaseUser?>(firebaseAuth.currentUser)
+    val currentUser: LiveData<FirebaseUser?>
+        get() = _currentUser
+    private var _chatPartner = MutableLiveData<String>()
+    val chatPartner: LiveData<String>
+        get() = _chatPartner
+
+    //Profil liste
+    val profileCollectionReference: CollectionReference by lazy { firebaseStore.collection("profiles") }
+    private lateinit var profileDocumentReference: DocumentReference
+
+    //Chat liste
+    lateinit var currentChatDocumentReference: DocumentReference
     //database Room
     /**
      * ruft Datenbank auf und erstellt falls noch keine vorhanden
@@ -68,25 +92,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val glucoseList: LiveData<MutableList<Glucose>>
         get() = _glucoseList
 
-
     private var _glucoseListoneDay = MutableLiveData<MutableList<Glucose>>()
 
     val glucoseListoneDay: LiveData<MutableList<Glucose>>
         get() = _glucoseListoneDay
 
-
-   // private var _glucoseListoneDayFirebase = MutableLiveData<MutableList<GlucoseFirebase>>()
-
-   // val glucoseListoneDayFirebase: LiveData<MutableList<GlucoseFirebase>>
-   //     get() = _glucoseListoneDayFirebase
-
+    // private var _glucoseListoneDayFirebase = MutableLiveData<MutableList<GlucoseFirebase>>()
+    // val glucoseListoneDayFirebase: LiveData<MutableList<GlucoseFirebase>>
+    //     get() = _glucoseListoneDayFirebase
 
     private var _carbonhydrateoneDay = MutableLiveData<Glucose>()
 
     val carbonHydrateoneDay: LiveData<Glucose>
         get() = _carbonhydrateoneDay
-
-
 
     //Kalender
     private var _myCalendarList = MutableLiveData<MutableList<MyCalendar>>()
@@ -99,7 +117,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val mycalendaroneDay: LiveData<MutableList<MyCalendar>>
         get() = _mycalendaroneDay
 
-
     //Meal Kalorien Kohlenhydrate
     private var _myMealList = MutableLiveData<MutableList<Meal>>()
 
@@ -111,7 +128,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val myMealoneDay: LiveData<MutableList<Meal>>
         get() = _myMealoneDay
 
+    private var _currentDate = MutableLiveData<String>()
+    val currentDate: LiveData<String>
+        get() = _currentDate
 
+
+    init {
+        // Initialisiere firebaseAuth vor der Verwendung
+        if (firebaseAuth.currentUser != null) {
+            setProfileDocumentReference()
+        }
+        _currentDate.value = getCurrentDate()
+        setDateToCurrentWeek()
+    }
 
     fun insertGlucose(glucose: Glucose) {
         viewModelScope.launch {
@@ -162,7 +191,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    suspend fun showGlucoseList(){
+    suspend fun showGlucoseList() {
         viewModelScope.launch {
             val glucoseData = repository.searchGlucoseAll().toMutableList()
             _glucoseList.value = glucoseData
@@ -188,7 +217,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             _myCalendarList.value = repository.searchMyCalendarAll().toMutableList()
             _mycalendaroneDay.value = _myCalendarList.value?.filter {
                 // Wenn LocalDatenach currentDate kommt true raus
-                LocalDate.parse(it.date, formatter).isAfter(currentDate) || LocalDate.parse(it.date, formatter).equals(currentDate)
+                LocalDate.parse(it.date, formatter).isAfter(currentDate) || LocalDate.parse(
+                    it.date,
+                    formatter
+                ).equals(currentDate)
             }?.toMutableList()?.sortedBy { LocalDate.parse(it.date, formatter) }?.toMutableList()
 
             Log.i("_mycalendaroneDay", "${_mycalendaroneDay.value}")
@@ -197,12 +229,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     /**@RequiresApi(Build.VERSION_CODES.O)
     suspend fun sortAscending(){
-        val currentDate = LocalDate.now()//Heutiges Datum
-        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
-        //sortedby = neue liste
-        _mycalendaroneDay.value = _mycalendaroneDay.value?.sortedBy {
-            LocalDate.parse(it.date, formatter)
-        }?.toMutableList()
+    val currentDate = LocalDate.now()//Heutiges Datum
+    val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+    //sortedby = neue liste
+    _mycalendaroneDay.value = _mycalendaroneDay.value?.sortedBy {
+    LocalDate.parse(it.date, formatter)
+    }?.toMutableList()
     }*/
 
     suspend fun filterMyMealList(day: String) {
@@ -215,8 +247,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-
-
     private fun getCurrentDate(): String {
         val calendar = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
@@ -227,12 +257,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     // ändern
 
 
-    private var _currentDate = MutableLiveData<String>()
-    val currentDate: LiveData<String>
-        get() = _currentDate
-
-
-    fun setDate(date: String){
+    fun setDate(date: String) {
         _currentDate.value = date
     }
 
@@ -247,20 +272,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         // Formatieren der Daten
         val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
-        val formattedWeekDates = weekDates.map { date ->
-            date.format(formatter)
-        }
-
-        // Aktualisiere die Livedata
-        _mondayDate.value = formattedWeekDates[0]
-        _tuesdayDate.value = formattedWeekDates[1]
-        _wednesDate.value = formattedWeekDates[2]
-        _thursdayDate.value = formattedWeekDates[3]
-        _fridayDate.value = formattedWeekDates[4]
-        _saturdayDate.value = formattedWeekDates[5]
-        _sundayDate.value = formattedWeekDates[6]
+        setLiveDataWeekDays(weekDates, formatter)
     }
-
 
 
     private var _mondayDate = MutableLiveData<String>()
@@ -268,11 +281,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         get() = _mondayDate
 
 
-
     private var _tuesdayDate = MutableLiveData<String>()
     val tuesdayDate: LiveData<String>
         get() = _tuesdayDate
-
 
 
     private fun setDateToCurrentWeek() {
@@ -287,20 +298,38 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             monday.plusDays(dayOffset.toLong())
         }
 
+        setLiveDataWeekDays(weekDates, formatter)
+    }
 
+    private fun setLiveDataWeekDays(
+        weekDates: List<LocalDate>,
+        formatter: DateTimeFormatter?
+    ) {
         val formattedWeekDates = weekDates.map { date ->
             date.format(formatter)
         }
 
-        // Aktualisiere die Livedata
-        _mondayDate.value = formattedWeekDates[0]
-        _tuesdayDate.value = formattedWeekDates[1]
-        _wednesDate.value = formattedWeekDates[2]
-        _thursdayDate.value = formattedWeekDates[3]
-        _fridayDate.value = formattedWeekDates[4]
-        _saturdayDate.value = formattedWeekDates[5]
-        _sundayDate.value = formattedWeekDates[6]
-
+        if (formattedWeekDates[0].isNullOrEmpty()) {
+            _mondayDate.value = formattedWeekDates[0]
+        }
+        if (formattedWeekDates[1].isNullOrEmpty()) {
+            _tuesdayDate.value = formattedWeekDates[1]
+        }
+        if (formattedWeekDates[2].isNullOrEmpty()) {
+            _wednesDate.value = formattedWeekDates[2]
+        }
+        if (formattedWeekDates[3].isNullOrEmpty()) {
+            _thursdayDate.value = formattedWeekDates[3]
+        }
+        if (formattedWeekDates[4].isNullOrEmpty()) {
+            _fridayDate.value = formattedWeekDates[4]
+        }
+        if (formattedWeekDates[5].isNullOrEmpty()) {
+            _saturdayDate.value = formattedWeekDates[5]
+        }
+        if (formattedWeekDates[6].isNullOrEmpty()) {
+            _sundayDate.value = formattedWeekDates[6]
+        }
     }
 
 
@@ -312,7 +341,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private var _thursdayDate = MutableLiveData<String>()
     val thursdayDate: LiveData<String>
         get() = _thursdayDate
-
 
 
     private var _fridayDate = MutableLiveData<String>()
@@ -374,70 +402,36 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     //Mit by lazy wird sichergestellt, dass firebaseStore erst dann initialisiert wird,
     //wenn es zum ersten Mal verwendet wird.
-    private val firebaseStore: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
-
-    private lateinit var firebaseAuth: FirebaseAuth
 
     //lateinit var glucoseDocumentReference: DocumentReference
     //val glucoseCollectionReference: CollectionReference = firebaseStore.collection("Glucose")
 
 
-   // fun setGlucoseOnline(glucose: GlucoseFirebase) {
-        //dokument erstellen
-       // glucoseDocumentReference = glucoseCollectionReference.document(glucose.id.toString())
-      //  this.glucoseDocumentReference.set(glucose)
+    // fun setGlucoseOnline(glucose: GlucoseFirebase) {
+    //dokument erstellen
+    // glucoseDocumentReference = glucoseCollectionReference.document(glucose.id.toString())
+    //  this.glucoseDocumentReference.set(glucose)
     //}
 
 
-
-    private var _toastMessage = MutableLiveData<String?>()
-    val toastMessage: LiveData<String?>
-        get() = _toastMessage
-
-    private var _currentUser = MutableLiveData<FirebaseUser?>(firebaseAuth.currentUser)
-    val currentUser: LiveData<FirebaseUser?>
-        get() = _currentUser
-
-    private var _chatPartner = MutableLiveData<String>()
-    val chatPartner: LiveData<String>
-        get() = _chatPartner
-
-    //Profil liste
-    val profileCollectionReference: CollectionReference by lazy { firebaseStore.collection("profiles")}
-    private lateinit var profileDocumentReference: DocumentReference
-    //Chat liste
-    lateinit var currentChatDocumentReference: DocumentReference
-
     private fun setProfileDocumentReference() {
-        profileDocumentReference = profileCollectionReference.document(firebaseAuth.currentUser!!.uid)
+        profileDocumentReference =
+            profileCollectionReference.document(firebaseAuth.currentUser!!.uid)
     }
-
-
-    init {
-        // Initialisiere firebaseAuth vor der Verwendung
-        firebaseAuth = FirebaseAuth.getInstance()
-        _currentUser.value = firebaseAuth.currentUser
-        if (firebaseAuth.currentUser != null) {
-            setProfileDocumentReference()
-        }
-        _currentDate.value = getCurrentDate()
-        setDateToCurrentWeek()
-    }
-
-
 
 
     fun login(email: String, password: String) {
         if (email.isNotEmpty() && password.isNotEmpty()) {
-            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { authResult ->
-                if (authResult.isSuccessful) {
-                    _currentUser.value = firebaseAuth.currentUser
-                    setProfileDocumentReference()
-                } else {
-                    Log.e("AUTH", "register ${authResult.exception?.message.toString()}")
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { authResult ->
+                    if (authResult.isSuccessful) {
+                        _currentUser.value = firebaseAuth.currentUser
+                        setProfileDocumentReference()
+                    } else {
+                        Log.e("AUTH", "register ${authResult.exception?.message.toString()}")
+                    }
                 }
-            }
         }
     }
 
@@ -448,16 +442,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun register(email: String, password: String, username: String) {
         if (email.isNotEmpty() && password.isNotEmpty() && username.isNotEmpty()) {
-            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { authResult ->
-                if (authResult.isSuccessful) {
-                    _currentUser.value = firebaseAuth.currentUser
-                    setProfileDocumentReference()
-                    profileDocumentReference.set(Profile(username = username))
-                } else {
-                    handleError(authResult.exception?.message.toString())
-                    Log.e("AUTH", "register ${authResult.exception?.message.toString()}")
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { authResult ->
+                    if (authResult.isSuccessful) {
+                        _currentUser.value = firebaseAuth.currentUser
+                        setProfileDocumentReference()
+                        profileDocumentReference.set(Profile(username = username))
+                    } else {
+                        handleError(authResult.exception?.message.toString())
+                        Log.e("AUTH", "register ${authResult.exception?.message.toString()}")
+                    }
                 }
-            }
         }
     }
 
@@ -483,8 +478,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
+
     //ChatPartner Name
-    fun setChatPartnerName(chatPartnerName:String) {
+    fun setChatPartnerName(chatPartnerName: String) {
         _chatPartner.value = chatPartnerName
     }
 
