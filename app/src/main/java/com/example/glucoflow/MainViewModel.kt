@@ -44,6 +44,9 @@ import java.util.Locale
  * erbt unser ViewModel nun nicht mehr von ViewModel() sondern von AndroidViewModel(),
  * da dieses uns den application-context mitgibt
  */
+
+data class AuthResult(val isSuccessful: Boolean, val errorMessage: String? = null)
+
 @RequiresApi(Build.VERSION_CODES.O)
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -64,6 +67,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private var _chatPartner = MutableLiveData<String>()
     val chatPartner: LiveData<String>
         get() = _chatPartner
+
+    private var _authResult = MutableLiveData<AuthResult>()
+    val authResult: LiveData<AuthResult>
+        get() = _authResult
 
     //Profil liste
     val profileCollectionReference: CollectionReference by lazy { firebaseStore.collection("profiles") }
@@ -428,7 +435,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     if (authResult.isSuccessful) {
                         _currentUser.value = firebaseAuth.currentUser
                         setProfileDocumentReference()
+                        _authResult.value = AuthResult(true)
                     } else {
+                        _authResult.value = AuthResult(false, authResult.exception?.message.toString())
                         Log.e("AUTH", "register ${authResult.exception?.message.toString()}")
                     }
                 }
@@ -448,11 +457,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                         _currentUser.value = firebaseAuth.currentUser
                         setProfileDocumentReference()
                         profileDocumentReference.set(Profile(username = username))
+                        _authResult.value = AuthResult(true)
                     } else {
+                        _authResult.value = AuthResult(false, authResult.exception?.message.toString())
                         handleError(authResult.exception?.message.toString())
                         Log.e("AUTH", "register ${authResult.exception?.message.toString()}")
                     }
                 }
+        } else {
+            _authResult.value = AuthResult(false, "Please enter all entry fields")
         }
     }
 
