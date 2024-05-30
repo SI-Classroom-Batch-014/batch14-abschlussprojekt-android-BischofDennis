@@ -66,7 +66,7 @@ dependencies {
 
     //Firebase SDK
     //Import the BoM for the Firebase platform
-    implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+    implementation(platform("com.google.firebase:firebase-bom:32.0.0"))
     //Declare the dependecy for the Cloud Firestore library
     //When using the BoM, you don't specify versions in Firebase library dependencies
     //Durch die Verwendung der Firebase Android BoM verwendet die App immer kompatible
@@ -74,7 +74,8 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore")
     //implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
-    implementation("com.google.firebase:firebase-firestore-ktx:24.11.1#")
+    implementation ("com.google.firebase:firebase-appcheck-safetynet:16.0.0")
+
 
     //Retrofit und Moshi
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")

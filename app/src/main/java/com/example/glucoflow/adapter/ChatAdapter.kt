@@ -18,8 +18,10 @@ class ChatAdapter(
     override fun getItemViewType(position: Int): Int {
         val chatItem = dataset[position]
         return if (chatItem.sender == currentUserId) {
+            //wenn der sender der eingeloggte user ist -> chatouttype
             chatOutType
         } else {
+            //wenn der sender nicht der eingeloggte user ist
             chatInType
         }
     }
@@ -32,6 +34,7 @@ class ChatAdapter(
             val binding = ItemChatInBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return ChatInViewHolder(binding)
         }
+        //zurück geben
         val binding = ItemChatOutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ChatOutViewHolder(binding)
     }
@@ -45,8 +48,10 @@ class ChatAdapter(
         val message = dataset[position]
 
         if (holder is ChatInViewHolder) {
+            //wenn die nachricht von partner kommt
             holder.binding.textViewIncoming.text = message.text
         } else if (holder is ChatOutViewHolder) {
+            //wenn nachricht vom sender selbst kommt nimm für recycler view den outItem
             holder.binding.textViewOutgoing.text = message.text
         }
     }

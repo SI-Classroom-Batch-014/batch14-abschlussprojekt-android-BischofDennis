@@ -1,12 +1,15 @@
 package com.example.glucoflow.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.glucoflow.MainViewModel
+import com.example.glucoflow.data.model.GlucoseFirebase
 import com.example.glucoflow.databinding.FragmentGlucoseBinding
 import com.example.glucoflow.db.model.Glucose
 import java.text.SimpleDateFormat
@@ -28,6 +31,7 @@ class FragmentGlucose: Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -42,19 +46,30 @@ class FragmentGlucose: Fragment() {
             val glucoseInput =  binding.editTextTextGlucoseInput.text.toString()
             val carbonHydrate = binding.editTextTextKohlenhydrateInput.text.toString()
 
+            val glucose =  Glucose(
+                glucosevalue =glucoseInput + "mg/dl",
+                dateTime = dateTimeInput,
+                carbon = carbonHydrate
+            )
 
             viewModel.insertGlucose(
-                Glucose(
-                    glucosevalue =glucoseInput + "mg/dl",
-                    dateTime = dateTimeInput,
-                    carbon = carbonHydrate
-                )
+              glucose
             )
+
+           // val glucoseFirebase = GlucoseFirebase(
+             //   glucosevalue = glucoseInput,
+              //  dateTime = dateTimeInput,
+              //  carbon = carbonHydrate
+            //)
+
+            //viewModel.setGlucoseOnline(glucoseFirebase)
             //EditTextFeld zurücksetzen
             binding.editTextTextGlucoseInput.text.clear()
             binding.editTextTextKohlenhydrateInput.text.clear()
         }
         //von Kalender aktuelle Zeit
         binding.textViewDatumUhrzeit.text = dateTimeInput
+
+
     }
 }

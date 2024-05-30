@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.glucoflow.data.model.Chat
+import com.example.glucoflow.data.model.GlucoseFirebase
 import com.example.glucoflow.data.model.Message
 import com.example.glucoflow.data.model.Profile
 import com.example.glucoflow.db.AppRepository
@@ -20,11 +21,13 @@ import com.example.glucoflow.db.model.Meal
 import com.example.glucoflow.db.model.MyCalendar
 import com.example.glucoflow.utils.Debug
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -70,6 +73,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val glucoseListoneDay: LiveData<MutableList<Glucose>>
         get() = _glucoseListoneDay
+
+
+   // private var _glucoseListoneDayFirebase = MutableLiveData<MutableList<GlucoseFirebase>>()
+
+   // val glucoseListoneDayFirebase: LiveData<MutableList<GlucoseFirebase>>
+   //     get() = _glucoseListoneDayFirebase
+
 
     private var _carbonhydrateoneDay = MutableLiveData<Glucose>()
 
@@ -358,16 +368,34 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     // Instanz von Firebase Authentication
     // Ersetzt in diesem Fall ein Repository
-    // private val firebaseAuth = FirebaseAuth.getInstance()
-    private val firebaseAuth = Firebase.auth
-    //update firestore
-    private val firebaseStore = Firebase.firestore
+    // private var firebaseAuth = FirebaseAuth.getInstance()
+    //private val firebaseAuth = Firebase.auth
+    //update Firestore - Datenbank
+
+    //Mit by lazy wird sichergestellt, dass firebaseStore erst dann initialisiert wird,
+    //wenn es zum ersten Mal verwendet wird.
+    private val firebaseStore: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
+
+
+    private lateinit var firebaseAuth: FirebaseAuth
+
+    //lateinit var glucoseDocumentReference: DocumentReference
+    //val glucoseCollectionReference: CollectionReference = firebaseStore.collection("Glucose")
+
+
+   // fun setGlucoseOnline(glucose: GlucoseFirebase) {
+        //dokument erstellen
+       // glucoseDocumentReference = glucoseCollectionReference.document(glucose.id.toString())
+      //  this.glucoseDocumentReference.set(glucose)
+    //}
+
+
 
     private var _toastMessage = MutableLiveData<String?>()
     val toastMessage: LiveData<String?>
         get() = _toastMessage
 
-    private var _currentUser = MutableLiveData<FirebaseUser>(firebaseAuth.currentUser)
+    private var _currentUser = MutableLiveData<FirebaseUser?>(firebaseAuth.currentUser)
     val currentUser: LiveData<FirebaseUser?>
         get() = _currentUser
 
@@ -376,7 +404,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         get() = _chatPartner
 
     //Profil liste
-    val profileCollectionReference: CollectionReference = firebaseStore.collection("profiles")
+    val profileCollectionReference: CollectionReference by lazy { firebaseStore.collection("profiles")}
     private lateinit var profileDocumentReference: DocumentReference
     //Chat liste
     lateinit var currentChatDocumentReference: DocumentReference
@@ -385,13 +413,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         profileDocumentReference = profileCollectionReference.document(firebaseAuth.currentUser!!.uid)
     }
 
+
     init {
+        // Initialisiere firebaseAuth vor der Verwendung
+        firebaseAuth = FirebaseAuth.getInstance()
+        _currentUser.value = firebaseAuth.currentUser
         if (firebaseAuth.currentUser != null) {
             setProfileDocumentReference()
         }
         _currentDate.value = getCurrentDate()
         setDateToCurrentWeek()
     }
+
 
 
 
@@ -410,7 +443,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun logout() {
         firebaseAuth.signOut()
-        _currentUser.value = firebaseAuth.currentUser
+        _currentUser.value = null//firebaseAuth.currentUser
     }
 
     fun register(email: String, password: String, username: String) {
@@ -477,6 +510,5 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         this.profileDocumentReference.set(profile)
     }
-
 
 }

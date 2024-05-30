@@ -16,7 +16,9 @@ import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.R
 import com.example.glucoflow.adapter.GlucoseAdapter
 import com.example.glucoflow.adapter.MyCalendarAdapter
+import com.example.glucoflow.data.model.GlucoseFirebase
 import com.example.glucoflow.databinding.FragmentHomeBinding
+import com.example.glucoflow.db.model.Glucose
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.type.DayOfWeek
@@ -35,8 +37,6 @@ class FragmentHome : Fragment() {
     var carbonInsulin = 0
     var carbonMeal = 0
     var carbonGesamt = 0
-
-
 
 
     override fun onCreateView(
@@ -115,6 +115,20 @@ class FragmentHome : Fragment() {
             }
 
         }
+
+
+        //daten beobachten und abrufen von livedata
+      /**  viewModel.glucoseCollectionReference.addSnapshotListener{ value, error ->
+            if (error == null && value != null){
+                //it = value und läuft die liste durch
+                val glucose = value.map { it.toObject(GlucoseFirebase::class.java) }
+                //wenn was drin ist packt er es in die Lste
+                if (glucose != null) {
+                    //daten von firebase in die Livedata
+                    viewModel.glucoseListoneDayFirebase.value?.addAll(glucose)
+                }
+            }
+        }*/
 
         //Kalender Widget
         viewModel.mycalendaroneDay.observe(viewLifecycleOwner) {

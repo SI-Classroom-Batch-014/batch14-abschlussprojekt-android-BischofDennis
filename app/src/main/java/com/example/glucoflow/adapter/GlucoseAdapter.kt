@@ -33,6 +33,7 @@ class GlucoseAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
 
+        //recyclerview für den Glucosewidget
         holder.binding.textViewGlucoseWert.text = item.glucosevalue
         holder.binding.textViewGlucoseWertUhrzeit.text = item.dateTime
 
