@@ -44,6 +44,7 @@ class FragmentRegister: Fragment() {
             }
         }
 
+        //Recaptcha token
         viewModel.authResult.observe(viewLifecycleOwner) {
             if (!it.isSuccessful) {
                 Toast.makeText(context, it.errorMessage, Toast.LENGTH_LONG).show()
@@ -51,6 +52,7 @@ class FragmentRegister: Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setButtonsOnClickListener() {
         setRegisterButtonOnClickListener()
         setBackButtonOnClickListener()
@@ -62,12 +64,14 @@ class FragmentRegister: Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setRegisterButtonOnClickListener() {
         binding.buttonRegister.setOnClickListener {
             val email = binding.editTextTextName.text.toString()
             val password = binding.editTextTextPassword.text.toString()
             val username = binding.editTextTextUsername.text.toString()
 
+            //viewModel.getRecaptchaToken(email,password, username)
             viewModel.register(email, password, username)
         }
     }

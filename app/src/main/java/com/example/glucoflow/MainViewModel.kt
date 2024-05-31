@@ -9,7 +9,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.glucoflow.data.model.Chat
-import com.example.glucoflow.data.model.GlucoseFirebase
 import com.example.glucoflow.data.model.Message
 import com.example.glucoflow.data.model.Profile
 import com.example.glucoflow.db.AppRepository
@@ -71,6 +70,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private var _authResult = MutableLiveData<AuthResult>()
     val authResult: LiveData<AuthResult>
         get() = _authResult
+
+
+
 
     //Profil liste
     val profileCollectionReference: CollectionReference by lazy { firebaseStore.collection("profiles") }
@@ -438,7 +440,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                         _authResult.value = AuthResult(true)
                     } else {
                         _authResult.value = AuthResult(false, authResult.exception?.message.toString())
-                        Log.e("AUTH", "register ${authResult.exception?.message.toString()}")
+                        Log.e("AUTH", "login ${authResult.exception?.message.toString()}")
                     }
                 }
         }
@@ -453,6 +455,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         if (email.isNotEmpty() && password.isNotEmpty() && username.isNotEmpty()) {
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { authResult ->
+                    Log.e("AUTH", "register $authResult")
+
                     if (authResult.isSuccessful) {
                         _currentUser.value = firebaseAuth.currentUser
                         setProfileDocumentReference()
