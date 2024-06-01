@@ -48,6 +48,7 @@ class FragmentHome : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.setDateToCurrentWeek()
 
         binding.datumBtn.setOnClickListener {
             showDatePickerDialog()
@@ -163,16 +164,19 @@ class FragmentHome : Fragment() {
 
 
         viewModel.mondayDate.observe(viewLifecycleOwner) {
-
+            Log.e("DATE_INFO_DEBUG", "mondayDate: == > $it")
             binding.textViewMondayDate.text = it
         }
 
         binding.textViewMonday.setOnClickListener {
+            Log.w("DATE_INFO_DEBUG", "mondayDate: == > $it")
             viewModel.mondayDate.observe(viewLifecycleOwner) {
+                Log.w("DATE_INFO_DEBUG", "mondayDate: == > $it")
                 Log.d("Monday Date", "Montag: $it")
                 //GlucoseListe nach ausgewählten Tag filter für den glucoseListOneDay zum Observen
                 Toast.makeText(requireContext(), "Montag: $it", Toast.LENGTH_SHORT).show()
                 viewModel.viewModelScope.launch {
+                    Log.w("DATE_INFO_DEBUG", "mondayDate: == > $it")
                     viewModel.filterGlucoseList(it)
                     viewModel.filterMyCalendarList(it)
                     viewModel.filterMyMealList(it)

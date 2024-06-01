@@ -148,7 +148,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             setProfileDocumentReference()
         }
         _currentDate.value = getCurrentDate()
-        setDateToCurrentWeek()
+        //setDateToCurrentWeek()
     }
 
     fun insertGlucose(glucose: Glucose) {
@@ -285,17 +285,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-    private var _mondayDate = MutableLiveData<String>()
+    private var _mondayDate = MutableLiveData<String>("")
     val mondayDate: LiveData<String>
         get() = _mondayDate
 
 
-    private var _tuesdayDate = MutableLiveData<String>()
+    private var _tuesdayDate = MutableLiveData<String>("")
     val tuesdayDate: LiveData<String>
         get() = _tuesdayDate
 
 
-    private fun setDateToCurrentWeek() {
+    fun setDateToCurrentWeek() {
         // Formatieren der Daten
         val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
 
@@ -317,26 +317,30 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val formattedWeekDates = weekDates.map { date ->
             date.format(formatter)
         }
-
-        if (formattedWeekDates[0].isNullOrEmpty()) {
+        Log.i("DATE_INFO_DEBUG", "setLiveDataWeekDays.mondayDate: == > $formattedWeekDates")
+        if (formattedWeekDates[0] != null) {
+            Log.wtf("DATE_INFO_DEBUG", "formattedWeekDates[0]: == > ${formattedWeekDates.first()}")
+            Log.wtf("DATE_INFO_DEBUG", "formattedWeekDates[0]: == > ${formattedWeekDates[0]}")
+            Log.wtf("DATE_INFO_DEBUG", "_mondayDate.valu: == > ${_mondayDate}")
+            Log.wtf("DATE_INFO_DEBUG", "_mondayDate: == > ${_mondayDate.value}")
             _mondayDate.value = formattedWeekDates[0]
         }
-        if (formattedWeekDates[1].isNullOrEmpty()) {
+        if (formattedWeekDates[1] != null) {
             _tuesdayDate.value = formattedWeekDates[1]
         }
-        if (formattedWeekDates[2].isNullOrEmpty()) {
+        if (formattedWeekDates[2] != null) {
             _wednesDate.value = formattedWeekDates[2]
         }
-        if (formattedWeekDates[3].isNullOrEmpty()) {
+        if (formattedWeekDates[3] != null) {
             _thursdayDate.value = formattedWeekDates[3]
         }
-        if (formattedWeekDates[4].isNullOrEmpty()) {
+        if (formattedWeekDates[4] != null) {
             _fridayDate.value = formattedWeekDates[4]
         }
-        if (formattedWeekDates[5].isNullOrEmpty()) {
+        if (formattedWeekDates[5] != null) {
             _saturdayDate.value = formattedWeekDates[5]
         }
-        if (formattedWeekDates[6].isNullOrEmpty()) {
+        if (formattedWeekDates[6] != null) {
             _sundayDate.value = formattedWeekDates[6]
         }
     }
