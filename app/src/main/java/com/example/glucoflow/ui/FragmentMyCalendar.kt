@@ -8,10 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.databinding.FragmentCalendarBinding
-import com.example.glucoflow.db.model.MyCalendar
-import java.text.SimpleDateFormat
+import com.example.glucoflow.dataRoom.model.MyCalendar
 import java.util.Calendar
-import java.util.Locale
 
 
 class FragmentMyCalendar : Fragment() {

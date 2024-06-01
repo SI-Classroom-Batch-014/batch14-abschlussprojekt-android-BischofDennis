@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.databinding.FragmentGlucoseBinding
-import com.example.glucoflow.db.model.Glucose
+import com.example.glucoflow.dataRoom.model.Glucose
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale

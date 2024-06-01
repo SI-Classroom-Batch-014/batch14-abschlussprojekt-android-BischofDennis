@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.databinding.GlucosedayItemBinding
-import com.example.glucoflow.db.model.Glucose
+import com.example.glucoflow.dataRoom.model.Glucose
 
 class GlucoseAdapter(
     private val dataset: MutableList<Glucose>,

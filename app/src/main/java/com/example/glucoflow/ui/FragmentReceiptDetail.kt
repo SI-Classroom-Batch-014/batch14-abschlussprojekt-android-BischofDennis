@@ -13,7 +13,7 @@ import coil.load
 import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.adapter.ReceiptDetailAdapter
 import com.example.glucoflow.databinding.FragmentReceiptdetailBinding
-import com.example.glucoflow.db.model.Meal
+import com.example.glucoflow.dataRoom.model.Meal
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale

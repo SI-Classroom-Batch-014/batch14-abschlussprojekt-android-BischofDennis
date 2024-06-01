@@ -1,4 +1,4 @@
-package com.example.glucoflow.db.model
+package com.example.glucoflow.dataRoom.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

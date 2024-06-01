@@ -1,10 +1,10 @@
-package com.example.glucoflow.db
+package com.example.glucoflow.dataRoom
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.glucoflow.db.model.MyCalendar
+import com.example.glucoflow.dataRoom.model.MyCalendar
 
 @Database(entities = [MyCalendar::class], version = 1)
 /**

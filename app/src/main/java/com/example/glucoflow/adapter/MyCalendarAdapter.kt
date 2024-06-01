@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.databinding.MycalendardayItemBinding
-import com.example.glucoflow.db.model.MyCalendar
+import com.example.glucoflow.dataRoom.model.MyCalendar
 
 class MyCalendarAdapter(
     private val dataset: MutableList<MyCalendar>,
