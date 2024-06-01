@@ -4,14 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.glucoflow.data.AppRepository
-import com.example.glucoflow.data.model.Meal
-import com.example.glucoflow.data.remote.MealApi
-import com.google.firebase.Firebase
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.firestore
+import com.example.glucoflow.dataOnline.AppRepository
+import com.example.glucoflow.dataOnline.modelOnline.Meal
+import com.example.glucoflow.dataOnline.remote.MealApi
 import kotlinx.coroutines.launch
 
+/**
+ * ➔ Das ViewModel erstellt das Repository und übergibt dabei den MealApi-Service mit an das Repository
+ * ➔ In diesem Beispiel liegt die LiveData im Repository und wird nur vom ViewModel “durchgeschliffen”
+ * ➔ loadMeal()
+ * ◆ im Hintergrund mittels
+ * Coroutine
+ */
 class MealViewModel: ViewModel() {
 
     private val repository = AppRepository(MealApi)

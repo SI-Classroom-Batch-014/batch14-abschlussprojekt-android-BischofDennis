@@ -1,4 +1,4 @@
-package com.example.glucoflow.data.model
+package com.example.glucoflow.dataOnline.modelOnline
 
 data class Chat(
     // @DocumentId

@@ -1,6 +1,4 @@
-package com.example.glucoflow.data.model
-
-import com.google.firebase.firestore.DocumentId
+package com.example.glucoflow.dataOnline.modelOnline
 
 data class GlucoseFirebase (
     //@DocumentId

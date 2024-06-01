@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.R
 import com.example.glucoflow.adapter.UserAdapter
-import com.example.glucoflow.data.model.Profile
+import com.example.glucoflow.dataOnline.modelOnline.Profile
 import com.example.glucoflow.databinding.FragmentChathomeBinding
 
 @RequiresApi(Build.VERSION_CODES.O)

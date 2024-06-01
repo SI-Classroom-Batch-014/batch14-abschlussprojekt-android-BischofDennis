@@ -1,13 +1,17 @@
-package com.example.glucoflow.data
+package com.example.glucoflow.dataOnline
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.glucoflow.data.model.Meal
-import com.example.glucoflow.data.remote.MealApi
+import com.example.glucoflow.dataOnline.modelOnline.Meal
+import com.example.glucoflow.dataOnline.remote.MealApi
 
 const val TAG = "AppRepositoryTAG"
 
+/**
+ * ➔ Das Repository bekommt ein Objekt vom Typ MealApi übergeben
+ * ➔ Danach kann es mit Hilfe dieses Objektes die Anfrage an die API stellen
+ */
 class AppRepository(private val mealAPI : MealApi) {
     var index = 0
 

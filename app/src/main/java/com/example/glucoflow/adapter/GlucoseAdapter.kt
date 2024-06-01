@@ -2,16 +2,10 @@ package com.example.glucoflow.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.example.glucoflow.MainViewModel
-import com.example.glucoflow.R
-import com.example.glucoflow.data.model.Meal
 import com.example.glucoflow.databinding.GlucosedayItemBinding
-import com.example.glucoflow.databinding.ReceiptItemBinding
 import com.example.glucoflow.db.model.Glucose
-import com.example.glucoflow.ui.MealViewModel
 
 class GlucoseAdapter(
     private val dataset: MutableList<Glucose>,

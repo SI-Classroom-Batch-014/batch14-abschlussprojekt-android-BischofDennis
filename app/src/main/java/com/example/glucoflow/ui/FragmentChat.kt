@@ -9,15 +9,12 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.R
 import com.example.glucoflow.adapter.ChatAdapter
-import com.example.glucoflow.data.model.Chat
+import com.example.glucoflow.dataOnline.modelOnline.Chat
 import com.example.glucoflow.databinding.FragmentChatBinding
-import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.O)
 class FragmentChat: Fragment() {

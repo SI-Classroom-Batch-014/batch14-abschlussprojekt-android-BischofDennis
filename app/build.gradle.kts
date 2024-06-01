@@ -59,7 +59,6 @@ dependencies {
     //Google Ads deswegen App absturz
     //implementation(libs.mediation.test.suite)
 
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

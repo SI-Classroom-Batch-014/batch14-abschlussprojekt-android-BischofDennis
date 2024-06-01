@@ -1,9 +1,12 @@
-package com.example.glucoflow.data.model
+package com.example.glucoflow.dataOnline.modelOnline
 
 import com.squareup.moshi.Json
 
 data class Meal (
-
+    /**
+     * ➔ In unserer Data-Class können wir mit der Annotation @Json und danach mit Angabe des Feldes bestimmen welches Feld wir meinen
+     * ➔ Dadurch können wir die Namen der Variablen und Values selbst wählen
+     */
     @Json(name="idMeal")
     val id: Int,
     //Name

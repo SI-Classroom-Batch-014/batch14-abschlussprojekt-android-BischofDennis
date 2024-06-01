@@ -3,7 +3,7 @@ package com.example.glucoflow.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.glucoflow.data.model.Message
+import com.example.glucoflow.dataOnline.modelOnline.Message
 import com.example.glucoflow.databinding.ItemChatInBinding
 import com.example.glucoflow.databinding.ItemChatOutBinding
 

@@ -8,9 +8,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.R
-import com.example.glucoflow.data.model.Profile
+import com.example.glucoflow.dataOnline.modelOnline.Profile
 import com.example.glucoflow.databinding.ItemUserBinding
-import com.example.glucoflow.ui.FragmentChatHomeDirections
 
 class UserAdapter(
     private val dataset: List<Profile>,
