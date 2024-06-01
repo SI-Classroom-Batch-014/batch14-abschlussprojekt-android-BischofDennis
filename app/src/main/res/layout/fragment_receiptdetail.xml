@@ -195,12 +195,14 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewZubereitung"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="8dp"
         android:layout_marginTop="340dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="230dp"
         app:cardBackgroundColor="#64D2FF"
         app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardViewKcal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
