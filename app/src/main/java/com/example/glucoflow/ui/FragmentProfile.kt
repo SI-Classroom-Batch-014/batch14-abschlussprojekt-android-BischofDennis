@@ -45,6 +45,13 @@ class FragmentProfile: Fragment() {
             findNavController().navigate(R.id.fragmentHome)
         }
 
+        //Aktuell eingeloggter User
+        viewModel.currentUser.observe(viewLifecycleOwner){
+            if (it != null) {
+                binding.textViewEmailAdress.text = it.email
+            }
+        }
+
     }
 
 

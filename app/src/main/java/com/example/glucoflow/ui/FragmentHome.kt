@@ -57,6 +57,12 @@ class FragmentHome : Fragment() {
             findNavController().navigate(R.id.fragmentProfile)
         }
 
+        //Aktuell eingeloggter User
+        viewModel.currentUser.observe(viewLifecycleOwner){
+            if (it != null) {
+                binding.textViewRegina.text = it.email
+            }
+        }
 
         // viewModel.insertGlucose(Glucose(0, "test", "2024-05-08"))
 
