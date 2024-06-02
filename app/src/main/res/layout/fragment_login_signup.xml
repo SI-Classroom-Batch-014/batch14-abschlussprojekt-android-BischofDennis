@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backroundlayoutthree">
+
+    <TextView
+        android:id="@+id/textViewGlucoFlow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="16dp"
+        android:text="GlucoFlow"
+        android:textColor="@color/black"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonFacebook"
+        style="@style/button_style1"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="120dp"
+        android:text="Facebook"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewGlucoFlow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonGoogle"
+        style="@style/button_style1"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="178dp"
+        android:text="Google"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewGlucoFlow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonApple"
+        style="@style/button_style1"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="236dp"
+        android:text="Apple"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewGlucoFlow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonRegistrieren"
+        style="@style/button_style1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="294dp"
+        android:text="Registrieren"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewGlucoFlow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonAnmelden"
+        style="@style/button_style1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="352dp"
+        android:text="Anmelden"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewGlucoFlow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button42"
+        style="@style/button_style1"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="410dp"
+        android:text="Foto hinzufügen"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewGlucoFlow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

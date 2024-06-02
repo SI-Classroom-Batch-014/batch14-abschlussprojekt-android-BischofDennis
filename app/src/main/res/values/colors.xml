@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="cyanDefault">#64D2FF</color>
+    <color name="blueDefault">#007AFF</color>
+    <!-- Bottom Navigation-->
+    <color name="selected_item_background">#007AFF</color> <!-- Farbe für den aktiven Indikator -->
+
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragmentHome"
+        android:title="@string/home"
+        android:icon="@drawable/baseline_home_24"/>
+
+    <item
+        android:id="@+id/fragmentCalendar"
+        android:title="@string/kalender"
+        android:icon="@drawable/baseline_calendar_month_24"/>
+
+    <item
+        android:id="@+id/fragmentGlucose"
+        android:title="@string/hinzuf_gen"
+        android:icon="@drawable/baseline_add_link_24" />
+
+    <item
+        android:id="@+id/fragmentReceipt"
+        android:title="@string/rezepte"
+        android:icon="@drawable/baseline_receipt_long_24"/>
+    <item
+        android:id="@+id/fragmentChatHome"
+        android:title="@string/chat"
+        android:icon="@drawable/baseline_chat_24"/>
+
+
+</menu>

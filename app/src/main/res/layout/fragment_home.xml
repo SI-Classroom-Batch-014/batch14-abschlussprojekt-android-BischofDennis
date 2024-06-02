@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backroundlayoutthree">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:background="#64D2FF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewRegina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/regina"
+            android:textColor="@color/black"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/profilePicture"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/regina" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textViewTodayDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="185dp"
+            android:layout_marginEnd="185dp"
+            android:layout_marginBottom="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/datum"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewMonday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/mo"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewDienstag"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textViewDienstag" />
+
+        <TextView
+            android:id="@+id/textViewDienstag"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/di"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewMittwoch"
+            app:layout_constraintEnd_toStartOf="@+id/textViewMittwoch"
+            app:layout_constraintTop_toTopOf="@+id/textViewMittwoch" />
+
+        <TextView
+            android:id="@+id/textViewMondayDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:text="10.10.2024"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textViewMonday" />
+
+        <TextView
+            android:id="@+id/textViewMittwoch"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text="@string/mi"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewDonnerstag"
+            app:layout_constraintEnd_toStartOf="@+id/textViewDonnerstag"
+            app:layout_constraintTop_toTopOf="@+id/textViewDonnerstag" />
+
+        <TextView
+            android:id="@+id/textViewMittwochDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:text="@string/_11_10_2024"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textViewMittwoch" />
+
+        <TextView
+            android:id="@+id/textViewDonnerstag"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="192dp"
+            android:layout_marginTop="65dp"
+            android:layout_marginEnd="192dp"
+            android:layout_marginBottom="32dp"
+            android:text="DO"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewTodayDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textViewDonnerstagDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:text="@string/_11_10_2024"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textViewDonnerstag" />
+
+        <TextView
+            android:id="@+id/textViewFreitag"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/fr"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewDonnerstag"
+            app:layout_constraintStart_toEndOf="@+id/textViewDonnerstag"
+            app:layout_constraintTop_toTopOf="@+id/textViewDonnerstag" />
+
+        <TextView
+            android:id="@+id/textViewFreitagDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:text="@string/_11_10_2024"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textViewFreitag" />
+
+        <TextView
+            android:id="@+id/textViewSamstag"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/sa"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewFreitag"
+            app:layout_constraintStart_toEndOf="@+id/textViewFreitag"
+            app:layout_constraintTop_toTopOf="@+id/textViewFreitag" />
+
+        <TextView
+            android:id="@+id/textViewSamstagDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:text="@string/_11_10_2024"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textViewSamstag" />
+
+        <TextView
+            android:id="@+id/textViewSonntag"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/so"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewSamstag"
+            app:layout_constraintStart_toEndOf="@+id/textViewSamstag"
+            app:layout_constraintTop_toTopOf="@+id/textViewSamstag" />
+
+        <TextView
+            android:id="@+id/textViewSundayDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:text="@string/_11_10_2024"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textViewSonntag" />
+
+        <TextView
+            android:id="@+id/textViewTuesdayDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:text="@string/_11_10_2024"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textViewDienstag" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/datum_btn"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/blueDefault"
+            app:icon="@drawable/baseline_calendar_month_24"
+            app:layout_constraintBottom_toBottomOf="@+id/profilePicture"
+            app:layout_constraintEnd_toStartOf="@+id/profilePicture"
+            app:layout_constraintTop_toTopOf="@+id/profilePicture"
+            app:layout_constraintVertical_bias="1.0" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/kalenderwidget"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="141dp"
+        app:cardBackgroundColor="#64D2FF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewDatumMontag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/montag"
+                android:textColor="@color/blueDefault"
+                android:textSize="23sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewDatum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/_26"
+                android:textColor="@color/blueDefault"
+                android:textSize="23sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMyCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:listitem="@layout/mycalendarday_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/glucosewidget"
+        android:focusable="true"
+        android:clickable="true"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="141dp"
+        android:layout_marginEnd="8dp"
+        app:cardBackgroundColor="#64D2FF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewGlucose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="80dp"
+                android:text="@string/glucose"
+                android:textColor="@color/blueDefault"
+                android:textSize="23sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvGlucose"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:listitem="@layout/glucoseday_item" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/schrittzaehlerWidget"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="337dp"
+        app:cardBackgroundColor="#64D2FF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewSchrittzaehler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/schrittz_hler"
+            android:textColor="@color/blueDefault"
+            android:textSize="23sp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/textViewButtonSchrittzaehler"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="110dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="#007AFF"
+            app:cardCornerRadius="10dp">
+
+            <TextView
+                android:id="@+id/textViewSchritte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="1dp"
+                android:text="@string/_4000_5000"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="45dp"
+            app:cardCornerRadius="25dp">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/schrittzaehler" />
+        </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/kohlenhydratewidget"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="337dp"
+        android:layout_marginEnd="8dp"
+        app:cardBackgroundColor="#64D2FF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewKohlenHydrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/kohlenhydrate"
+            android:textColor="@color/blueDefault"
+            android:textSize="23sp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/textViewButtonKohlenhydrate"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="60dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="#007AFF"
+            app:cardCornerRadius="10dp">
+
+            <TextView
+                android:id="@+id/textViewKohlenhydrate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/_210_250"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewEinheitG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/g"
+                android:textSize="20sp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/textViewButtonEinheitKcal"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="110dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="#007AFF"
+            app:cardCornerRadius="10dp">
+
+            <TextView
+                android:id="@+id/textViewKalorien"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/_1700_2100"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewEinheitKcal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/kcal"
+                android:textSize="20sp" />
+        </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/trendGlucose"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="550dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#64D2FF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/_79bec8c2_b27f_4912_b064_9916a4103229" />
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

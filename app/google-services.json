@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "625605207712",
+    "project_id": "glucoflowabschlussprojekt",
+    "storage_bucket": "glucoflowabschlussprojekt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625605207712:android:5ee66f7b34663089710bc5",
+        "android_client_info": {
+          "package_name": "com.example.glucoflow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7PY2LfEkaoDDsS_GJfxrAfcK6dPIbWuE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
