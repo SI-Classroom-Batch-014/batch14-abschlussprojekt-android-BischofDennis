@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.glucoflow.MainViewModel
+import com.example.glucoflow.dataOnline.modelOnline.GlucoseFirebase
 import com.example.glucoflow.databinding.GlucosedayItemBinding
 import com.example.glucoflow.dataRoom.model.Glucose
 

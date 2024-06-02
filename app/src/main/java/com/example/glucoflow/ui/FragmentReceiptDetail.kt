@@ -2,16 +2,19 @@ package com.example.glucoflow.ui
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.glucoflow.MainViewModel
 import com.example.glucoflow.adapter.ReceiptDetailAdapter
+import com.example.glucoflow.dataOnline.modelOnline.MealFirebase
 import com.example.glucoflow.databinding.FragmentReceiptdetailBinding
 import com.example.glucoflow.dataRoom.model.Meal
 import java.text.SimpleDateFormat
@@ -34,6 +37,7 @@ class FragmentReceiptDetail: Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -70,12 +74,25 @@ class FragmentReceiptDetail: Fragment() {
                 val dateTimeInput = SimpleDateFormat("dd.MM.yyyy HH:mm:ss",
                     Locale.getDefault()).format(calendar.time)
 
+               val meal =  Meal(
+                    randomKH,
+                    randomKcal,
+                    dateTimeInput
+                )
                 viewModelMain.saveKhKcal(
-                    Meal(
-                        randomKH,
-                        randomKcal,
-                        dateTimeInput
-                    )
+                    meal
+                )
+
+                val mealFirebase = MealFirebase(
+                    id = "",
+                    randomKH,
+                    randomKcal,
+                    dateTimeInput
+
+                )
+                viewModelMain.saveKhKcalOnline(
+                    mealFirebase
+
                 )
                 binding.tvKcal.text = "0"
                 binding.tvKH.text = "0"

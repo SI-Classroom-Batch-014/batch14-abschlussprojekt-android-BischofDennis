@@ -12,6 +12,8 @@ const val TAG = "AppRepositoryTAG"
  * ➔ Das Repository bekommt ein Objekt vom Typ MealApi übergeben
  * ➔ Danach kann es mit Hilfe dieses Objektes die Anfrage an die API stellen
  */
+
+//API-ROOM zusammengemacht wird nicht mehr benötigt
 class AppRepository(private val mealAPI : MealApi) {
     var index = 0
 

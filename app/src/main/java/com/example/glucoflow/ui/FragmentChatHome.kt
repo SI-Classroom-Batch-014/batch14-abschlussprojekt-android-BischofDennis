@@ -35,6 +35,10 @@ class FragmentChatHome: Fragment() {
         addObservers()
         setupChatList()
         setLogoutButtonOnClickListener()
+
+        binding.profilePicture.setOnClickListener {
+            findNavController().navigate(R.id.fragmentProfile)
+        }
     }
 
     private fun setupChatList() {

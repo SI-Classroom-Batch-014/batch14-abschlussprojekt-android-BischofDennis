@@ -1,5 +1,7 @@
 package com.example.glucoflow.ui
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +9,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.glucoflow.dataOnline.AppRepository
 import com.example.glucoflow.dataOnline.modelOnline.Meal
 import com.example.glucoflow.dataOnline.remote.MealApi
+import com.example.glucoflow.dataRoom.getDatabase
+import com.example.glucoflow.dataRoom.getDatabase2
+import com.example.glucoflow.dataRoom.getDatabase3
 import kotlinx.coroutines.launch
 
 /**
@@ -16,9 +21,19 @@ import kotlinx.coroutines.launch
  * ◆ im Hintergrund mittels
  * Coroutine
  */
-class MealViewModel: ViewModel() {
+//class MealViewModel: Viewmodel(){
+class MealViewModel(application: Application) : AndroidViewModel(application){
 
-    private val repository = AppRepository(MealApi)
+    /**private val repository = AppRepository(MealApi)
+     * API-ROOM zusammengemacht
+     */
+
+private val repository = com.example.glucoflow.dataRoom.AppRepository(
+    (MealApi),
+    getDatabase(application),
+    getDatabase2(application),
+    getDatabase3(application)
+)
     val meals = repository.meals
     //val currentMeal = repository.currentMeal
     //var currentMealIndex: Int = 0

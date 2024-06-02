@@ -8,9 +8,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.glucoflow.dataOnline.modelOnline.CalendarFirebase
 import com.example.glucoflow.dataOnline.modelOnline.Chat
+import com.example.glucoflow.dataOnline.modelOnline.GlucoseFirebase
+import com.example.glucoflow.dataOnline.modelOnline.MealFirebase
 import com.example.glucoflow.dataOnline.modelOnline.Message
 import com.example.glucoflow.dataOnline.modelOnline.Profile
+import com.example.glucoflow.dataOnline.remote.MealApi
 import com.example.glucoflow.dataRoom.AppRepository
 import com.example.glucoflow.dataRoom.getDatabase
 import com.example.glucoflow.dataRoom.getDatabase2
@@ -52,37 +56,77 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val firebaseAuth = Firebase.auth
 
     //Profil liste
-    val profileCollectionReference: CollectionReference = firebaseStore.collection("profiles")
     private lateinit var profileDocumentReference: DocumentReference
-
+    val profileCollectionReference: CollectionReference = firebaseStore.collection("profiles")
     //Chat liste
     lateinit var currentChatDocumentReference: DocumentReference
+    //Glucose Online
+    lateinit var glucoseDocumentReference: DocumentReference
+    val glucoseCollectionReference: CollectionReference = firebaseStore.collection("glucoseList")
+    //Calendar Online
+    lateinit var calendarDocumentReference: DocumentReference
+    val calendarCollectionReference: CollectionReference = firebaseStore.collection("calendarList")
+    //KH/Kcal Online
+    lateinit var mealDocumentReference: DocumentReference
+    val mealCollectionReference: CollectionReference = firebaseStore.collection("khkcalList")
+
     private fun setProfileDocumentReference() {
         profileDocumentReference =
             profileCollectionReference.document(firebaseAuth.currentUser!!.uid)
     }
-/**
-    // Instanz von Firebase Authentication
-    // Ersetzt in diesem Fall ein Repository
-    // private var firebaseAuth = FirebaseAuth.getInstance()
-    //private val firebaseAuth = Firebase.auth
-    //update Firestore - Datenbank
+    private fun setGlucoseDocumentReference() {
+        calendarDocumentReference =
+            calendarCollectionReference.document(firebaseAuth.currentUser!!.uid)
+    }
 
-    //Mit by lazy wird sichergestellt, dass firebaseStore erst dann initialisiert wird,
-    //wenn es zum ersten Mal verwendet wird.
+    private fun setCalendarDocumentReference() {
+        glucoseDocumentReference =
+            glucoseCollectionReference.document(firebaseAuth.currentUser!!.uid)
+    }
 
-    lateinit var glucoseDocumentReference: DocumentReference
-    val glucoseCollectionReference: CollectionReference = firebaseStore.collection("Glucose")
+    private fun setMealDocumentReference() {
+        mealDocumentReference =
+            mealCollectionReference.document(firebaseAuth.currentUser!!.uid)
+    }
 
+    private var _glucoseListFirebase = MutableLiveData<MutableList<GlucoseFirebase>>()
+    val glucoseListFirebase: LiveData<MutableList<GlucoseFirebase>>
+        get() = _glucoseListFirebase
+
+    private var _glucoseListOneDayFirebase = MutableLiveData<MutableList<GlucoseFirebase>>()
+    val glucoseListOneDayFirebase: LiveData<MutableList<GlucoseFirebase>>
+        get() = _glucoseListOneDayFirebase
     fun setGlucoseOnline(glucose: GlucoseFirebase) {
     //dokument erstellen
-     glucoseDocumentReference = glucoseCollectionReference.document(glucose.id.toString())
+     glucoseDocumentReference = glucoseCollectionReference.document()
       this.glucoseDocumentReference.set(glucose)
     }
 
-    private var _glucoseListoneDayFirebase = MutableLiveData<MutableList<GlucoseFirebase>>()
-    val glucoseListoneDayFirebase: LiveData<MutableList<GlucoseFirebase>>
-        get() = _glucoseListoneDayFirebase*/
+    private var _calendarListFirebase = MutableLiveData<MutableList<CalendarFirebase>>()
+    val calendarListFirebase: LiveData<MutableList<CalendarFirebase>>
+        get() = _calendarListFirebase
+
+    private var _calendarListOneDayFirebase = MutableLiveData<MutableList<CalendarFirebase>>()
+    val calendarListoneDayFirebase: LiveData<MutableList<CalendarFirebase>>
+        get() = _calendarListOneDayFirebase
+    fun setCalendarOnline(calendar: CalendarFirebase) {
+        //dokument erstellen
+        calendarDocumentReference = calendarCollectionReference.document()
+        this.calendarDocumentReference.set(calendar)
+    }
+    private var _mealListFirebase = MutableLiveData<MutableList<MealFirebase>>()
+    val mealListFirebase: LiveData<MutableList<MealFirebase>>
+        get() = _mealListFirebase
+
+    private var _mealListOneDayFirebase = MutableLiveData<MutableList<MealFirebase>>()
+    val mealListOneDayFirebase: LiveData<MutableList<MealFirebase>>
+        get() = _mealListOneDayFirebase
+
+    fun saveKhKcalOnline(mealFirebase: MealFirebase) {
+        //dokument erstellen
+        mealDocumentReference = mealCollectionReference.document()
+        this.mealDocumentReference.set(mealFirebase)
+    }
 
     private var _currentUser = MutableLiveData<FirebaseUser?>(firebaseAuth.currentUser)
     val currentUser: LiveData<FirebaseUser?>
@@ -114,6 +158,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         // Initialisiere firebaseAuth vor der Verwendung
         if (firebaseAuth.currentUser != null) {
             setProfileDocumentReference()
+            setGlucoseDocumentReference()
+            setCalendarDocumentReference()
+            setMealDocumentReference()
         }
         _currentDate.value = getCurrentDate()
         //setDateToCurrentWeek()
@@ -215,7 +262,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      * ruft Datenbank auf und erstellt falls noch keine vorhanden
      * ist eine neue mittels application(context)
      */
+
+    /**API-ROOM zusammengemacht
+     * val repository = AppRepository(
+     *         getDatabase(application),
+     *         getDatabase2(application),
+     *         getDatabase3(application)
+     *     )
+     */
     val repository = AppRepository(
+        (MealApi),
         getDatabase(application),
         getDatabase2(application),
         getDatabase3(application)
@@ -320,7 +376,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun filterMyCalendarListToday() {
         val currentDate = LocalDate.now() // Heutiges Datum
         val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
